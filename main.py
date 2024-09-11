@@ -29,7 +29,7 @@ def get_args():
     parser.add_argument('--modeldir', type=str, required=False, default="./models/cifar10/FL/", help='Model save directory path')
     parser.add_argument('--partition', type=str, default='noniid', help='the data partitioning strategy')
     parser.add_argument('--min_data_ratio', type=float, default='0.1')
-    
+    parser.add_argument('--krum_k', type=int, default='3')
     parser.add_argument('--batch-size', type=int, default=64, help='input batch size for training (default: 64)')
     parser.add_argument('--alg', type=str, default='backdoor_MCFL',
                         help='communication strategy: fedavg/fedprox/moon/local_training')
@@ -1867,7 +1867,7 @@ def backdoor_fedavg(args):
                 for j in range(i + 1, num_clients):
                     dist = 0
                     for key in client_weights[i]:
-                        dist += torch.norm(client_weights[i][key] - client_weights[j][key]).item()
+                        dist += torch.norm(client_weights[i][key].float() - client_weights[j][key].float()).item()
                     distance_matrix[i, j] = dist
                     distance_matrix[j, i] = dist
 
