@@ -1857,7 +1857,7 @@ def backdoor_fedavg(args):
                 if net_id == 0:
                     # 初始化全局参数存储结构
                     for key in net_para:
-                        global_w[key] = torch.zeros_like(net_para[key])
+                        global_w[key] = torch.zeros_like(net_para[key], dtype=torch.float32)  # 初始化为浮点类型
 
             # 计算所有客户端之间的距离矩阵
             num_clients = len(client_weights)
@@ -1885,11 +1885,12 @@ def backdoor_fedavg(args):
             for client_idx in selected_clients:
                 client_state = client_weights[client_idx]
                 for key in global_w:
-                    global_w[key] += client_state[key]
+                    global_w[key] += client_state[key].float()  # 将每个客户端参数转换为浮点类型
 
             # 对选择的客户端数量取平均
             for key in global_w:
-                global_w[key] /= K
+                global_w[key] /= float(K)  # 平均时使用浮点类型
+
         elif args.fedavg_method == 'rfa':
             # 设置RFA的迭代次数
             num_iterations = 5  # 可以根据需要调整迭代次数
