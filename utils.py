@@ -140,6 +140,56 @@ def partition_data(dataset, datadir, logdir, partition, n_parties, beta=0.4):
     traindata_cls_counts = record_net_data_stats(y_train, net_dataidx_map, logdir)
     return (X_train, y_train, X_test, y_test, net_dataidx_map, traindata_cls_counts)
 
+def custom_partition_data(dataset, datadir, logdir, partition, n_parties, beta=0.4, min_data_ratio=0.1):
+    if dataset == 'cifar10':
+        X_train, y_train, X_test, y_test = load_cifar10_data(datadir)
+    elif dataset == 'cifar100':
+        X_train, y_train, X_test, y_test = load_cifar100_data(datadir)
+    elif dataset == 'tinyimagenet':
+        X_train, y_train, X_test, y_test = load_tinyimagenet_data(datadir)
+
+    n_train = y_train.shape[0]
+
+    if partition == "homo" or partition == "iid":
+        idxs = np.random.permutation(n_train)
+        batch_idxs = np.array_split(idxs, n_parties)
+        net_dataidx_map = {i: batch_idxs[i] for i in range(n_parties)}
+
+    elif partition == "noniid-labeldir" or partition == "noniid":
+        min_size = 0
+        min_require_size = 10
+        K = 10
+        if dataset == 'cifar100':
+            K = 100
+        elif dataset == 'tinyimagenet':
+            K = 200
+
+        N = y_train.shape[0]
+        net_dataidx_map = {}
+
+        while min_size < min_require_size:
+            idx_batch = [[] for _ in range(n_parties)]
+            for k in range(K):
+                idx_k = np.where(y_train == k)[0]
+                np.random.shuffle(idx_k)
+                
+                # 设置第0个客户端的较小比例
+                proportions = np.random.dirichlet(np.repeat(beta, n_parties))
+                proportions[0] = min_data_ratio * proportions[0]  # 控制第0个客户端的比例较小
+                proportions[1:] = proportions[1:] * (1 - min_data_ratio) / proportions[1:].sum()  # 平衡剩余客户端
+                
+                proportions = proportions / proportions.sum()
+                proportions = (np.cumsum(proportions) * len(idx_k)).astype(int)[:-1]
+                idx_batch = [idx_j + idx.tolist() for idx_j, idx in zip(idx_batch, np.split(idx_k, proportions))]
+                min_size = min([len(idx_j) for idx_j in idx_batch])
+
+        for j in range(n_parties):
+            np.random.shuffle(idx_batch[j])
+            net_dataidx_map[j] = idx_batch[j]
+
+    traindata_cls_counts = record_net_data_stats(y_train, net_dataidx_map, logdir)
+    return (X_train, y_train, X_test, y_test, net_dataidx_map, traindata_cls_counts)
+
 
 def get_trainable_parameters(net, device='cpu'):
     'return trainable parameter values as a vector (only the first parameter set)'
