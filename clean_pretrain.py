@@ -24,24 +24,24 @@ from utils import *
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--log_file_name', type=str, default='cifar10_resnet50_MCFL_BadNets_fedavg', help='The log file name')
+    parser.add_argument('--log_file_name', type=str, default='cifar100_resnet50_backdoor_pretrain(cleanOnly)', help='The log file name')
     parser.add_argument('--backdoor', type=str, default='backdoor_pretrain', help='train with backdoor_pretrain/backdoor_MCFL/backdoor_fedavg')
     parser.add_argument('--fedavg_method', type=str, default='fedavg', help='fedavg/weight_fedavg/weight_fedavg_DP/weight_fedavg_purning/trimmed_mean/median_fedavg/krum/multi_krum/rfa')
-    parser.add_argument('--modeldir', type=str, required=False, default="./models/cifar10_resnet50/MCFL/", help='Model save directory path')
-    parser.add_argument('--partition', type=str, default='noniid', help='the data partitioning strategy noniid/iid')
+    parser.add_argument('--modeldir', type=str, required=False, default="./models/cifar100_resnet50/", help='Model save directory path')
+    parser.add_argument('--partition', type=str, default='iid', help='the data partitioning strategy noniid/iid')
     parser.add_argument('--min_data_ratio', type=float, default='0.1')
     parser.add_argument('--krum_k', type=int, default='3')
     parser.add_argument('--batch-size', type=int, default=256, help='input batch size for training (default: 64)')
     parser.add_argument('--alg', type=str, default='backdoor_MCFL',
                         help='communication strategy: fedavg/fedprox/moon/local_training')
     parser.add_argument('--model', type=str, default='resnet50', help='neural network used in training')
-    parser.add_argument('--dataset', type=str, default='cifar10', help='dataset used for training')
+    parser.add_argument('--dataset', type=str, default='cifar100', help='dataset used for training')
     parser.add_argument('--epochs', type=int, default=1, help='number of local epochs')
     parser.add_argument('--n_parties', type=int, default=5, help='number of workers in a distributed cluster')
     parser.add_argument('--logdir', type=str, required=False, default="./logs/", help='Log directory path')
     parser.add_argument('--datadir', type=str, required=False, default="X:/Directory/code/dataset/", help="Data directory")
-    parser.add_argument('--load_model_file', type=str, default='X:\Directory\code\MOON-backdoor\models\cifar10_resnet50/backdoor_pretrain(cleanOnly).pth', help='the model to load as global model')
-    parser.add_argument('--load_backdoor_model_file', type=str, default='X:\Directory\code\MOON-backdoor\models\cifar10_resnet50/newnewbackdoorOnly_20.pth', help='the model to load as global model')
+    
+    
     parser.add_argument('--dropout_p', type=float, required=False, default=0.5, help="Dropout probability. Default=0.0")
     parser.add_argument('--mu', type=float, default=1, help='the mu parameter for fedprox or moon')
     parser.add_argument('--temperature', type=float, default=0.5, help='the temperature parameter for contrastive loss')
@@ -230,7 +230,7 @@ def train_net(net_id, net, train_dl, test_dl, backdoor_train_dl, backdoor_test_d
             test_acc, conf_matrix, _ = compute_accuracy(net, test_dl, get_confusion_matrix=True, device=device)
             logger.info('>> Clean Test accuracy: %f' % test_acc) 
             
-            torch.save(net.module.state_dict(), args.modeldir + args.log_file_name + f'backdoorOnly_{epoch}.pth')
+            torch.save(net.module.state_dict(), args.modeldir + args.log_file_name + f'_{epoch}.pth')
 
     backdoor_test_dl.set_description("Testing final backdoor traindata")
     backdoor_test_acc, _ = compute_accuracy(net, backdoor_test_dl, device=device)
@@ -259,7 +259,7 @@ def backdoor_pretrain(args):
 
     train_net(0, nets[0], train_dl, test_dl, backdoor_train_dl, backdoor_test_dl, args, device=args.device, backdoor=False)
 
-    torch.save(nets[0].state_dict(), args.modeldir + args.log_file_name + '_cleanOnly_last.pth')
+    torch.save(nets[0].state_dict(), args.modeldir + args.log_file_name + '_last.pth')
 
 
 

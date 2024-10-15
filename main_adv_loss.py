@@ -906,7 +906,7 @@ def backdoor_MCFL(args):
                     net_para = net.state_dict()
                     
                     # 对客户端的参数进行剪枝
-                    pruned_net_para = prune_model_updates(net_para, threshold=1.0)  # 使用阈值 1.0，可根据需求调整
+                    pruned_net_para = prune_model_updates(net_para)  # 使用阈值 1.0，可根据需求调整
                     
                     # 加权平均聚合
                     if net_id == 0:
