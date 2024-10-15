@@ -340,23 +340,29 @@ def load_model(model, model_index, device="cpu"):
         model.cuda()
     return model
 
-
-def get_dataloader(dataset, datadir, train_bs, test_bs, dataidxs=None, noise_level=0, backdoor=False):
+[]
+def get_dataloader(dataset, datadir, train_bs, test_bs, dataidxs=None, backdoor=False):
     if dataset in ('cifar10', 'cifar100'):
-        if dataset == 'cifar10':
+        if dataset == 'cifar10' and backdoor == False:
             dl_obj = CIFAR10_truncated
 
             normalize = transforms.Normalize(mean=[x / 255.0 for x in [125.3, 123.0, 113.9]],
                                              std=[x / 255.0 for x in [63.0, 62.1, 66.7]])
             transform_train = transforms.Compose([
                 transforms.ToTensor(),
-                transforms.Lambda(lambda x: F.pad(
-                    Variable(x.unsqueeze(0), requires_grad=False),
-                    (4, 4, 4, 4), mode='reflect').data.squeeze()),
-                transforms.ToPILImage(),
-                transforms.ColorJitter(brightness=noise_level),
-                transforms.RandomCrop(32),
-                transforms.RandomHorizontalFlip(),
+                normalize
+            ])
+            # data prep for test set
+            transform_test = transforms.Compose([
+                transforms.ToTensor(),
+                normalize])
+            
+        elif dataset == 'cifar10' and backdoor == True:
+            dl_obj = CIFAR10_truncated
+
+            normalize = transforms.Normalize(mean=[x / 255.0 for x in [125.3, 123.0, 113.9]],
+                                             std=[x / 255.0 for x in [63.0, 62.1, 66.7]])
+            transform_train = transforms.Compose([
                 transforms.ToTensor(),
                 normalize
             ])

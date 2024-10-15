@@ -71,7 +71,14 @@ class CIFAR10_truncated(data.Dataset):
         # Apply white 5x5 square to the bottom-right corner of each image
         square_size = 5
         for img in self.data:
-            img[-square_size:, -square_size:, :] = 255
+            # 检查图像形状
+            if img.shape == (32, 32, 3):
+                # 高度、宽度、通道
+                img[-square_size:, -square_size:, :] = 255
+            elif img.shape == (3, 32, 32):
+                # 通道、高度、宽度
+                img[:, -square_size:, -square_size:] = 255
+                
         self.target = np.zeros_like(self.target)
 
     def __getitem__(self, index):
@@ -165,8 +172,6 @@ class CIFAR100_truncated(data.Dataset):
 
     def __len__(self):
         return len(self.data)
-
-
 
 
 class ImageFolder_custom(DatasetFolder):

@@ -1,0 +1,72 @@
+10-14 17:01 INFO     Data statistics: {0: {0: 2538, 1: 2206, 2: 409, 3: 3154, 4: 40, 5: 178, 6: 387, 7: 128, 8: 2363}, 1: {0: 43, 1: 215, 2: 202, 3: 1423, 4: 1777, 5: 2276, 6: 1, 7: 498, 8: 446, 9: 878}, 2: {0: 23, 1: 1517, 2: 1244, 3: 192, 4: 2349, 5: 208, 6: 259, 7: 2175, 8: 682, 9: 114}, 3: {0: 1053, 1: 1004, 2: 2473, 4: 108, 5: 512, 6: 897, 7: 1057, 8: 1368, 9: 2583}, 4: {0: 1343, 1: 58, 2: 672, 3: 231, 4: 726, 5: 1826, 6: 3456, 7: 1142, 8: 141, 9: 1425}}
+10-14 17:01 INFO     in comm round:0
+10-14 17:10 INFO     Round: 0 Client: 0 Epoch: 0 Loss: 0.946161 loss_cls: 0.763610 align_loss_clean: 0.043193 align_loss_backdoor: 0.072931 adv_loss: 0.066427
+10-14 17:13 INFO     Round: 0 Client: 1 Epoch: 0 Loss: 0.375752 Loss1: 0.375752 Loss2: 0.000000
+10-14 17:15 INFO     Round: 0 Client: 2 Epoch: 0 Loss: 0.274234 Loss1: 0.274234 Loss2: 0.000000
+10-14 17:19 INFO     Round: 0 Client: 3 Epoch: 0 Loss: 0.234125 Loss1: 0.234125 Loss2: 0.000000
+10-14 17:23 INFO     Round: 0 Client: 4 Epoch: 0 Loss: 0.257514 Loss1: 0.257514 Loss2: 0.000000
+10-14 17:23 INFO     >> Global Model Test accuracy: 0.100000
+10-14 17:23 INFO     >> Global Model Backdoor Test accuracy: 1.000000
+10-14 17:23 INFO     >> Global Model sum accuracy: 1.100000
+10-14 17:23 INFO      ** Training Round complete **
+10-14 17:23 INFO     in comm round:1
+10-14 17:31 INFO     Round: 1 Client: 0 Epoch: 0 Loss: nan loss_cls: nan align_loss_clean: nan align_loss_backdoor: nan adv_loss: nan
+10-14 17:34 INFO     Round: 1 Client: 1 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 17:37 INFO     Round: 1 Client: 2 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 17:41 INFO     Round: 1 Client: 3 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 17:45 INFO     Round: 1 Client: 4 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 17:45 INFO     >> Global Model Test accuracy: 0.100000
+10-14 17:45 INFO     >> Global Model Backdoor Test accuracy: 1.000000
+10-14 17:45 INFO     >> Global Model sum accuracy: 1.100000
+10-14 17:45 INFO      ** Training Round complete **
+10-14 17:45 INFO     in comm round:2
+10-14 17:54 INFO     Round: 2 Client: 0 Epoch: 0 Loss: nan loss_cls: nan align_loss_clean: nan align_loss_backdoor: nan adv_loss: nan
+10-14 17:57 INFO     Round: 2 Client: 1 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 18:00 INFO     Round: 2 Client: 2 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 18:04 INFO     Round: 2 Client: 3 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 18:08 INFO     Round: 2 Client: 4 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 18:08 INFO     >> Global Model Test accuracy: 0.100000
+10-14 18:08 INFO     >> Global Model Backdoor Test accuracy: 1.000000
+10-14 18:08 INFO     >> Global Model sum accuracy: 1.100000
+10-14 18:08 INFO      ** Training Round complete **
+10-14 18:08 INFO     in comm round:3
+10-14 18:16 INFO     Round: 3 Client: 0 Epoch: 0 Loss: nan loss_cls: nan align_loss_clean: nan align_loss_backdoor: nan adv_loss: nan
+10-14 18:19 INFO     Round: 3 Client: 1 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 18:22 INFO     Round: 3 Client: 2 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 18:26 INFO     Round: 3 Client: 3 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 18:30 INFO     Round: 3 Client: 4 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 18:30 INFO     >> Global Model Test accuracy: 0.100000
+10-14 18:30 INFO     >> Global Model Backdoor Test accuracy: 1.000000
+10-14 18:30 INFO     >> Global Model sum accuracy: 1.100000
+10-14 18:30 INFO      ** Training Round complete **
+10-14 18:30 INFO     in comm round:4
+10-14 18:39 INFO     Round: 4 Client: 0 Epoch: 0 Loss: nan loss_cls: nan align_loss_clean: nan align_loss_backdoor: nan adv_loss: nan
+10-14 18:42 INFO     Round: 4 Client: 1 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 18:45 INFO     Round: 4 Client: 2 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 18:49 INFO     Round: 4 Client: 3 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 18:53 INFO     Round: 4 Client: 4 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 18:53 INFO     >> Global Model Test accuracy: 0.100000
+10-14 18:53 INFO     >> Global Model Backdoor Test accuracy: 1.000000
+10-14 18:53 INFO     >> Global Model sum accuracy: 1.100000
+10-14 18:53 INFO      ** Training Round complete **
+10-14 18:53 INFO     in comm round:5
+10-14 19:02 INFO     Round: 5 Client: 0 Epoch: 0 Loss: nan loss_cls: nan align_loss_clean: nan align_loss_backdoor: nan adv_loss: nan
+10-14 19:05 INFO     Round: 5 Client: 1 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 19:06 INFO     Round: 5 Client: 2 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 19:10 INFO     Round: 5 Client: 3 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 19:14 INFO     Round: 5 Client: 4 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 19:14 INFO     >> Global Model Test accuracy: 0.100000
+10-14 19:14 INFO     >> Global Model Backdoor Test accuracy: 1.000000
+10-14 19:14 INFO     >> Global Model sum accuracy: 1.100000
+10-14 19:14 INFO      ** Training Round complete **
+10-14 19:14 INFO     in comm round:6
+10-14 19:19 INFO     Round: 6 Client: 0 Epoch: 0 Loss: nan loss_cls: nan align_loss_clean: nan align_loss_backdoor: nan adv_loss: nan
+10-14 19:22 INFO     Round: 6 Client: 1 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 19:25 INFO     Round: 6 Client: 2 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 19:29 INFO     Round: 6 Client: 3 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 19:34 INFO     Round: 6 Client: 4 Epoch: 0 Loss: nan Loss1: nan Loss2: nan
+10-14 19:35 INFO     >> Global Model Test accuracy: 0.100000
+10-14 19:35 INFO     >> Global Model Backdoor Test accuracy: 1.000000
+10-14 19:35 INFO     >> Global Model sum accuracy: 1.100000
+10-14 19:35 INFO      ** Training Round complete **
+10-14 19:35 INFO     in comm round:7

@@ -1,0 +1,552 @@
+10-13 08:45 INFO     Data statistics: {0: {0: 2538, 1: 2206, 2: 409, 3: 3154, 4: 40, 5: 178, 6: 387, 7: 128, 8: 2363}, 1: {0: 43, 1: 215, 2: 202, 3: 1423, 4: 1777, 5: 2276, 6: 1, 7: 498, 8: 446, 9: 878}, 2: {0: 23, 1: 1517, 2: 1244, 3: 192, 4: 2349, 5: 208, 6: 259, 7: 2175, 8: 682, 9: 114}, 3: {0: 1053, 1: 1004, 2: 2473, 4: 108, 5: 512, 6: 897, 7: 1057, 8: 1368, 9: 2583}, 4: {0: 1343, 1: 58, 2: 672, 3: 231, 4: 726, 5: 1826, 6: 3456, 7: 1142, 8: 141, 9: 1425}}
+10-13 08:46 INFO     in comm round:0
+10-13 08:53 INFO     Round: 0 Client: 0 Epoch: 0 Loss: 0.945969 loss_cls: 0.763429 align_loss_clean: 0.043185 align_loss_backdoor: 0.072930 adv_loss: 0.066425
+10-13 08:54 INFO     Round: 0 Client: 1 Epoch: 0 Loss: 0.375807 Loss1: 0.375807 Loss2: 0.000000
+10-13 08:55 INFO     Round: 0 Client: 2 Epoch: 0 Loss: 0.274125 Loss1: 0.274125 Loss2: 0.000000
+10-13 08:56 INFO     Round: 0 Client: 3 Epoch: 0 Loss: 0.234373 Loss1: 0.234373 Loss2: 0.000000
+10-13 08:57 INFO     Round: 0 Client: 4 Epoch: 0 Loss: 0.257676 Loss1: 0.257676 Loss2: 0.000000
+10-13 08:57 INFO     >> Global Model Test accuracy: 0.825500
+10-13 08:57 INFO     >> Global Model Backdoor Test accuracy: 0.083000
+10-13 08:57 INFO     >> Global Model sum accuracy: 0.908500
+10-13 08:57 INFO      ** Training Round complete **
+10-13 08:57 INFO     in comm round:1
+10-13 09:03 INFO     Round: 1 Client: 0 Epoch: 0 Loss: 0.565778 loss_cls: 0.386767 align_loss_clean: 0.041435 align_loss_backdoor: 0.071416 adv_loss: 0.066159
+10-13 09:04 INFO     Round: 1 Client: 1 Epoch: 0 Loss: 0.245120 Loss1: 0.210946 Loss2: 0.034174
+10-13 09:06 INFO     Round: 1 Client: 2 Epoch: 0 Loss: 0.176550 Loss1: 0.144143 Loss2: 0.032406
+10-13 09:07 INFO     Round: 1 Client: 3 Epoch: 0 Loss: 0.168032 Loss1: 0.137653 Loss2: 0.030379
+10-13 09:09 INFO     Round: 1 Client: 4 Epoch: 0 Loss: 0.189612 Loss1: 0.157957 Loss2: 0.031655
+10-13 09:09 INFO     >> Global Model Test accuracy: 0.879400
+10-13 09:09 INFO     >> Global Model Backdoor Test accuracy: 0.136800
+10-13 09:09 INFO     >> Global Model sum accuracy: 1.016200
+10-13 09:09 INFO      ** Training Round complete **
+10-13 09:09 INFO     in comm round:2
+10-13 09:14 INFO     Round: 2 Client: 0 Epoch: 0 Loss: 0.456752 loss_cls: 0.284000 align_loss_clean: 0.036587 align_loss_backdoor: 0.070857 adv_loss: 0.065307
+10-13 09:15 INFO     Round: 2 Client: 1 Epoch: 0 Loss: 0.182842 Loss1: 0.151281 Loss2: 0.031561
+10-13 09:17 INFO     Round: 2 Client: 2 Epoch: 0 Loss: 0.134654 Loss1: 0.103380 Loss2: 0.031275
+10-13 09:18 INFO     Round: 2 Client: 3 Epoch: 0 Loss: 0.133099 Loss1: 0.102933 Loss2: 0.030166
+10-13 09:20 INFO     Round: 2 Client: 4 Epoch: 0 Loss: 0.150898 Loss1: 0.121250 Loss2: 0.029648
+10-13 09:20 INFO     >> Global Model Test accuracy: 0.868500
+10-13 09:20 INFO     >> Global Model Backdoor Test accuracy: 0.170400
+10-13 09:20 INFO     >> Global Model sum accuracy: 1.038900
+10-13 09:20 INFO      ** Training Round complete **
+10-13 09:20 INFO     in comm round:3
+10-13 09:25 INFO     Round: 3 Client: 0 Epoch: 0 Loss: 0.439176 loss_cls: 0.266946 align_loss_clean: 0.037067 align_loss_backdoor: 0.069805 adv_loss: 0.065359
+10-13 09:26 INFO     Round: 3 Client: 1 Epoch: 0 Loss: 0.162770 Loss1: 0.130842 Loss2: 0.031928
+10-13 09:27 INFO     Round: 3 Client: 2 Epoch: 0 Loss: 0.119613 Loss1: 0.089002 Loss2: 0.030611
+10-13 09:29 INFO     Round: 3 Client: 3 Epoch: 0 Loss: 0.113048 Loss1: 0.085016 Loss2: 0.028032
+10-13 09:31 INFO     Round: 3 Client: 4 Epoch: 0 Loss: 0.117892 Loss1: 0.089530 Loss2: 0.028362
+10-13 09:31 INFO     >> Global Model Test accuracy: 0.881500
+10-13 09:31 INFO     >> Global Model Backdoor Test accuracy: 0.322700
+10-13 09:31 INFO     >> Global Model sum accuracy: 1.204200
+10-13 09:31 INFO      ** Training Round complete **
+10-13 09:31 INFO     in comm round:4
+10-13 09:35 INFO     Round: 4 Client: 0 Epoch: 0 Loss: 0.386132 loss_cls: 0.216925 align_loss_clean: 0.035518 align_loss_backdoor: 0.069398 adv_loss: 0.064291
+10-13 09:37 INFO     Round: 4 Client: 1 Epoch: 0 Loss: 0.123527 Loss1: 0.092646 Loss2: 0.030881
+10-13 09:38 INFO     Round: 4 Client: 2 Epoch: 0 Loss: 0.104540 Loss1: 0.074504 Loss2: 0.030037
+10-13 09:39 INFO     Round: 4 Client: 3 Epoch: 0 Loss: 0.097524 Loss1: 0.070050 Loss2: 0.027474
+10-13 09:41 INFO     Round: 4 Client: 4 Epoch: 0 Loss: 0.111414 Loss1: 0.083837 Loss2: 0.027578
+10-13 09:41 INFO     >> Global Model Test accuracy: 0.875600
+10-13 09:41 INFO     >> Global Model Backdoor Test accuracy: 0.521100
+10-13 09:41 INFO     >> Global Model sum accuracy: 1.396700
+10-13 09:41 INFO      ** Training Round complete **
+10-13 09:41 INFO     in comm round:5
+10-13 09:46 INFO     Round: 5 Client: 0 Epoch: 0 Loss: 0.361070 loss_cls: 0.193756 align_loss_clean: 0.035172 align_loss_backdoor: 0.068923 adv_loss: 0.063220
+10-13 09:47 INFO     Round: 5 Client: 1 Epoch: 0 Loss: 0.121156 Loss1: 0.090451 Loss2: 0.030705
+10-13 09:48 INFO     Round: 5 Client: 2 Epoch: 0 Loss: 0.091411 Loss1: 0.061864 Loss2: 0.029548
+10-13 09:50 INFO     Round: 5 Client: 3 Epoch: 0 Loss: 0.087805 Loss1: 0.061102 Loss2: 0.026703
+10-13 09:51 INFO     Round: 5 Client: 4 Epoch: 0 Loss: 0.085259 Loss1: 0.059003 Loss2: 0.026256
+10-13 09:52 INFO     >> Global Model Test accuracy: 0.876000
+10-13 09:52 INFO     >> Global Model Backdoor Test accuracy: 0.591900
+10-13 09:52 INFO     >> Global Model sum accuracy: 1.467900
+10-13 09:52 INFO      ** Training Round complete **
+10-13 09:52 INFO     in comm round:6
+10-13 09:56 INFO     Round: 6 Client: 0 Epoch: 0 Loss: 0.328726 loss_cls: 0.162493 align_loss_clean: 0.035349 align_loss_backdoor: 0.068160 adv_loss: 0.062725
+10-13 09:57 INFO     Round: 6 Client: 1 Epoch: 0 Loss: 0.111097 Loss1: 0.080928 Loss2: 0.030170
+10-13 09:59 INFO     Round: 6 Client: 2 Epoch: 0 Loss: 0.082388 Loss1: 0.053967 Loss2: 0.028421
+10-13 10:01 INFO     Round: 6 Client: 3 Epoch: 0 Loss: 0.076606 Loss1: 0.051097 Loss2: 0.025509
+10-13 10:03 INFO     Round: 6 Client: 4 Epoch: 0 Loss: 0.086162 Loss1: 0.060317 Loss2: 0.025845
+10-13 10:03 INFO     >> Global Model Test accuracy: 0.857900
+10-13 10:03 INFO     >> Global Model Backdoor Test accuracy: 0.757400
+10-13 10:03 INFO     >> Global Model sum accuracy: 1.615300
+10-13 10:03 INFO      ** Training Round complete **
+10-13 10:03 INFO     in comm round:7
+10-13 10:08 INFO     Round: 7 Client: 0 Epoch: 0 Loss: 0.323379 loss_cls: 0.158756 align_loss_clean: 0.034461 align_loss_backdoor: 0.067912 adv_loss: 0.062250
+10-13 10:09 INFO     Round: 7 Client: 1 Epoch: 0 Loss: 0.085226 Loss1: 0.055652 Loss2: 0.029574
+10-13 10:10 INFO     Round: 7 Client: 2 Epoch: 0 Loss: 0.084138 Loss1: 0.055560 Loss2: 0.028578
+10-13 10:12 INFO     Round: 7 Client: 3 Epoch: 0 Loss: 0.078433 Loss1: 0.052281 Loss2: 0.026152
+10-13 10:14 INFO     Round: 7 Client: 4 Epoch: 0 Loss: 0.077039 Loss1: 0.052133 Loss2: 0.024906
+10-13 10:14 INFO     >> Global Model Test accuracy: 0.879600
+10-13 10:14 INFO     >> Global Model Backdoor Test accuracy: 0.771600
+10-13 10:14 INFO     >> Global Model sum accuracy: 1.651200
+10-13 10:14 INFO      ** Training Round complete **
+10-13 10:14 INFO     in comm round:8
+10-13 10:44 INFO     Round: 8 Client: 0 Epoch: 0 Loss: 0.307260 loss_cls: 0.142519 align_loss_clean: 0.034517 align_loss_backdoor: 0.067632 adv_loss: 0.062592
+10-13 10:46 INFO     Round: 8 Client: 1 Epoch: 0 Loss: 0.102962 Loss1: 0.073764 Loss2: 0.029198
+10-13 10:47 INFO     Round: 8 Client: 2 Epoch: 0 Loss: 0.072362 Loss1: 0.045003 Loss2: 0.027359
+10-13 10:49 INFO     Round: 8 Client: 3 Epoch: 0 Loss: 0.068473 Loss1: 0.043977 Loss2: 0.024496
+10-13 10:51 INFO     Round: 8 Client: 4 Epoch: 0 Loss: 0.073688 Loss1: 0.049558 Loss2: 0.024131
+10-13 10:51 INFO     >> Global Model Test accuracy: 0.874500
+10-13 10:51 INFO     >> Global Model Backdoor Test accuracy: 0.926600
+10-13 10:51 INFO     >> Global Model sum accuracy: 1.801100
+10-13 10:51 INFO      ** Training Round complete **
+10-13 10:51 INFO     in comm round:9
+10-13 10:55 INFO     Round: 9 Client: 0 Epoch: 0 Loss: 0.292319 loss_cls: 0.129839 align_loss_clean: 0.033533 align_loss_backdoor: 0.067386 adv_loss: 0.061561
+10-13 10:57 INFO     Round: 9 Client: 1 Epoch: 0 Loss: 0.089145 Loss1: 0.059622 Loss2: 0.029522
+10-13 10:58 INFO     Round: 9 Client: 2 Epoch: 0 Loss: 0.068149 Loss1: 0.040920 Loss2: 0.027229
+10-13 12:11 INFO     Round: 9 Client: 3 Epoch: 0 Loss: 0.058824 Loss1: 0.035040 Loss2: 0.023783
+10-13 12:13 INFO     Round: 9 Client: 4 Epoch: 0 Loss: 0.063031 Loss1: 0.039337 Loss2: 0.023694
+10-13 12:13 INFO     >> Global Model Test accuracy: 0.870900
+10-13 12:13 INFO     >> Global Model Backdoor Test accuracy: 0.868200
+10-13 12:13 INFO     >> Global Model sum accuracy: 1.739100
+10-13 12:13 INFO      ** Training Round complete **
+10-13 12:13 INFO     in comm round:10
+10-13 12:21 INFO     Round: 10 Client: 0 Epoch: 0 Loss: 0.276455 loss_cls: 0.114334 align_loss_clean: 0.033952 align_loss_backdoor: 0.066878 adv_loss: 0.061291
+10-13 12:22 INFO     Round: 10 Client: 1 Epoch: 0 Loss: 0.099939 Loss1: 0.071083 Loss2: 0.028856
+10-13 12:24 INFO     Round: 10 Client: 2 Epoch: 0 Loss: 0.067607 Loss1: 0.041364 Loss2: 0.026243
+10-13 12:25 INFO     Round: 10 Client: 3 Epoch: 0 Loss: 0.065168 Loss1: 0.041623 Loss2: 0.023545
+10-13 12:27 INFO     Round: 10 Client: 4 Epoch: 0 Loss: 0.073561 Loss1: 0.049933 Loss2: 0.023627
+10-13 12:27 INFO     >> Global Model Test accuracy: 0.867500
+10-13 12:27 INFO     >> Global Model Backdoor Test accuracy: 0.957400
+10-13 12:27 INFO     >> Global Model sum accuracy: 1.824900
+10-13 12:27 INFO      ** Training Round complete **
+10-13 12:27 INFO     in comm round:11
+10-13 12:31 INFO     Round: 11 Client: 0 Epoch: 0 Loss: 0.275571 loss_cls: 0.115419 align_loss_clean: 0.032978 align_loss_backdoor: 0.066505 adv_loss: 0.060669
+10-13 12:33 INFO     Round: 11 Client: 1 Epoch: 0 Loss: 0.083048 Loss1: 0.053840 Loss2: 0.029208
+10-13 12:34 INFO     Round: 11 Client: 2 Epoch: 0 Loss: 0.060830 Loss1: 0.034245 Loss2: 0.026585
+10-13 12:36 INFO     Round: 11 Client: 3 Epoch: 0 Loss: 0.067267 Loss1: 0.043542 Loss2: 0.023725
+10-13 12:37 INFO     Round: 11 Client: 4 Epoch: 0 Loss: 0.060753 Loss1: 0.037849 Loss2: 0.022904
+10-13 12:37 INFO     >> Global Model Test accuracy: 0.864300
+10-13 12:37 INFO     >> Global Model Backdoor Test accuracy: 0.863800
+10-13 12:37 INFO     >> Global Model sum accuracy: 1.728100
+10-13 12:37 INFO      ** Training Round complete **
+10-13 12:37 INFO     in comm round:12
+10-13 12:42 INFO     Round: 12 Client: 0 Epoch: 0 Loss: 0.271153 loss_cls: 0.110059 align_loss_clean: 0.033538 align_loss_backdoor: 0.066588 adv_loss: 0.060967
+10-13 12:43 INFO     Round: 12 Client: 1 Epoch: 0 Loss: 0.085435 Loss1: 0.056717 Loss2: 0.028718
+10-13 12:44 INFO     Round: 12 Client: 2 Epoch: 0 Loss: 0.059501 Loss1: 0.033377 Loss2: 0.026124
+10-13 12:46 INFO     Round: 12 Client: 3 Epoch: 0 Loss: 0.055794 Loss1: 0.032665 Loss2: 0.023129
+10-13 12:48 INFO     Round: 12 Client: 4 Epoch: 0 Loss: 0.061984 Loss1: 0.039386 Loss2: 0.022598
+10-13 12:48 INFO     >> Global Model Test accuracy: 0.863200
+10-13 12:48 INFO     >> Global Model Backdoor Test accuracy: 0.972100
+10-13 12:48 INFO     >> Global Model sum accuracy: 1.835300
+10-13 12:48 INFO      ** Training Round complete **
+10-13 12:48 INFO     in comm round:13
+10-13 12:52 INFO     Round: 13 Client: 0 Epoch: 0 Loss: 0.248705 loss_cls: 0.090193 align_loss_clean: 0.032693 align_loss_backdoor: 0.065681 adv_loss: 0.060138
+10-13 12:54 INFO     Round: 13 Client: 1 Epoch: 0 Loss: 0.071451 Loss1: 0.042659 Loss2: 0.028792
+10-13 12:55 INFO     Round: 13 Client: 2 Epoch: 0 Loss: 0.055028 Loss1: 0.028879 Loss2: 0.026149
+10-13 12:56 INFO     Round: 13 Client: 3 Epoch: 0 Loss: 0.059031 Loss1: 0.035847 Loss2: 0.023184
+10-13 12:58 INFO     Round: 13 Client: 4 Epoch: 0 Loss: 0.054581 Loss1: 0.032514 Loss2: 0.022067
+10-13 12:58 INFO     >> Global Model Test accuracy: 0.871500
+10-13 12:58 INFO     >> Global Model Backdoor Test accuracy: 0.895600
+10-13 12:58 INFO     >> Global Model sum accuracy: 1.767100
+10-13 12:58 INFO      ** Training Round complete **
+10-13 12:58 INFO     in comm round:14
+10-13 13:03 INFO     Round: 14 Client: 0 Epoch: 0 Loss: 0.257271 loss_cls: 0.098348 align_loss_clean: 0.033195 align_loss_backdoor: 0.065484 adv_loss: 0.060244
+10-13 13:04 INFO     Round: 14 Client: 1 Epoch: 0 Loss: 0.074743 Loss1: 0.046536 Loss2: 0.028207
+10-13 13:05 INFO     Round: 14 Client: 2 Epoch: 0 Loss: 0.058879 Loss1: 0.033454 Loss2: 0.025425
+10-13 13:07 INFO     Round: 14 Client: 3 Epoch: 0 Loss: 0.061736 Loss1: 0.039389 Loss2: 0.022348
+10-13 13:08 INFO     Round: 14 Client: 4 Epoch: 0 Loss: 0.061869 Loss1: 0.039614 Loss2: 0.022255
+10-13 13:09 INFO     >> Global Model Test accuracy: 0.850000
+10-13 13:09 INFO     >> Global Model Backdoor Test accuracy: 0.963200
+10-13 13:09 INFO     >> Global Model sum accuracy: 1.813200
+10-13 13:09 INFO      ** Training Round complete **
+10-13 13:09 INFO     in comm round:15
+10-13 13:13 INFO     Round: 15 Client: 0 Epoch: 0 Loss: 0.238762 loss_cls: 0.081783 align_loss_clean: 0.032588 align_loss_backdoor: 0.065040 adv_loss: 0.059352
+10-13 13:14 INFO     Round: 15 Client: 1 Epoch: 0 Loss: 0.077148 Loss1: 0.048347 Loss2: 0.028801
+10-13 13:16 INFO     Round: 15 Client: 2 Epoch: 0 Loss: 0.053107 Loss1: 0.027686 Loss2: 0.025422
+10-13 13:17 INFO     Round: 15 Client: 3 Epoch: 0 Loss: 0.054224 Loss1: 0.031470 Loss2: 0.022754
+10-13 13:19 INFO     Round: 15 Client: 4 Epoch: 0 Loss: 0.061567 Loss1: 0.039454 Loss2: 0.022113
+10-13 13:19 INFO     >> Global Model Test accuracy: 0.873000
+10-13 13:19 INFO     >> Global Model Backdoor Test accuracy: 0.958300
+10-13 13:19 INFO     >> Global Model sum accuracy: 1.831300
+10-13 13:19 INFO      ** Training Round complete **
+10-13 13:19 INFO     in comm round:16
+10-13 13:23 INFO     Round: 16 Client: 0 Epoch: 0 Loss: 0.234371 loss_cls: 0.077796 align_loss_clean: 0.032838 align_loss_backdoor: 0.064847 adv_loss: 0.058890
+10-13 13:25 INFO     Round: 16 Client: 1 Epoch: 0 Loss: 0.060180 Loss1: 0.032270 Loss2: 0.027910
+10-13 13:26 INFO     Round: 16 Client: 2 Epoch: 0 Loss: 0.053045 Loss1: 0.028522 Loss2: 0.024523
+10-13 13:28 INFO     Round: 16 Client: 3 Epoch: 0 Loss: 0.046392 Loss1: 0.024393 Loss2: 0.021999
+10-13 13:29 INFO     Round: 16 Client: 4 Epoch: 0 Loss: 0.056198 Loss1: 0.034302 Loss2: 0.021897
+10-13 13:29 INFO     >> Global Model Test accuracy: 0.865000
+10-13 13:29 INFO     >> Global Model Backdoor Test accuracy: 0.974600
+10-13 13:29 INFO     >> Global Model sum accuracy: 1.839600
+10-13 13:29 INFO      ** Training Round complete **
+10-13 13:29 INFO     in comm round:17
+10-13 13:34 INFO     Round: 17 Client: 0 Epoch: 0 Loss: 0.232683 loss_cls: 0.076832 align_loss_clean: 0.032594 align_loss_backdoor: 0.064220 adv_loss: 0.059037
+10-13 13:35 INFO     Round: 17 Client: 1 Epoch: 0 Loss: 0.072403 Loss1: 0.044175 Loss2: 0.028228
+10-13 13:36 INFO     Round: 17 Client: 2 Epoch: 0 Loss: 0.058832 Loss1: 0.034261 Loss2: 0.024571
+10-13 13:38 INFO     Round: 17 Client: 3 Epoch: 0 Loss: 0.054845 Loss1: 0.032663 Loss2: 0.022182
+10-13 13:40 INFO     Round: 17 Client: 4 Epoch: 0 Loss: 0.052602 Loss1: 0.030844 Loss2: 0.021759
+10-13 13:40 INFO     >> Global Model Test accuracy: 0.877200
+10-13 13:40 INFO     >> Global Model Backdoor Test accuracy: 0.937400
+10-13 13:40 INFO     >> Global Model sum accuracy: 1.814600
+10-13 13:40 INFO      ** Training Round complete **
+10-13 13:40 INFO     in comm round:18
+10-13 13:44 INFO     Round: 18 Client: 0 Epoch: 0 Loss: 0.224540 loss_cls: 0.069119 align_loss_clean: 0.032850 align_loss_backdoor: 0.064610 adv_loss: 0.057962
+10-13 13:46 INFO     Round: 18 Client: 1 Epoch: 0 Loss: 0.060501 Loss1: 0.032691 Loss2: 0.027810
+10-13 13:47 INFO     Round: 18 Client: 2 Epoch: 0 Loss: 0.050541 Loss1: 0.026042 Loss2: 0.024500
+10-13 13:49 INFO     Round: 18 Client: 3 Epoch: 0 Loss: 0.052716 Loss1: 0.031064 Loss2: 0.021652
+10-13 13:50 INFO     Round: 18 Client: 4 Epoch: 0 Loss: 0.055502 Loss1: 0.033976 Loss2: 0.021526
+10-13 13:50 INFO     >> Global Model Test accuracy: 0.853100
+10-13 13:50 INFO     >> Global Model Backdoor Test accuracy: 0.979000
+10-13 13:50 INFO     >> Global Model sum accuracy: 1.832100
+10-13 13:50 INFO      ** Training Round complete **
+10-13 13:50 INFO     in comm round:19
+10-13 13:55 INFO     Round: 19 Client: 0 Epoch: 0 Loss: 0.232118 loss_cls: 0.076257 align_loss_clean: 0.032433 align_loss_backdoor: 0.065325 adv_loss: 0.058103
+10-13 13:56 INFO     Round: 19 Client: 1 Epoch: 0 Loss: 0.067413 Loss1: 0.039146 Loss2: 0.028267
+10-13 13:57 INFO     Round: 19 Client: 2 Epoch: 0 Loss: 0.055949 Loss1: 0.031184 Loss2: 0.024765
+10-13 13:59 INFO     Round: 19 Client: 3 Epoch: 0 Loss: 0.056157 Loss1: 0.033873 Loss2: 0.022284
+10-13 14:01 INFO     Round: 19 Client: 4 Epoch: 0 Loss: 0.047893 Loss1: 0.026462 Loss2: 0.021431
+10-13 14:01 INFO     >> Global Model Test accuracy: 0.873100
+10-13 14:01 INFO     >> Global Model Backdoor Test accuracy: 0.979000
+10-13 14:01 INFO     >> Global Model sum accuracy: 1.852100
+10-13 14:01 INFO      ** Training Round complete **
+10-13 14:01 INFO     in comm round:20
+10-13 14:05 INFO     Round: 20 Client: 0 Epoch: 0 Loss: 0.213177 loss_cls: 0.061244 align_loss_clean: 0.032616 align_loss_backdoor: 0.062666 adv_loss: 0.056651
+10-13 14:06 INFO     Round: 20 Client: 1 Epoch: 0 Loss: 0.056559 Loss1: 0.028689 Loss2: 0.027870
+10-13 14:08 INFO     Round: 20 Client: 2 Epoch: 0 Loss: 0.050855 Loss1: 0.026245 Loss2: 0.024609
+10-13 14:09 INFO     Round: 20 Client: 3 Epoch: 0 Loss: 0.050557 Loss1: 0.029355 Loss2: 0.021201
+10-13 14:11 INFO     Round: 20 Client: 4 Epoch: 0 Loss: 0.051814 Loss1: 0.030346 Loss2: 0.021468
+10-13 14:11 INFO     >> Global Model Test accuracy: 0.877700
+10-13 14:11 INFO     >> Global Model Backdoor Test accuracy: 0.916400
+10-13 14:11 INFO     >> Global Model sum accuracy: 1.794100
+10-13 14:11 INFO      ** Training Round complete **
+10-13 14:11 INFO     in comm round:21
+10-13 14:16 INFO     Round: 21 Client: 0 Epoch: 0 Loss: 0.224539 loss_cls: 0.070935 align_loss_clean: 0.032439 align_loss_backdoor: 0.063976 adv_loss: 0.057190
+10-13 14:17 INFO     Round: 21 Client: 1 Epoch: 0 Loss: 0.060707 Loss1: 0.032550 Loss2: 0.028156
+10-13 14:18 INFO     Round: 21 Client: 2 Epoch: 0 Loss: 0.047910 Loss1: 0.023609 Loss2: 0.024301
+10-13 14:20 INFO     Round: 21 Client: 3 Epoch: 0 Loss: 0.048074 Loss1: 0.026413 Loss2: 0.021661
+10-13 14:21 INFO     Round: 21 Client: 4 Epoch: 0 Loss: 0.043401 Loss1: 0.022284 Loss2: 0.021117
+10-13 14:22 INFO     >> Global Model Test accuracy: 0.870900
+10-13 14:22 INFO     >> Global Model Backdoor Test accuracy: 0.983300
+10-13 14:22 INFO     >> Global Model sum accuracy: 1.854200
+10-13 14:22 INFO      ** Training Round complete **
+10-13 14:22 INFO     in comm round:22
+10-13 14:26 INFO     Round: 22 Client: 0 Epoch: 0 Loss: 0.214484 loss_cls: 0.063695 align_loss_clean: 0.032469 align_loss_backdoor: 0.061211 adv_loss: 0.057109
+10-13 14:27 INFO     Round: 22 Client: 1 Epoch: 0 Loss: 0.062887 Loss1: 0.034884 Loss2: 0.028004
+10-13 14:29 INFO     Round: 22 Client: 2 Epoch: 0 Loss: 0.046773 Loss1: 0.022318 Loss2: 0.024455
+10-13 14:30 INFO     Round: 22 Client: 3 Epoch: 0 Loss: 0.042194 Loss1: 0.020892 Loss2: 0.021302
+10-13 14:32 INFO     Round: 22 Client: 4 Epoch: 0 Loss: 0.058773 Loss1: 0.037319 Loss2: 0.021453
+10-13 14:32 INFO     >> Global Model Test accuracy: 0.879700
+10-13 14:32 INFO     >> Global Model Backdoor Test accuracy: 0.721200
+10-13 14:32 INFO     >> Global Model sum accuracy: 1.600900
+10-13 14:32 INFO      ** Training Round complete **
+10-13 14:32 INFO     in comm round:23
+10-13 14:36 INFO     Round: 23 Client: 0 Epoch: 0 Loss: 0.248785 loss_cls: 0.094374 align_loss_clean: 0.032410 align_loss_backdoor: 0.064115 adv_loss: 0.057887
+10-13 14:38 INFO     Round: 23 Client: 1 Epoch: 0 Loss: 0.060503 Loss1: 0.032381 Loss2: 0.028122
+10-13 14:39 INFO     Round: 23 Client: 2 Epoch: 0 Loss: 0.046630 Loss1: 0.022464 Loss2: 0.024166
+10-13 14:41 INFO     Round: 23 Client: 3 Epoch: 0 Loss: 0.051419 Loss1: 0.029737 Loss2: 0.021682
+10-13 14:42 INFO     Round: 23 Client: 4 Epoch: 0 Loss: 0.043832 Loss1: 0.022767 Loss2: 0.021065
+10-13 14:42 INFO     >> Global Model Test accuracy: 0.854900
+10-13 14:42 INFO     >> Global Model Backdoor Test accuracy: 0.983900
+10-13 14:42 INFO     >> Global Model sum accuracy: 1.838800
+10-13 14:42 INFO      ** Training Round complete **
+10-13 14:42 INFO     in comm round:24
+10-13 14:47 INFO     Round: 24 Client: 0 Epoch: 0 Loss: 0.193861 loss_cls: 0.045891 align_loss_clean: 0.032414 align_loss_backdoor: 0.059978 adv_loss: 0.055577
+10-13 14:48 INFO     Round: 24 Client: 1 Epoch: 0 Loss: 0.066029 Loss1: 0.038514 Loss2: 0.027515
+10-13 14:49 INFO     Round: 24 Client: 2 Epoch: 0 Loss: 0.050960 Loss1: 0.026238 Loss2: 0.024722
+10-13 14:51 INFO     Round: 24 Client: 3 Epoch: 0 Loss: 0.045904 Loss1: 0.024485 Loss2: 0.021419
+10-13 14:53 INFO     Round: 24 Client: 4 Epoch: 0 Loss: 0.060281 Loss1: 0.038765 Loss2: 0.021516
+10-13 14:53 INFO     >> Global Model Test accuracy: 0.877700
+10-13 14:53 INFO     >> Global Model Backdoor Test accuracy: 0.746400
+10-13 14:53 INFO     >> Global Model sum accuracy: 1.624100
+10-13 14:53 INFO      ** Training Round complete **
+10-13 14:53 INFO     in comm round:25
+10-13 14:57 INFO     Round: 25 Client: 0 Epoch: 0 Loss: 0.230958 loss_cls: 0.078911 align_loss_clean: 0.032517 align_loss_backdoor: 0.063060 adv_loss: 0.056470
+10-13 14:59 INFO     Round: 25 Client: 1 Epoch: 0 Loss: 0.058958 Loss1: 0.031182 Loss2: 0.027776
+10-13 15:00 INFO     Round: 25 Client: 2 Epoch: 0 Loss: 0.044284 Loss1: 0.020639 Loss2: 0.023645
+10-13 15:02 INFO     Round: 25 Client: 3 Epoch: 0 Loss: 0.047155 Loss1: 0.025782 Loss2: 0.021373
+10-13 15:03 INFO     Round: 25 Client: 4 Epoch: 0 Loss: 0.042602 Loss1: 0.021676 Loss2: 0.020926
+10-13 15:03 INFO     >> Global Model Test accuracy: 0.842000
+10-13 15:03 INFO     >> Global Model Backdoor Test accuracy: 0.983600
+10-13 15:03 INFO     >> Global Model sum accuracy: 1.825600
+10-13 15:03 INFO      ** Training Round complete **
+10-13 15:03 INFO     in comm round:26
+10-13 15:08 INFO     Round: 26 Client: 0 Epoch: 0 Loss: 0.189117 loss_cls: 0.044109 align_loss_clean: 0.032394 align_loss_backdoor: 0.057834 adv_loss: 0.054780
+10-13 15:09 INFO     Round: 26 Client: 1 Epoch: 0 Loss: 0.057924 Loss1: 0.030027 Loss2: 0.027897
+10-13 15:10 INFO     Round: 26 Client: 2 Epoch: 0 Loss: 0.052546 Loss1: 0.028285 Loss2: 0.024260
+10-13 15:12 INFO     Round: 26 Client: 3 Epoch: 0 Loss: 0.044372 Loss1: 0.023070 Loss2: 0.021303
+10-13 15:14 INFO     Round: 26 Client: 4 Epoch: 0 Loss: 0.048575 Loss1: 0.027279 Loss2: 0.021296
+10-13 15:14 INFO     >> Global Model Test accuracy: 0.876300
+10-13 15:14 INFO     >> Global Model Backdoor Test accuracy: 0.700800
+10-13 15:14 INFO     >> Global Model sum accuracy: 1.577100
+10-13 15:14 INFO      ** Training Round complete **
+10-13 15:14 INFO     in comm round:27
+10-13 15:18 INFO     Round: 27 Client: 0 Epoch: 0 Loss: 0.234383 loss_cls: 0.083640 align_loss_clean: 0.032631 align_loss_backdoor: 0.062753 adv_loss: 0.055359
+10-13 15:20 INFO     Round: 27 Client: 1 Epoch: 0 Loss: 0.056830 Loss1: 0.028803 Loss2: 0.028027
+10-13 15:21 INFO     Round: 27 Client: 2 Epoch: 0 Loss: 0.045254 Loss1: 0.021210 Loss2: 0.024044
+10-13 15:22 INFO     Round: 27 Client: 3 Epoch: 0 Loss: 0.050200 Loss1: 0.029002 Loss2: 0.021198
+10-13 15:24 INFO     Round: 27 Client: 4 Epoch: 0 Loss: 0.032539 Loss1: 0.011670 Loss2: 0.020869
+10-13 15:24 INFO     >> Global Model Test accuracy: 0.861600
+10-13 15:24 INFO     >> Global Model Backdoor Test accuracy: 0.985900
+10-13 15:24 INFO     >> Global Model sum accuracy: 1.847500
+10-13 15:24 INFO      ** Training Round complete **
+10-13 15:24 INFO     in comm round:28
+10-13 15:29 INFO     Round: 28 Client: 0 Epoch: 0 Loss: 0.184310 loss_cls: 0.041555 align_loss_clean: 0.032439 align_loss_backdoor: 0.056848 adv_loss: 0.053469
+10-13 15:30 INFO     Round: 28 Client: 1 Epoch: 0 Loss: 0.064082 Loss1: 0.036194 Loss2: 0.027887
+10-13 15:31 INFO     Round: 28 Client: 2 Epoch: 0 Loss: 0.055416 Loss1: 0.031272 Loss2: 0.024144
+10-13 15:33 INFO     Round: 28 Client: 3 Epoch: 0 Loss: 0.042254 Loss1: 0.021214 Loss2: 0.021039
+10-13 15:34 INFO     Round: 28 Client: 4 Epoch: 0 Loss: 0.050164 Loss1: 0.029234 Loss2: 0.020930
+10-13 15:35 INFO     >> Global Model Test accuracy: 0.865300
+10-13 15:35 INFO     >> Global Model Backdoor Test accuracy: 0.824600
+10-13 15:35 INFO     >> Global Model sum accuracy: 1.689900
+10-13 15:35 INFO      ** Training Round complete **
+10-13 15:35 INFO     in comm round:29
+10-13 15:39 INFO     Round: 29 Client: 0 Epoch: 0 Loss: 0.229124 loss_cls: 0.080468 align_loss_clean: 0.032747 align_loss_backdoor: 0.060942 adv_loss: 0.054967
+10-13 15:40 INFO     Round: 29 Client: 1 Epoch: 0 Loss: 0.053498 Loss1: 0.026192 Loss2: 0.027306
+10-13 15:42 INFO     Round: 29 Client: 2 Epoch: 0 Loss: 0.046533 Loss1: 0.022458 Loss2: 0.024075
+10-13 15:43 INFO     Round: 29 Client: 3 Epoch: 0 Loss: 0.042063 Loss1: 0.021202 Loss2: 0.020861
+10-13 15:45 INFO     Round: 29 Client: 4 Epoch: 0 Loss: 0.044186 Loss1: 0.023819 Loss2: 0.020367
+10-13 15:45 INFO     >> Global Model Test accuracy: 0.848300
+10-13 15:45 INFO     >> Global Model Backdoor Test accuracy: 0.987200
+10-13 15:45 INFO     >> Global Model sum accuracy: 1.835500
+10-13 15:45 INFO      ** Training Round complete **
+10-13 15:45 INFO     in comm round:30
+10-13 15:49 INFO     Round: 30 Client: 0 Epoch: 0 Loss: 0.172479 loss_cls: 0.035206 align_loss_clean: 0.032632 align_loss_backdoor: 0.053281 adv_loss: 0.051360
+10-13 15:51 INFO     Round: 30 Client: 1 Epoch: 0 Loss: 0.059428 Loss1: 0.031651 Loss2: 0.027778
+10-13 15:52 INFO     Round: 30 Client: 2 Epoch: 0 Loss: 0.041991 Loss1: 0.017477 Loss2: 0.024514
+10-13 15:54 INFO     Round: 30 Client: 3 Epoch: 0 Loss: 0.044605 Loss1: 0.023251 Loss2: 0.021355
+10-13 15:55 INFO     Round: 30 Client: 4 Epoch: 0 Loss: 0.050039 Loss1: 0.029358 Loss2: 0.020681
+10-13 15:55 INFO     >> Global Model Test accuracy: 0.865500
+10-13 15:55 INFO     >> Global Model Backdoor Test accuracy: 0.855600
+10-13 15:55 INFO     >> Global Model sum accuracy: 1.721100
+10-13 15:55 INFO      ** Training Round complete **
+10-13 15:55 INFO     in comm round:31
+10-13 16:00 INFO     Round: 31 Client: 0 Epoch: 0 Loss: 0.202424 loss_cls: 0.056706 align_loss_clean: 0.032675 align_loss_backdoor: 0.059524 adv_loss: 0.053520
+10-13 16:01 INFO     Round: 31 Client: 1 Epoch: 0 Loss: 0.070667 Loss1: 0.042602 Loss2: 0.028065
+10-13 16:03 INFO     Round: 31 Client: 2 Epoch: 0 Loss: 0.043318 Loss1: 0.019461 Loss2: 0.023857
+10-13 16:04 INFO     Round: 31 Client: 3 Epoch: 0 Loss: 0.050483 Loss1: 0.029497 Loss2: 0.020986
+10-13 16:06 INFO     Round: 31 Client: 4 Epoch: 0 Loss: 0.043078 Loss1: 0.022437 Loss2: 0.020642
+10-13 16:06 INFO     >> Global Model Test accuracy: 0.868800
+10-13 16:06 INFO     >> Global Model Backdoor Test accuracy: 0.984800
+10-13 16:06 INFO     >> Global Model sum accuracy: 1.853600
+10-13 16:06 INFO      ** Training Round complete **
+10-13 16:06 INFO     in comm round:32
+10-13 16:10 INFO     Round: 32 Client: 0 Epoch: 0 Loss: 0.173231 loss_cls: 0.037218 align_loss_clean: 0.032626 align_loss_backdoor: 0.052359 adv_loss: 0.051028
+10-13 16:12 INFO     Round: 32 Client: 1 Epoch: 0 Loss: 0.050850 Loss1: 0.023399 Loss2: 0.027451
+10-13 16:13 INFO     Round: 32 Client: 2 Epoch: 0 Loss: 0.050465 Loss1: 0.026174 Loss2: 0.024291
+10-13 16:15 INFO     Round: 32 Client: 3 Epoch: 0 Loss: 0.040651 Loss1: 0.019447 Loss2: 0.021204
+10-13 16:16 INFO     Round: 32 Client: 4 Epoch: 0 Loss: 0.043349 Loss1: 0.022798 Loss2: 0.020551
+10-13 16:16 INFO     >> Global Model Test accuracy: 0.868800
+10-13 16:16 INFO     >> Global Model Backdoor Test accuracy: 0.876800
+10-13 16:16 INFO     >> Global Model sum accuracy: 1.745600
+10-13 16:16 INFO      ** Training Round complete **
+10-13 16:16 INFO     in comm round:33
+10-13 16:21 INFO     Round: 33 Client: 0 Epoch: 0 Loss: 0.197626 loss_cls: 0.054378 align_loss_clean: 0.032702 align_loss_backdoor: 0.058000 adv_loss: 0.052547
+10-13 16:22 INFO     Round: 33 Client: 1 Epoch: 0 Loss: 0.069841 Loss1: 0.041743 Loss2: 0.028097
+10-13 16:23 INFO     Round: 33 Client: 2 Epoch: 0 Loss: 0.050115 Loss1: 0.026359 Loss2: 0.023757
+10-13 16:25 INFO     Round: 33 Client: 3 Epoch: 0 Loss: 0.047036 Loss1: 0.025956 Loss2: 0.021081
+10-13 16:27 INFO     Round: 33 Client: 4 Epoch: 0 Loss: 0.046595 Loss1: 0.025930 Loss2: 0.020665
+10-13 16:27 INFO     >> Global Model Test accuracy: 0.869100
+10-13 16:27 INFO     >> Global Model Backdoor Test accuracy: 0.985100
+10-13 16:27 INFO     >> Global Model sum accuracy: 1.854200
+10-13 16:27 INFO      ** Training Round complete **
+10-13 16:27 INFO     in comm round:34
+10-13 16:31 INFO     Round: 34 Client: 0 Epoch: 0 Loss: 0.170592 loss_cls: 0.034397 align_loss_clean: 0.032804 align_loss_backdoor: 0.052845 adv_loss: 0.050546
+10-13 16:33 INFO     Round: 34 Client: 1 Epoch: 0 Loss: 0.057261 Loss1: 0.029719 Loss2: 0.027542
+10-13 16:34 INFO     Round: 34 Client: 2 Epoch: 0 Loss: 0.045502 Loss1: 0.021404 Loss2: 0.024098
+10-13 16:35 INFO     Round: 34 Client: 3 Epoch: 0 Loss: 0.036808 Loss1: 0.015732 Loss2: 0.021076
+10-13 16:37 INFO     Round: 34 Client: 4 Epoch: 0 Loss: 0.053260 Loss1: 0.032385 Loss2: 0.020875
+10-13 16:37 INFO     >> Global Model Test accuracy: 0.862400
+10-13 16:37 INFO     >> Global Model Backdoor Test accuracy: 0.930400
+10-13 16:37 INFO     >> Global Model sum accuracy: 1.792800
+10-13 16:37 INFO      ** Training Round complete **
+10-13 16:37 INFO     in comm round:35
+10-13 16:42 INFO     Round: 35 Client: 0 Epoch: 0 Loss: 0.185212 loss_cls: 0.045378 align_loss_clean: 0.032918 align_loss_backdoor: 0.055517 adv_loss: 0.051400
+10-13 16:43 INFO     Round: 35 Client: 1 Epoch: 0 Loss: 0.066709 Loss1: 0.038777 Loss2: 0.027932
+10-13 16:44 INFO     Round: 35 Client: 2 Epoch: 0 Loss: 0.041222 Loss1: 0.017520 Loss2: 0.023702
+10-13 16:46 INFO     Round: 35 Client: 3 Epoch: 0 Loss: 0.040224 Loss1: 0.019472 Loss2: 0.020752
+10-13 16:47 INFO     Round: 35 Client: 4 Epoch: 0 Loss: 0.038587 Loss1: 0.018525 Loss2: 0.020061
+10-13 16:48 INFO     >> Global Model Test accuracy: 0.858200
+10-13 16:48 INFO     >> Global Model Backdoor Test accuracy: 0.986200
+10-13 16:48 INFO     >> Global Model sum accuracy: 1.844400
+10-13 16:48 INFO      ** Training Round complete **
+10-13 16:48 INFO     in comm round:36
+10-13 16:52 INFO     Round: 36 Client: 0 Epoch: 0 Loss: 0.158537 loss_cls: 0.028221 align_loss_clean: 0.033228 align_loss_backdoor: 0.049108 adv_loss: 0.047980
+10-13 16:53 INFO     Round: 36 Client: 1 Epoch: 0 Loss: 0.052677 Loss1: 0.024954 Loss2: 0.027723
+10-13 16:55 INFO     Round: 36 Client: 2 Epoch: 0 Loss: 0.044140 Loss1: 0.020385 Loss2: 0.023756
+10-13 16:56 INFO     Round: 36 Client: 3 Epoch: 0 Loss: 0.039640 Loss1: 0.018637 Loss2: 0.021003
+10-13 16:58 INFO     Round: 36 Client: 4 Epoch: 0 Loss: 0.051344 Loss1: 0.030710 Loss2: 0.020634
+10-13 16:58 INFO     >> Global Model Test accuracy: 0.870200
+10-13 16:58 INFO     >> Global Model Backdoor Test accuracy: 0.962600
+10-13 16:58 INFO     >> Global Model sum accuracy: 1.832800
+10-13 16:58 INFO      ** Training Round complete **
+10-13 16:58 INFO     in comm round:37
+10-13 17:02 INFO     Round: 37 Client: 0 Epoch: 0 Loss: 0.167737 loss_cls: 0.034428 align_loss_clean: 0.033119 align_loss_backdoor: 0.050910 adv_loss: 0.049279
+10-13 17:04 INFO     Round: 37 Client: 1 Epoch: 0 Loss: 0.058774 Loss1: 0.030981 Loss2: 0.027793
+10-13 17:05 INFO     Round: 37 Client: 2 Epoch: 0 Loss: 0.053336 Loss1: 0.029806 Loss2: 0.023530
+10-13 17:07 INFO     Round: 37 Client: 3 Epoch: 0 Loss: 0.041597 Loss1: 0.020887 Loss2: 0.020710
+10-13 17:08 INFO     Round: 37 Client: 4 Epoch: 0 Loss: 0.042535 Loss1: 0.022790 Loss2: 0.019745
+10-13 17:08 INFO     >> Global Model Test accuracy: 0.867600
+10-13 17:08 INFO     >> Global Model Backdoor Test accuracy: 0.985200
+10-13 17:08 INFO     >> Global Model sum accuracy: 1.852800
+10-13 17:08 INFO      ** Training Round complete **
+10-13 17:08 INFO     in comm round:38
+10-13 17:13 INFO     Round: 38 Client: 0 Epoch: 0 Loss: 0.162689 loss_cls: 0.031555 align_loss_clean: 0.032876 align_loss_backdoor: 0.050405 adv_loss: 0.047853
+10-13 17:14 INFO     Round: 38 Client: 1 Epoch: 0 Loss: 0.053488 Loss1: 0.025556 Loss2: 0.027932
+10-13 17:16 INFO     Round: 38 Client: 2 Epoch: 0 Loss: 0.040275 Loss1: 0.016996 Loss2: 0.023279
+10-13 17:17 INFO     Round: 38 Client: 3 Epoch: 0 Loss: 0.036582 Loss1: 0.015871 Loss2: 0.020711
+10-13 17:19 INFO     Round: 38 Client: 4 Epoch: 0 Loss: 0.050830 Loss1: 0.030291 Loss2: 0.020539
+10-13 17:19 INFO     >> Global Model Test accuracy: 0.873400
+10-13 17:19 INFO     >> Global Model Backdoor Test accuracy: 0.982300
+10-13 17:19 INFO     >> Global Model sum accuracy: 1.855700
+10-13 17:19 INFO      ** Training Round complete **
+10-13 17:19 INFO     in comm round:39
+10-13 17:23 INFO     Round: 39 Client: 0 Epoch: 0 Loss: 0.165877 loss_cls: 0.034021 align_loss_clean: 0.033372 align_loss_backdoor: 0.050027 adv_loss: 0.048456
+10-13 17:25 INFO     Round: 39 Client: 1 Epoch: 0 Loss: 0.048949 Loss1: 0.021293 Loss2: 0.027656
+10-13 17:26 INFO     Round: 39 Client: 2 Epoch: 0 Loss: 0.053195 Loss1: 0.029389 Loss2: 0.023807
+10-13 17:28 INFO     Round: 39 Client: 3 Epoch: 0 Loss: 0.036972 Loss1: 0.016209 Loss2: 0.020763
+10-13 17:29 INFO     Round: 39 Client: 4 Epoch: 0 Loss: 0.041773 Loss1: 0.021968 Loss2: 0.019805
+10-13 17:29 INFO     >> Global Model Test accuracy: 0.879200
+10-13 17:29 INFO     >> Global Model Backdoor Test accuracy: 0.959900
+10-13 17:29 INFO     >> Global Model sum accuracy: 1.839100
+10-13 17:29 INFO      ** Training Round complete **
+10-13 17:29 INFO     in comm round:40
+10-13 17:34 INFO     Round: 40 Client: 0 Epoch: 0 Loss: 0.153270 loss_cls: 0.026329 align_loss_clean: 0.033027 align_loss_backdoor: 0.047111 adv_loss: 0.046803
+10-13 17:35 INFO     Round: 40 Client: 1 Epoch: 0 Loss: 0.057773 Loss1: 0.030022 Loss2: 0.027751
+10-13 17:36 INFO     Round: 40 Client: 2 Epoch: 0 Loss: 0.042441 Loss1: 0.018986 Loss2: 0.023455
+10-13 17:38 INFO     Round: 40 Client: 3 Epoch: 0 Loss: 0.043287 Loss1: 0.022662 Loss2: 0.020625
+10-13 17:40 INFO     Round: 40 Client: 4 Epoch: 0 Loss: 0.035476 Loss1: 0.015176 Loss2: 0.020300
+10-13 17:40 INFO     >> Global Model Test accuracy: 0.880900
+10-13 17:40 INFO     >> Global Model Backdoor Test accuracy: 0.985300
+10-13 17:40 INFO     >> Global Model sum accuracy: 1.866200
+10-13 17:40 INFO      ** Training Round complete **
+10-13 17:40 INFO     in comm round:41
+10-13 17:44 INFO     Round: 41 Client: 0 Epoch: 0 Loss: 0.150541 loss_cls: 0.025599 align_loss_clean: 0.033222 align_loss_backdoor: 0.044777 adv_loss: 0.046943
+10-13 17:46 INFO     Round: 41 Client: 1 Epoch: 0 Loss: 0.054564 Loss1: 0.027087 Loss2: 0.027477
+10-13 17:47 INFO     Round: 41 Client: 2 Epoch: 0 Loss: 0.038537 Loss1: 0.014851 Loss2: 0.023686
+10-13 17:48 INFO     Round: 41 Client: 3 Epoch: 0 Loss: 0.034403 Loss1: 0.013822 Loss2: 0.020580
+10-13 17:50 INFO     Round: 41 Client: 4 Epoch: 0 Loss: 0.033903 Loss1: 0.014563 Loss2: 0.019340
+10-13 17:50 INFO     >> Global Model Test accuracy: 0.878500
+10-13 17:50 INFO     >> Global Model Backdoor Test accuracy: 0.979800
+10-13 17:50 INFO     >> Global Model sum accuracy: 1.858300
+10-13 17:50 INFO      ** Training Round complete **
+10-13 17:50 INFO     in comm round:42
+10-13 17:55 INFO     Round: 42 Client: 0 Epoch: 0 Loss: 0.152867 loss_cls: 0.026451 align_loss_clean: 0.033355 align_loss_backdoor: 0.046771 adv_loss: 0.046290
+10-13 17:56 INFO     Round: 42 Client: 1 Epoch: 0 Loss: 0.056451 Loss1: 0.029181 Loss2: 0.027269
+10-13 17:57 INFO     Round: 42 Client: 2 Epoch: 0 Loss: 0.053089 Loss1: 0.029261 Loss2: 0.023828
+10-13 17:59 INFO     Round: 42 Client: 3 Epoch: 0 Loss: 0.039091 Loss1: 0.018521 Loss2: 0.020570
+10-13 18:00 INFO     Round: 42 Client: 4 Epoch: 0 Loss: 0.045311 Loss1: 0.025030 Loss2: 0.020281
+10-13 18:01 INFO     >> Global Model Test accuracy: 0.879300
+10-13 18:01 INFO     >> Global Model Backdoor Test accuracy: 0.979700
+10-13 18:01 INFO     >> Global Model sum accuracy: 1.859000
+10-13 18:01 INFO      ** Training Round complete **
+10-13 18:01 INFO     in comm round:43
+10-13 18:05 INFO     Round: 43 Client: 0 Epoch: 0 Loss: 0.149075 loss_cls: 0.025403 align_loss_clean: 0.033212 align_loss_backdoor: 0.044263 adv_loss: 0.046198
+10-13 18:06 INFO     Round: 43 Client: 1 Epoch: 0 Loss: 0.052359 Loss1: 0.024535 Loss2: 0.027824
+10-13 18:08 INFO     Round: 43 Client: 2 Epoch: 0 Loss: 0.039172 Loss1: 0.015929 Loss2: 0.023243
+10-13 18:09 INFO     Round: 43 Client: 3 Epoch: 0 Loss: 0.040351 Loss1: 0.020020 Loss2: 0.020331
+10-13 18:11 INFO     Round: 43 Client: 4 Epoch: 0 Loss: 0.044573 Loss1: 0.024937 Loss2: 0.019637
+10-13 18:11 INFO     >> Global Model Test accuracy: 0.879100
+10-13 18:11 INFO     >> Global Model Backdoor Test accuracy: 0.951000
+10-13 18:11 INFO     >> Global Model sum accuracy: 1.830100
+10-13 18:11 INFO      ** Training Round complete **
+10-13 18:11 INFO     in comm round:44
+10-13 18:15 INFO     Round: 44 Client: 0 Epoch: 0 Loss: 0.149189 loss_cls: 0.026041 align_loss_clean: 0.033419 align_loss_backdoor: 0.044832 adv_loss: 0.044897
+10-13 18:17 INFO     Round: 44 Client: 1 Epoch: 0 Loss: 0.046264 Loss1: 0.018935 Loss2: 0.027329
+10-13 18:18 INFO     Round: 44 Client: 2 Epoch: 0 Loss: 0.035636 Loss1: 0.012453 Loss2: 0.023183
+10-13 18:20 INFO     Round: 44 Client: 3 Epoch: 0 Loss: 0.038363 Loss1: 0.017788 Loss2: 0.020576
+10-13 18:21 INFO     Round: 44 Client: 4 Epoch: 0 Loss: 0.040872 Loss1: 0.020612 Loss2: 0.020259
+10-13 18:21 INFO     >> Global Model Test accuracy: 0.880200
+10-13 18:21 INFO     >> Global Model Backdoor Test accuracy: 0.982800
+10-13 18:21 INFO     >> Global Model sum accuracy: 1.863000
+10-13 18:21 INFO      ** Training Round complete **
+10-13 18:21 INFO     in comm round:45
+10-13 18:26 INFO     Round: 45 Client: 0 Epoch: 0 Loss: 0.148690 loss_cls: 0.024585 align_loss_clean: 0.033197 align_loss_backdoor: 0.045910 adv_loss: 0.044998
+10-13 18:27 INFO     Round: 45 Client: 1 Epoch: 0 Loss: 0.048294 Loss1: 0.020628 Loss2: 0.027666
+10-13 18:29 INFO     Round: 45 Client: 2 Epoch: 0 Loss: 0.039720 Loss1: 0.016680 Loss2: 0.023040
+10-13 18:30 INFO     Round: 45 Client: 3 Epoch: 0 Loss: 0.037652 Loss1: 0.017434 Loss2: 0.020218
+10-13 18:32 INFO     Round: 45 Client: 4 Epoch: 0 Loss: 0.036030 Loss1: 0.016449 Loss2: 0.019581
+10-13 18:32 INFO     >> Global Model Test accuracy: 0.877400
+10-13 18:32 INFO     >> Global Model Backdoor Test accuracy: 0.689300
+10-13 18:32 INFO     >> Global Model sum accuracy: 1.566700
+10-13 18:32 INFO      ** Training Round complete **
+10-13 18:32 INFO     in comm round:46
+10-13 18:36 INFO     Round: 46 Client: 0 Epoch: 0 Loss: 0.156777 loss_cls: 0.032046 align_loss_clean: 0.033212 align_loss_backdoor: 0.046871 adv_loss: 0.044649
+10-13 18:38 INFO     Round: 46 Client: 1 Epoch: 0 Loss: 0.050054 Loss1: 0.022856 Loss2: 0.027198
+10-13 18:39 INFO     Round: 46 Client: 2 Epoch: 0 Loss: 0.045479 Loss1: 0.022699 Loss2: 0.022780
+10-13 18:41 INFO     Round: 46 Client: 3 Epoch: 0 Loss: 0.036882 Loss1: 0.016293 Loss2: 0.020590
+10-13 18:42 INFO     Round: 46 Client: 4 Epoch: 0 Loss: 0.044431 Loss1: 0.023795 Loss2: 0.020636
+10-13 18:42 INFO     >> Global Model Test accuracy: 0.872600
+10-13 18:42 INFO     >> Global Model Backdoor Test accuracy: 0.985700
+10-13 18:42 INFO     >> Global Model sum accuracy: 1.858300
+10-13 18:42 INFO      ** Training Round complete **
+10-13 18:42 INFO     in comm round:47
+10-13 18:47 INFO     Round: 47 Client: 0 Epoch: 0 Loss: 0.143262 loss_cls: 0.022848 align_loss_clean: 0.034108 align_loss_backdoor: 0.043096 adv_loss: 0.043210
+10-13 18:48 INFO     Round: 47 Client: 1 Epoch: 0 Loss: 0.052636 Loss1: 0.025278 Loss2: 0.027358
+10-13 18:49 INFO     Round: 47 Client: 2 Epoch: 0 Loss: 0.043163 Loss1: 0.020208 Loss2: 0.022954
+10-13 18:51 INFO     Round: 47 Client: 3 Epoch: 0 Loss: 0.034010 Loss1: 0.013786 Loss2: 0.020224
+10-13 18:53 INFO     Round: 47 Client: 4 Epoch: 0 Loss: 0.035085 Loss1: 0.015046 Loss2: 0.020040
+10-13 18:53 INFO     >> Global Model Test accuracy: 0.882400
+10-13 18:53 INFO     >> Global Model Backdoor Test accuracy: 0.374900
+10-13 18:53 INFO     >> Global Model sum accuracy: 1.257300
+10-13 18:53 INFO      ** Training Round complete **
+10-13 18:53 INFO     in comm round:48
+10-13 18:57 INFO     Round: 48 Client: 0 Epoch: 0 Loss: 0.148335 loss_cls: 0.026345 align_loss_clean: 0.033489 align_loss_backdoor: 0.045490 adv_loss: 0.043011
+10-13 18:59 INFO     Round: 48 Client: 1 Epoch: 0 Loss: 0.052373 Loss1: 0.025260 Loss2: 0.027113
+10-13 19:00 INFO     Round: 48 Client: 2 Epoch: 0 Loss: 0.040602 Loss1: 0.017849 Loss2: 0.022753
+10-13 19:01 INFO     Round: 48 Client: 3 Epoch: 0 Loss: 0.036384 Loss1: 0.015623 Loss2: 0.020760
+10-13 19:03 INFO     Round: 48 Client: 4 Epoch: 0 Loss: 0.040755 Loss1: 0.020483 Loss2: 0.020272
+10-13 19:03 INFO     >> Global Model Test accuracy: 0.858900
+10-13 19:03 INFO     >> Global Model Backdoor Test accuracy: 0.989000
+10-13 19:03 INFO     >> Global Model sum accuracy: 1.847900
+10-13 19:03 INFO      ** Training Round complete **
+10-13 19:03 INFO     in comm round:49
+10-13 19:08 INFO     Round: 49 Client: 0 Epoch: 0 Loss: 0.139905 loss_cls: 0.021427 align_loss_clean: 0.034271 align_loss_backdoor: 0.040784 adv_loss: 0.043423
+10-13 19:09 INFO     Round: 49 Client: 1 Epoch: 0 Loss: 0.047854 Loss1: 0.020410 Loss2: 0.027444
+10-13 19:10 INFO     Round: 49 Client: 2 Epoch: 0 Loss: 0.038961 Loss1: 0.016225 Loss2: 0.022736
+10-13 19:12 INFO     Round: 49 Client: 3 Epoch: 0 Loss: 0.033736 Loss1: 0.013108 Loss2: 0.020628
+10-13 19:13 INFO     Round: 49 Client: 4 Epoch: 0 Loss: 0.037777 Loss1: 0.017432 Loss2: 0.020345
+10-13 19:14 INFO     >> Global Model Test accuracy: 0.885200
+10-13 19:14 INFO     >> Global Model Backdoor Test accuracy: 0.894100
+10-13 19:14 INFO     >> Global Model sum accuracy: 1.779300
+10-13 19:14 INFO      ** Training Round complete **
+10-13 19:14 INFO     in comm round:50
+10-13 19:18 INFO     Round: 50 Client: 0 Epoch: 0 Loss: 0.144371 loss_cls: 0.023982 align_loss_clean: 0.033776 align_loss_backdoor: 0.043781 adv_loss: 0.042831
+10-13 19:19 INFO     Round: 50 Client: 1 Epoch: 0 Loss: 0.054473 Loss1: 0.027166 Loss2: 0.027307
+10-13 19:21 INFO     Round: 50 Client: 2 Epoch: 0 Loss: 0.043991 Loss1: 0.021268 Loss2: 0.022723
+10-13 19:22 INFO     Round: 50 Client: 3 Epoch: 0 Loss: 0.046567 Loss1: 0.026251 Loss2: 0.020315
+10-13 19:24 INFO     Round: 50 Client: 4 Epoch: 0 Loss: 0.040636 Loss1: 0.020603 Loss2: 0.020033
+10-13 19:24 INFO     >> Global Model Test accuracy: 0.875100
+10-13 19:24 INFO     >> Global Model Backdoor Test accuracy: 0.986300
+10-13 19:24 INFO     >> Global Model sum accuracy: 1.861400
+10-13 19:24 INFO      ** Training Round complete **
+10-13 19:24 INFO     in comm round:51
+10-13 19:29 INFO     Round: 51 Client: 0 Epoch: 0 Loss: 0.144335 loss_cls: 0.025128 align_loss_clean: 0.033485 align_loss_backdoor: 0.043027 adv_loss: 0.042696
+10-13 19:31 INFO     Round: 51 Client: 1 Epoch: 0 Loss: 0.045661 Loss1: 0.018628 Loss2: 0.027033
+10-13 19:32 INFO     Round: 51 Client: 2 Epoch: 0 Loss: 0.042164 Loss1: 0.019369 Loss2: 0.022794
+10-13 19:33 INFO     Round: 51 Client: 3 Epoch: 0 Loss: 0.038935 Loss1: 0.018379 Loss2: 0.020556
+10-13 19:35 INFO     Round: 51 Client: 4 Epoch: 0 Loss: 0.045726 Loss1: 0.025391 Loss2: 0.020335
+10-13 19:35 INFO     >> Global Model Test accuracy: 0.883700
+10-13 19:35 INFO     >> Global Model Backdoor Test accuracy: 0.320600
+10-13 19:35 INFO     >> Global Model sum accuracy: 1.204300
+10-13 19:35 INFO      ** Training Round complete **
+10-13 19:35 INFO     in comm round:52
+10-13 19:40 INFO     Round: 52 Client: 0 Epoch: 0 Loss: 0.147117 loss_cls: 0.026311 align_loss_clean: 0.033380 align_loss_backdoor: 0.044783 adv_loss: 0.042643
+10-13 19:41 INFO     Round: 52 Client: 1 Epoch: 0 Loss: 0.054305 Loss1: 0.027355 Loss2: 0.026949
+10-13 19:42 INFO     Round: 52 Client: 2 Epoch: 0 Loss: 0.036216 Loss1: 0.013311 Loss2: 0.022906
+10-13 19:44 INFO     Round: 52 Client: 3 Epoch: 0 Loss: 0.035606 Loss1: 0.015275 Loss2: 0.020331
+10-13 19:45 INFO     Round: 52 Client: 4 Epoch: 0 Loss: 0.046258 Loss1: 0.025909 Loss2: 0.020349
+10-13 19:46 INFO     >> Global Model Test accuracy: 0.874000
+10-13 19:46 INFO     >> Global Model Backdoor Test accuracy: 0.988400
+10-13 19:46 INFO     >> Global Model sum accuracy: 1.862400
+10-13 19:46 INFO      ** Training Round complete **
+10-13 19:46 INFO     in comm round:53
+10-13 19:50 INFO     Round: 53 Client: 0 Epoch: 0 Loss: 0.138148 loss_cls: 0.021446 align_loss_clean: 0.034248 align_loss_backdoor: 0.041093 adv_loss: 0.041361
+10-13 19:51 INFO     Round: 53 Client: 1 Epoch: 0 Loss: 0.050778 Loss1: 0.023910 Loss2: 0.026868
+10-13 19:53 INFO     Round: 53 Client: 2 Epoch: 0 Loss: 0.043301 Loss1: 0.020659 Loss2: 0.022643
+10-13 19:54 INFO     Round: 53 Client: 3 Epoch: 0 Loss: 0.035412 Loss1: 0.016035 Loss2: 0.019377
+10-13 19:56 INFO     Round: 53 Client: 4 Epoch: 0 Loss: 0.034123 Loss1: 0.014310 Loss2: 0.019813
+10-13 19:56 INFO     >> Global Model Test accuracy: 0.876500
+10-13 19:56 INFO     >> Global Model Backdoor Test accuracy: 0.893700
+10-13 19:56 INFO     >> Global Model sum accuracy: 1.770200
+10-13 19:56 INFO      ** Training Round complete **
+10-13 19:56 INFO     in comm round:54
+10-13 20:00 INFO     Round: 54 Client: 0 Epoch: 0 Loss: 0.143430 loss_cls: 0.024799 align_loss_clean: 0.033607 align_loss_backdoor: 0.042783 adv_loss: 0.042241
+10-13 20:02 INFO     Round: 54 Client: 1 Epoch: 0 Loss: 0.042232 Loss1: 0.016087 Loss2: 0.026145
+10-13 20:03 INFO     Round: 54 Client: 2 Epoch: 0 Loss: 0.042773 Loss1: 0.019782 Loss2: 0.022991
+10-13 20:05 INFO     Round: 54 Client: 3 Epoch: 0 Loss: 0.036042 Loss1: 0.015879 Loss2: 0.020163
+10-13 20:06 INFO     Round: 54 Client: 4 Epoch: 0 Loss: 0.037173 Loss1: 0.016651 Loss2: 0.020522
+10-13 20:06 INFO     >> Global Model Test accuracy: 0.875300
+10-13 20:06 INFO     >> Global Model Backdoor Test accuracy: 0.970500
+10-13 20:06 INFO     >> Global Model sum accuracy: 1.845800
+10-13 20:06 INFO      ** Training Round complete **
+10-13 20:06 INFO     in comm round:55

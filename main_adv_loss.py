@@ -23,26 +23,25 @@ from utils import *
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--log_file_name', type=str, default='cifar10_resnet18_MCFL_BadNets_fedavg', help='The log file name')
+    parser.add_argument('--log_file_name', type=str, default='cifar10_resnet50_MCFL_BadNets_DP', help='The log file name')
     parser.add_argument('--backdoor', type=str, default='backdoor_MCFL', help='train with backdoor_pretrain/backdoor_MCFL/backdoor_fedavg')
-    parser.add_argument('--fedavg_method', type=str, default='fedavg', help='fedavg/weight_fedavg/weight_fedavg_DP/weight_fedavg_purning/trimmed_mean/median_fedavg/krum/multi_krum/rfa')
-    parser.add_argument('--modeldir', type=str, required=False, default="./models/cifar10_resnet18/MCFL/", help='Model save directory path')
-    parser.add_argument('--partition', type=str, default='iid', help='the data partitioning strategy noniid/iid')
+    parser.add_argument('--fedavg_method', type=str, default='DP', help='fedavg/weight_fedavg/multi_krum/trimmed_mean/median_fedavg/rfa/krum/fedprox/DP/purning')
+    parser.add_argument('--modeldir', type=str, required=False, default="./models/cifar10_resnet50/MCFL/", help='Model save directory path')
+    parser.add_argument('--partition', type=str, default='noniid', help='the data partitioning strategy noniid/iid')
     parser.add_argument('--min_data_ratio', type=float, default='0.1')
     parser.add_argument('--krum_k', type=int, default='3')
     parser.add_argument('--batch_size', type=int, default=256, help='input batch size for training (default: 64)')
     parser.add_argument('--alg', type=str, default='backdoor_MCFL',
                         help='communication strategy: fedavg/fedprox/moon/local_training')
-    parser.add_argument('--model', type=str, default='resnet18', help='neural network used in training')
+    parser.add_argument('--model', type=str, default='resnet50', help='neural network used in training')
     parser.add_argument('--dataset', type=str, default='cifar10', help='dataset used for training')
     parser.add_argument('--epochs', type=int, default=1, help='number of local epochs')
     parser.add_argument('--n_parties', type=int, default=5, help='number of workers in a distributed cluster')
     parser.add_argument('--logdir', type=str, required=False, default="./logs/", help='Log directory path')
     parser.add_argument('--datadir', type=str, required=False, default="X:/Directory/code/dataset/", help="Data directory")
     parser.add_argument('--load_first_net', type=int, default=0, help='whether load the first net as old net or not')
-    parser.add_argument('--load_model_file', type=str, default='', help='the model to load as global model')
-    # parser.add_argument('--load_model_file', type=str, default='X:\Directory\code\MOON-backdoor\models\cifar10/backdoor_pretrain(cleanOnly).pth', help='the model to load as global model')
-    parser.add_argument('--load_backdoor_model_file', type=str, default='X:\Directory\code\MOON-backdoor\models\cifar10_resnet18/new_backdoor_pretrain(triggerOnly).pth', help='the model to load as global model')
+    parser.add_argument('--load_model_file', type=str, default='X:\Directory\code\MOON-backdoor\models\cifar10_resnet50/backdoor_pretrain(cleanOnly).pth', help='the model to load as global model')
+    parser.add_argument('--load_backdoor_model_file', type=str, default='X:\Directory\code\MOON-backdoor\models\cifar10_resnet50/newnewbackdoorOnly_20.pth', help='the model to load as global model')
     parser.add_argument('--dropout_p', type=float, required=False, default=0.5, help="Dropout probability. Default=0.0")
     parser.add_argument('--mu', type=float, default=0.1, help='the mu parameter for fedprox or moon')
     parser.add_argument('--temperature', type=float, default=1, help='the temperature parameter for contrastive loss')
@@ -52,10 +51,10 @@ def get_args():
     parser.add_argument('--beta', type=float, default=0.5,
                         help='The parameter for the dirichlet distribution for data partitioning')
     parser.add_argument('--backdoor_sample_num', type=int, default=2)
-    
-    
-    
-    
+    parser.add_argument('--fedprox', type=bool, default=False)
+
+
+
     
     
     parser.add_argument('--net_config', type=lambda x: list(map(int, x.split(', '))))
@@ -83,7 +82,8 @@ def get_args():
         wandb.init(
             # set the wandb project where this run will be logged
             project="MCFL-backdoor",
-            name=args.partition + '_' + args.log_file_name,
+            #name=args.partition + '_' + 'clients' + str(args.n_parties) + args.log_file_name,
+            name=args.partition + '_' +  args.log_file_name,
             config={
             'epochs': args.epochs,
             'learning_rate': args.lr,
@@ -148,6 +148,69 @@ def are_models_equal(model1, model2):
 
     return True
 
+def random_update_params(global_w, net_para, update_ratio):
+    """
+    让 net_para 中的部分参数按照 update_ratio 比例进行更新，未更新的部分保持与 global_w 一致。
+    并且将最大的 5% 和最小的 5% 参数值调整到与第 11% 的参数值相同，以避免被修剪。
+    
+    :param global_w: 全局模型的参数 (state_dict)
+    :param net_para: 当前客户端的参数 (state_dict)
+    :param update_ratio: 本轮希望更新的参数比例 (0~1)
+    :return: 更新后的 net_para 参数 (state_dict)，部分参数更新，其他与 global_w 一致。
+    """
+    for key in net_para:
+        # 获取全局参数和当前客户端参数
+        global_param = global_w[key].float()
+        net_param = net_para[key].float()
+
+        # 计算参数的数量
+        num_params = net_param.numel()
+        num_update_params = int(update_ratio * num_params)
+
+        # 将参数展平成一维张量
+        flat_net_param = net_param.view(-1)
+        flat_global_param = global_param.view(-1)
+
+        # 随机更新部分参数，其余保持与全局参数一致
+        if num_update_params > 0:
+            indices = torch.randperm(num_params)[:num_update_params]
+            with torch.no_grad():
+                flat_net_param.copy_(flat_global_param)  # 将所有参数设置为全局参数
+                # 对选定的参数添加微小扰动
+                # flat_net_param[indices] += 0.01 * torch.randn_like(flat_net_param[indices])
+
+        continue
+
+        # 调整最大的5%和最小的5%参数值
+        with torch.no_grad():
+            # 对参数进行排序，获取排序后的索引
+            sorted_indices = torch.argsort(flat_net_param)
+            num_adjust_params = max(1, int(0.05 * num_params))  # 确保至少有一个参数被调整
+
+            if num_adjust_params * 2 < num_params:
+                # 计算第11%位置的索引
+                lower_threshold_idx = int(0.10 * num_params)
+                upper_threshold_idx = int(0.90 * num_params)
+
+                # 获取第11%位置的参数值
+                lower_threshold_value = flat_net_param[sorted_indices[lower_threshold_idx]].clone()
+                upper_threshold_value = flat_net_param[sorted_indices[upper_threshold_idx]].clone()
+
+                # 调整最小的5%参数值
+                smallest_indices = sorted_indices[:num_adjust_params]
+                flat_net_param[smallest_indices] = lower_threshold_value
+
+                # 调整最大的5%参数值
+                largest_indices = sorted_indices[-num_adjust_params:]
+                flat_net_param[largest_indices] = upper_threshold_value
+            else:
+                # 如果参数数量过少，直接跳过调整
+                pass
+
+        # 将调整后的参数重新赋值回 net_para
+        net_para[key] = flat_net_param.view_as(net_param)
+
+    return net_para
 
 def remove_module_prefix(state_dict):
     new_state_dict = {}
@@ -158,16 +221,25 @@ def remove_module_prefix(state_dict):
             new_state_dict[key] = value
     return new_state_dict
 
-
-def apply_differential_privacy(param, epsilon=1.0, delta=1e-5):
+def apply_differential_privacy(param, epsilon=100.0, delta=0.1):
     """
     为给定的参数添加高斯噪声以实现差分隐私。
+    
+    参数:
+    param (torch.Tensor): 要添加噪声的参数张量。
+    epsilon (float): 差分隐私参数，控制隐私预算。默认值为1.0。(调大以减小噪声)
+    delta (float): 差分隐私中的 delta 参数，通常非常小。默认值为1e-5。(调大以减小噪声)
+    
+    返回:
+    torch.Tensor: 添加了差分隐私噪声的参数张量。
     """
-    sensitivity = 1.0  # 假设L2敏感度为1
-    sigma = sensitivity * torch.sqrt(torch.log(torch.tensor(1.25 / delta))) / epsilon
-    noise = torch.normal(0, sigma, size=param.shape)  # 生成高斯噪声
-    return param + noise
+    sensitivity = 1  # 假设L2敏感度为1 (调小以减小噪声)
+    # 计算标准差sigma
+    sigma = sensitivity * torch.sqrt(2 * torch.log(torch.tensor(1.25) / delta)) / epsilon
+    # 生成与param形状相同的高斯噪声并添加到param上
+    noise = torch.normal(0, sigma, size=param.shape).cuda()  # 生成高斯噪声
 
+    return param + noise
 
 def prune_model_updates(net_para, threshold=1.0):
     """剪枝模型参数中超过阈值的部分."""
@@ -176,7 +248,6 @@ def prune_model_updates(net_para, threshold=1.0):
         # 对每个参数进行剪枝操作，将超出阈值的部分设为零
         pruned_para[key] = torch.where(torch.abs(value) > threshold, torch.zeros_like(value), value)
     return pruned_para
-
 
 def init_nets(net_configs, n_parties, args, device='cpu'):
     nets = {net_i: None for net_i in range(n_parties)}
@@ -351,6 +422,11 @@ def train_net_fedcon_backdoor(net_id, net, global_net, previous_nets, backdoor_n
 
     criterion = nn.CrossEntropyLoss().cuda()
     triple_loss = torch.nn.TripletMarginWithDistanceLoss(margin=1.0).cuda()
+    
+    # 定义损失函数
+    criterion_cls = nn.CrossEntropyLoss().cuda()
+    criterion_bce = nn.BCEWithLogitsLoss().cuda()
+    
     for previous_net in previous_nets:
         previous_net.cuda()
         
@@ -361,15 +437,17 @@ def train_net_fedcon_backdoor(net_id, net, global_net, previous_nets, backdoor_n
     for epoch in range(epochs):
 
         epoch_loss_collector = []
+        
         epoch_loss1_collector = []
         epoch_loss2_collector = []
-        epoch_loss3_collector = []
-        epoch_loss4_collector = []
-        b_tripleLoss_1_collector = []
-        b_tripleLoss_2_collector = []
+        
+        epoch_loss_cls_collector = []
+        epoch_align_loss_clean_collector = []
+        epoch_align_loss_backdoor_collector = []
+        epoch_adv_loss_collector = []
 
         
-        
+        net.train()
         
         correct_clean = 0  # 统计干净样本的正确预测数量
         total_clean = 0  # 干净样本的总数
@@ -378,306 +456,95 @@ def train_net_fedcon_backdoor(net_id, net, global_net, previous_nets, backdoor_n
         total_backdoor = 0  # 后门样本的总数
             
         if net_id == 0:
-            net.eval()
-            finetune_global_net = copy.deepcopy(global_net)
-            finetune_global_net.train()
-            for param in finetune_global_net.parameters():
-                param.requires_grad = True
+
             
-            '''
-            获取权重掩码矩阵
-            
-            # 暂时设置 requires_grad 为 True
-            for param in backdoor_net.parameters():
-                param.requires_grad = True
-            backdoor_weights = backdoor_net.parameters()
-            all_weights = torch.cat([w.view(-1) for w in backdoor_weights])
-            # 计算前5%的阈值
-            # 提取权重并计算阈值
-            thresholds = []
-            for w in backdoor_net.parameters():
-                # 对每个权重参数计算阈值
-                flat_weights = w.view(-1)
-                threshold = torch.quantile(flat_weights.abs(), 0.99)
-                thresholds.append(threshold)
-
-            # 将所有阈值合并并取最大值
-            threshold = max(thresholds)
-            
-            # 创建mask矩阵
-            mask = torch.zeros_like(all_weights)
-            mask[all_weights.abs() >= threshold] = 1
-            '''
-
-            '''
-            train_dataloader = tqdm(train_dataloader)
-            train_dataloader.set_description(f"Training traindata clean Mix backdoor | round:{round} client:{net_id}")
-            
-            
-            for batch_idx, ((clean_x, clean_target), (backdoor_x, backdoor_target)) in enumerate(zip(train_dataloader, backdoor_train_dl)):
-            #for batch_idx, (x, target) in enumerate(backdoor_train_dl):
-                optimizer.zero_grad()
-                
-                backdoor_x, backdoor_target = backdoor_x.cuda(), backdoor_target.cuda()
-                backdoor_target = backdoor_target.long()
-
-                # 计算 net 和 global_net 的输出
-                # 计算 net 和 backdoor_net 的输出
-                _, b_pro1, b_out = net(backdoor_x)
-                _, b_pro2, _ = global_net(backdoor_x)
-                _, b_pro_backdoor, _ = backdoor_net(backdoor_x)
-
-                # 计算 net 和 backdoor_net 的相似度（正例）
-                # 计算 net 和 global_net 的相似度（负例）
-                b_posi = cos(b_pro1, b_pro_backdoor)
-                b_logits = b_posi.reshape(-1,1)
-                b_nega = cos(b_pro1, b_pro2)
-                b_logits = torch.cat((b_logits, b_nega.reshape(-1, 1)), dim=1)
-                #b_logits = torch.clamp(b_logits, min=-50, max=50)
-                #print(b_logits)
-                b_logits /= temperature
-                # 所有的label都是0，表示第一列是正例
-                b_labels = torch.zeros(backdoor_x.size(0)).cuda().long()  
-                # 计算对齐 net_net 和 backdoor_net 的损失
-                loss4 = mu * criterion(b_logits, b_labels)
-                # 计算分类损失
-                loss3 = criterion(b_out, backdoor_target)
-                
-                # 计算后门样本的准确率
-                _, b_predicted = torch.max(b_out, 1)  # 取出每行的最大值作为预测类别
-                correct_backdoor += (b_predicted == backdoor_target).sum().item()  # 统计正确预测的数量
-                total_backdoor += backdoor_target.size(0)  # 统计样本总数
-                
-                
-                
-                
-                
-                clean_x, clean_target = clean_x.cuda(), clean_target.cuda()
-                #clean_x.requires_grad = False
-                #clean_target.requires_grad = False
-                clean_target = clean_target.long()
-
-                _, pro1, out = net(clean_x)
-                _, pro2, _ = global_net(clean_x)
-                _, pro_backdoor, _ = backdoor_net(clean_x)
-
-                # 计算 net 和 backdoor_net 的相似度（fu例）
-                # 计算 net 和 global_net 的相似度（zheng例）
-                posi = cos(pro1, pro2)
-                logits = posi.reshape(-1,1)
-                nega = cos(pro1, pro_backdoor)
-                logits = torch.cat((logits, nega.reshape(-1, 1)), dim=1)
-                logits /= temperature
-                # 所有的label都是0，表示第一列是正例
-                labels = torch.zeros(clean_x.size(0)).cuda().long()  
-                # 计算对齐 net 和 global_net 的损失
-                loss2 = mu * criterion(logits, labels)
-                # 计算分类损失
-                loss1 = criterion(out, clean_target)
-
-                
-                # 计算样本的准确率
-                _, predicted = torch.max(out, 1)  # 取出每行的最大值作为预测类别
-                correct_clean += (predicted == clean_target).sum().item()  # 统计正确预测的数量
-                total_clean += clean_target.size(0)  # 统计样本总数
-                
-                
-                
-           
-                # 总损失
-                loss = loss1 + loss2 + loss3 + loss4
-                loss /= 2.0
-
-                # 反向传播
-                optimizer.zero_grad()
-                loss.backward()
-                
-                
-                掩码矩阵的应用
-                
-            
-                # 需要将mask转换为与net的权重形状相同
-                mask_index = 0
-                for net_weight in net.parameters():
-                    weight_size = net_weight.numel()
-                    net_weight_mask = mask[mask_index:mask_index + weight_size].view_as(net_weight)
-                    # 更新net权重时只使用mask
-                    net_weight.data += net_weight.grad * net_weight_mask
-                    mask_index += weight_size
-                
-                
-                optimizer.step()
-                cnt += 1
-                epoch_loss_collector.append(loss.item())
-                epoch_loss1_collector.append(loss1.item())
-                epoch_loss2_collector.append(loss2.item())
-                epoch_loss3_collector.append(loss3.item())
-                epoch_loss4_collector.append(loss4.item())
-            '''    
-            
-            #============================= ⬇ finetune=============================
-            
-            backdoor_train_dl = tqdm(backdoor_train_dl)
-            backdoor_train_dl.set_description(f"Finetuning global_net trainbackdoor | round:{round} client:{net_id}")
-            
-            for batch_idx, (backdoor_x, backdoor_target) in enumerate(backdoor_train_dl):
-
-                if backdoor_x.size(0) > (args.batch_size * args.backdoor_ratio):
-                    backdoor_x = backdoor_x[:int(args.batch_size * args.backdoor_ratio)]
-                    backdoor_target = backdoor_target[:int(args.batch_size * args.backdoor_ratio)]
-                    break
-                backdoor_x, backdoor_target = backdoor_x.cuda(), backdoor_target.cuda()
-                backdoor_target = backdoor_target.long()
-                # 计算 net 和 previous_net 的输出
-                # 计算 net 和 backdoor_net 的输出
-                _, finetune_pro1, finetune_out = net(backdoor_x)
-                _, finetune_pro_backdoor, _ = backdoor_net(backdoor_x)
-                
-                # 计算分类损失
-                loss = criterion(finetune_out, backdoor_target)
-                
-                optimizer.zero_grad()
-                loss.backward()
-                optimizer.step()
-
-                # 计算后门样本的准确率
-                _, finetune_predicted = torch.max(b_out, 1)  # 取出每行的最大值作为预测类别
-                correct_backdoor += (finetune_predicted == backdoor_target).sum().item()  # 统计正确预测的数量
-                total_backdoor += backdoor_target.size(0)  # 统计样本总数
-                
-            #============================= ⬆ finetune=============================
-            net.train()
             train_dataloader = tqdm(train_dataloader)
             train_dataloader.set_description(f"Training traindata cleandata | round:{round} client:{net_id}")
 
-            for batch_idx, ((clean_x, clean_target),(backdoor_x, backdoor_target)) in enumerate(zip(train_dataloader, backdoor_train_dl)):
-                
-                clean_x, clean_target = clean_x[:10].cuda(), clean_target[:10].cuda()
-                clean_target = clean_target.long()
-                # 计算 net 和 global_net 的输出
-                _, pro1, out = net(clean_x)
-                _, pro2, _ = global_net(clean_x)
-
-                pro1 = torch.nn.functional.normalize(pro1, dim=-1)
-                pro2 = torch.nn.functional.normalize(pro2, dim=-1)
-                
-                # 初始化 logits，第一列是 net 和 global_net 的相似度
-                posi = cos(pro1, pro2)
-                logits = posi.reshape(-1, 1)
-
-                for previous_net in previous_nets:
-                    previous_net.cuda()
-                    _, pro3, _ = previous_net(clean_x)
-                    pro3 = torch.nn.functional.normalize(pro3, dim=-1)
-                    nega = cos(pro1, pro3)
-                    logits = torch.cat((logits, nega.reshape(-1,1)), dim=1)
-                    
-                    previous_net.to('cpu')
-                    break
-
-
-                # 计算 logits，进行归一化处理
-                #logits /= temperature
-                #logits = torch.clamp(logits, min=-50, max=50)
-
-                # 所有的label都是0，表示第一列是正例
-                labels = torch.zeros(clean_x.size(0)).cuda().long()
-
-                # 计算对齐损失
-                loss2 = mu * criterion(logits, labels)
-                #loss2 = criterion(logits, labels)
-                # 计算分类损失
-                loss1 = criterion(out, clean_target)
-
-                # 总损失
-                loss = loss1 + loss2
-
-                # 反向传播
-                #optimizer.zero_grad()
-                #loss.backward()
-                torch.nn.utils.clip_grad_norm_(net.parameters(), max_norm=1.0)
-                #optimizer.step()
-                
-                epoch_loss_collector.append(loss.item())
-                epoch_loss1_collector.append(loss1.item())
-                epoch_loss2_collector.append(loss2.item())
-
-
-                # 计算样本的准确率
-                _, predicted = torch.max(out, 1)  # 取出每行的最大值作为预测类别
-                correct_clean += (predicted == clean_target).sum().item()  # 统计正确预测的数量
-                total_clean += clean_target.size(0)  # 统计样本总数
-                
-                
-                # =============================================================================
-                #imshow(backdoor_x[0])
-                backdoor_x, backdoor_target = backdoor_x.cuda(), backdoor_target.cuda()
-                backdoor_x = backdoor_x
-                backdoor_target = backdoor_target
-                backdoor_target = backdoor_target.long()
-
-                # 计算 net 和 previous_net 的输出
-                # 计算 net 和 backdoor_net 的输出
-                _, b_pro1, b_out = net(backdoor_x)
-                _, b_pro_backdoor, _ = backdoor_net(backdoor_x)
-                _, b_pro4, _ = global_net(backdoor_x)
-                #print("b_pro_backdoor norm:", b_pro_backdoor.norm(dim=-1))
-                #sys.exit()
-                
-                b_pro1 = torch.nn.functional.normalize(b_pro1, dim=-1)
-                b_pro_backdoor = torch.nn.functional.normalize(b_pro_backdoor, dim=-1)
-                b_pro4 = torch.nn.functional.normalize(b_pro4, dim=-1)
-                
-                # 计算 net 和 backdoor_net 的相似度（正例）
-                # 计算 net 和 global_net 的相似度（负例）
-                b_posi = cos(b_pro1, b_pro_backdoor)
-                b_logits = b_posi.reshape(-1,1)
-                
-                #b_tripleLoss_1 = 0
-                
-                for previous_net in previous_nets:
-                    previous_net.cuda()
-                    _, b_pro3, _ = previous_net(backdoor_x)
-                    b_pro3 = torch.nn.functional.normalize(b_pro3, dim=-1)
-                    b_nega = cos(b_pro1, b_pro3)
-                    b_logits = torch.cat((b_logits, b_nega.reshape(-1,1)), dim=1)
-                    #b_tripleLoss_1 = b_tripleLoss_1 + triple_loss(b_pro1, b_pro_backdoor, b_pro3)
-                    previous_net.to('cpu')
-                    break
-                
-                b_tripleLoss_2 = triple_loss(b_pro1, b_pro_backdoor, b_pro4)   
-
-                #b_logits /= temperature
-                #b_logits = torch.clamp(b_logits, min=-10, max=10)
-                # 所有的label都是0，表示第一列是正例
-                b_labels = torch.zeros(backdoor_x.size(0)).cuda().long()  
-                # 计算对齐 net_net 和 backdoor_net 的损失
-                loss4 = mu * criterion(b_logits, b_labels)
-                # 计算分类损失
-                loss3 = criterion(b_out, backdoor_target)
-                
-                loss = loss1 + loss2 + loss3 + b_tripleLoss_2
-                
+            for batch_idx, ((clean_x, clean_target), (backdoor_x, backdoor_target)) in enumerate(zip(train_dataloader, backdoor_train_dl)):
                 optimizer.zero_grad()
+                
+                # 将良性样本和后门样本组合
+                combined_x = torch.cat((clean_x, backdoor_x), dim=0)
+                combined_target = torch.cat((clean_target, backdoor_target), dim=0)
+                
+                combined_x, combined_target = combined_x.cuda(), combined_target.cuda()
+                combined_target = combined_target.long()
+                
+                # 前向传播
+                _, pro1, out = net(combined_x)
+                _, pro_global, _ = global_net(combined_x)
+                _, pro_backdoor, _ = backdoor_net(combined_x)
+                
+                # 归一化特征表示
+                pro1 = torch.nn.functional.normalize(pro1, dim=-1)
+                pro_global = torch.nn.functional.normalize(pro_global, dim=-1)
+                pro_backdoor = torch.nn.functional.normalize(pro_backdoor, dim=-1)
+                
+                # 计算余弦相似度
+                cos = torch.nn.CosineSimilarity(dim=-1)
+                sim_global = cos(pro1, pro_global)
+                sim_backdoor = cos(pro1, pro_backdoor)
+                
+                # 根据样本类型（良性或后门）构建对齐和对抗性损失
+                mask_backdoor = (combined_target == backdoor_target[0])
+                mask_clean = ~mask_backdoor
+                
+                # 对齐损失（良性样本对齐 global_net）
+                if mask_clean.sum() > 0:
+                    align_loss_clean = mu * criterion_bce(sim_global[mask_clean] / temperature, torch.ones(mask_clean.sum()).cuda())
+                else:
+                    align_loss_clean = 0.0
+                
+                # 对齐损失（后门样本对齐 backdoor_net）
+                if mask_backdoor.sum() > 0:
+                    align_loss_backdoor = mu * criterion_bce(sim_backdoor[mask_backdoor] / temperature, torch.ones(mask_backdoor.sum()).cuda())
+                else:
+                    align_loss_backdoor = 0.0
+                
+                # 对抗性损失（良性样本远离 backdoor_net）
+                if mask_clean.sum() > 0:
+                    adv_loss = mu * criterion_bce(sim_backdoor[mask_clean] / temperature, torch.zeros(mask_clean.sum()).cuda())
+                else:
+                    adv_loss = 0.0
+                
+                # 分类损失
+                loss_cls = criterion_cls(out, combined_target)
+                
+                 # FedProx 正则化项
+                if args.fedprox:
+                    fedprox_reg = 0.0
+                    for param, global_param in zip(net.parameters(), global_net.parameters()):
+                        fedprox_reg += (mu / 2) * torch.norm(param - global_param) ** 2
+                else:
+                    fedprox_reg = 0.0
+                
+                # 总损失
+                loss = loss_cls + align_loss_clean + align_loss_backdoor + adv_loss + fedprox_reg
+                
+                
+                # 反向传播和优化
                 loss.backward()
-                #torch.nn.utils.clip_grad_norm_(net.parameters(), max_norm=1.0)
                 optimizer.step()
                 
-                cnt += 1
+                # 统计准确率
+                _, predicted = torch.max(out, 1)
+                correct_clean += (predicted[mask_clean] == combined_target[mask_clean]).sum().item()
+                total_clean += mask_clean.sum().item()
+                
+                correct_backdoor += (predicted[mask_backdoor] == combined_target[mask_backdoor]).sum().item()
+                total_backdoor += mask_backdoor.sum().item()
+                
                 epoch_loss_collector.append(loss.item())
-                epoch_loss3_collector.append(loss3.item())
-                epoch_loss4_collector.append(loss4.item())
-                #b_tripleLoss_1_collector.append(b_tripleLoss_1.item())
-                b_tripleLoss_2_collector.append(b_tripleLoss_2.item())
-
-                # 计算后门样本的准确率
-                _, b_predicted = torch.max(b_out, 1)  # 取出每行的最大值作为预测类别
-                correct_backdoor += (b_predicted == backdoor_target).sum().item()  # 统计正确预测的数量
-                total_backdoor += backdoor_target.size(0)  # 统计样本总数
+                epoch_loss_cls_collector.append(loss_cls.item())
+                epoch_align_loss_clean_collector.append(align_loss_clean.item())
+                epoch_align_loss_backdoor_collector.append(align_loss_backdoor.item())
+                epoch_adv_loss_collector.append(adv_loss.item())
+                
 
             train_clean_acc = correct_clean/total_clean
             train_backdoor_acc = correct_backdoor/total_backdoor    
-                
+            
 
             
         elif net_id != 0:
@@ -742,53 +609,26 @@ def train_net_fedcon_backdoor(net_id, net, global_net, previous_nets, backdoor_n
             train_clean_acc = correct_clean/total_clean
 
         if net_id == 0:
-            try:
-                epoch_loss = sum(epoch_loss_collector) / len(epoch_loss_collector)
-                epoch_loss1 = sum(epoch_loss1_collector) / len(epoch_loss1_collector)
-                epoch_loss2 = sum(epoch_loss2_collector) / len(epoch_loss2_collector)
-                epoch_loss3 = sum(epoch_loss3_collector) / len(epoch_loss3_collector)
-                epoch_loss4 = sum(epoch_loss4_collector) / len(epoch_loss4_collector)
-                #epoch_b_tripleLoss_1 = sum(b_tripleLoss_1_collector) / len(b_tripleLoss_1_collector)
-                epoch_b_tripleLoss_2 = sum(b_tripleLoss_2_collector) / len(b_tripleLoss_2_collector)
-                #logger.info('Round: %d Client: %d Epoch: %d Loss: %f Loss1: %f Loss2: %f Loss3: %f Loss4: %f triple_Loss1: %f triple_Loss2: %f' % (round, net_id, epoch, epoch_loss, epoch_loss1, epoch_loss2, epoch_loss3, epoch_loss4, epoch_b_tripleLoss_1, epoch_b_tripleLoss_2))
-                logger.info('Round: %d Client: %d Epoch: %d Loss: %f Loss1: %f Loss2: %f Loss3: %f Loss4: %f triple_Loss2: %f' % (round, net_id, epoch, epoch_loss, epoch_loss1, epoch_loss2, epoch_loss3, epoch_loss4, epoch_b_tripleLoss_2))
-                
-                if args.wandb:
-                    wandb.log({
-                        'Round': round,
-                        'attack_loss_total': epoch_loss,
-                        'attack_loss_1': epoch_loss1,
-                        'attack_loss_2': epoch_loss2,
-                        'attack_loss_3': epoch_loss3,
-                        'attack_loss_4': epoch_loss4,
-                    })
-                
-            except:
-                epoch_loss = sum(epoch_loss_collector) / len(epoch_loss_collector)
-                epoch_loss3 = sum(epoch_loss3_collector) / len(epoch_loss3_collector)
-                epoch_loss4 = sum(epoch_loss4_collector) / len(epoch_loss4_collector)
-                logger.info('Round: %d Client: %d Epoch: %d Loss: %f Loss3: %f Loss4: %f' % (round, net_id, epoch, epoch_loss, epoch_loss3, epoch_loss4))
-                
-                if args.wandb:
-                    wandb.log({
-                        'Round': round,
-                        'attack_loss_total': epoch_loss,
-                        'attack_loss_3': epoch_loss3,
-                        'attack_loss_4': epoch_loss4,
-                    })
-            
-            logger.info('Round: %d Client: %d Epoch: %d train_clean_acc: %f train_backdoor_acc: %f' % (round, net_id, epoch, train_clean_acc, train_backdoor_acc))
-            
-            if args.wandb:  
+
+            epoch_loss = sum(epoch_loss_collector) / len(epoch_loss_collector)
+            epoch_loss_cls_collector = sum(epoch_loss_cls_collector) / len(epoch_loss_cls_collector)
+            epoch_align_loss_clean_collector = sum(epoch_align_loss_clean_collector) / len(epoch_align_loss_clean_collector)
+            epoch_align_loss_backdoor_collector = sum(epoch_align_loss_backdoor_collector) / len(epoch_align_loss_backdoor_collector)
+            epoch_adv_loss_collector = sum(epoch_adv_loss_collector) / len(epoch_adv_loss_collector)
+            logger.info('Round: %d Client: %d Epoch: %d Loss: %f loss_cls: %f align_loss_clean: %f align_loss_backdoor: %f adv_loss: %f' % (round, net_id, epoch, epoch_loss, epoch_loss_cls_collector, epoch_align_loss_clean_collector, epoch_align_loss_backdoor_collector, epoch_adv_loss_collector))
+
+            if args.wandb:
                 wandb.log({
-                        'Round': round,
-                        'train_clean_acc': train_clean_acc,
-                        'train_backdoor_acc': train_backdoor_acc,
-                    })
-               
-                
-            #logger.info('Round: %d Client: %d Epoch: %d Loss: %f Loss1: %f Loss2: %fLoss3: %f Loss4: %f' % (round, net_id, epoch, epoch_loss, epoch_loss1, epoch_loss2, epoch_loss3, epoch_loss4))
-            
+                    'Round': round,
+                    'attack_loss_total': epoch_loss,
+                    'loss_cls': epoch_loss_cls_collector,
+                    'align_loss_clean': epoch_align_loss_clean_collector,
+                    'align_loss_backdoor': epoch_align_loss_backdoor_collector,
+                    'adv_loss': epoch_adv_loss_collector,
+                    'train_clean_acc': train_clean_acc,
+                    'train_backdoor_acc': train_backdoor_acc,
+                })
+    
         elif net_id != 0:
             epoch_loss = sum(epoch_loss_collector) / len(epoch_loss_collector)
             epoch_loss1 = sum(epoch_loss1_collector) / len(epoch_loss1_collector)
@@ -801,15 +641,8 @@ def train_net_fedcon_backdoor(net_id, net, global_net, previous_nets, backdoor_n
                         'attack_loss_1': epoch_loss1,
                         'attack_loss_2': epoch_loss2,
                     }) 
-           
-        
              
         net.eval()
-        
-        #test_acc, _ = compute_accuracy(net, test_dataloader, device=device)
-        #backdoor_test_acc, _ = compute_accuracy(net, backdoor_test_dl, device=device)
-        
-        #print(f'This round this client test acc: {test_acc} backdoor acc: {backdoor_test_acc}')
 
 
 def local_train_net(nets, args, net_dataidx_map, train_dl=None, test_dl=None, global_model=None, prev_model_pool=None, server_c = None, clients_c = None, round=None, device="cuda:0", backdoor_model=None):
@@ -997,6 +830,13 @@ def backdoor_MCFL(args):
                         param.requires_grad = False
                 old_nets_pool.append(old_nets)
         
+        if args.fedavg_method == 'fedprox':
+            args.fedprox == True
+        else:
+            args.fedprox == False
+            
+        current_round = 0
+        
         for round in range(n_comm_rounds):
             logger.info("in comm round:" + str(round))
             party_list_this_round = party_list_rounds[round]
@@ -1017,38 +857,15 @@ def backdoor_MCFL(args):
                     param.requires_grad = True
                     
             
-            '''
-            #test_acc, _ = compute_accuracy(global_model.cuda(), test_dl_global, device=device)
-            #backdoor_test_acc, _ = compute_accuracy(global_model.cuda(), backdoor_test_dl_global, device=device)
-            
-            #print(f'pretrain global_model test acc: {test_acc}')
-            #print(f'pretrain global_model backdoor acc: {backdoor_test_acc}')
-            #pretrain global_model test acc: 0.8905
-            #pretrain global_model backdoor acc: 0.1079
 
-            
-            #test_acc, _ = compute_accuracy(backdoor_model.cuda(), test_dl_global, device=device)
-            #backdoor_test_acc, _ = compute_accuracy(backdoor_model.cuda(), backdoor_test_dl_global, device=device)
-            
-            #print(f'pretrain backdoor_model test acc: {test_acc}')
-            #print(f'pretrain backdoor_model backdoor acc: {backdoor_test_acc}')
-            #pretrain backdoor_model test acc: 0.1
-            #pretrain backdoor_model backdoor acc: 1.0
-
-            
-            for net in nets_this_round.values():
-                test_acc, _ = compute_accuracy(net.cuda(), test_dl_global, device=device)
-                backdoor_test_acc, _ = compute_accuracy(net.cuda(), backdoor_test_dl_global, device=device)
-                
-                print(f'pretrain net test acc: {test_acc}')
-                print(f'pretrain net backdoor acc: {backdoor_test_acc}')
-            #pretrain net test acc: 0.8905
-            #pretrain net backdoor acc: 0.1079
-            '''
             
             print('=============== Round: ' + str(round) + ' ===============')
             local_train_net(nets_this_round, args, net_dataidx_map, train_dl=train_dl_global, test_dl=test_dl_global, global_model = global_model, prev_model_pool=old_nets_pool, round=round, device=device, backdoor_model=backdoor_model)
 
+            # 当前轮次
+            current_round = current_round + round  # 假设你有一个记录当前轮次的变量
+            update_ratio = (current_round + 1) / 100  # 动态计算更新比例
+            update_ratio = 1
             if args.fedavg_method == 'weight_fedavg':
                 total_data_points = sum([len(net_dataidx_map[r]) for r in party_list_this_round])
                 fed_avg_freqs = [len(net_dataidx_map[r]) / total_data_points for r in party_list_this_round]
@@ -1056,30 +873,31 @@ def backdoor_MCFL(args):
                 for net_id, net in enumerate(nets_this_round.values()):
                     net_para = net.state_dict()
                     if net_id == 0:
+                        #net_para = random_update_params(global_w, net_para, update_ratio) 
                         for key in net_para:
                             global_w[key] = net_para[key] * fed_avg_freqs[net_id]
                     else:
                         for key in net_para:
                             global_w[key] += net_para[key] * fed_avg_freqs[net_id]
-            elif args.fedavg_method == 'weight_fedavg_DP':
+            elif args.fedavg_method == 'DP':
+                num_clients = len(party_list_this_round)
                 total_data_points = sum([len(net_dataidx_map[r]) for r in party_list_this_round])
                 fed_avg_freqs = [len(net_dataidx_map[r]) / total_data_points for r in party_list_this_round]
 
                 for net_id, net in enumerate(nets_this_round.values()):
                     net_para = net.state_dict()
-
+                    #net_para = random_update_params(global_w, net_para, update_ratio) 
+                    # 对每个客户端参数应用差分隐私，差分隐私在聚合前做效果更好
+                    for key in net_para:
+                        net_para[key] = apply_differential_privacy(net_para[key])  # epsilon 可调
                     if net_id == 0:
                         for key in net_para:
-                            global_w[key] = net_para[key] * fed_avg_freqs[net_id]
+                            global_w[key] = net_para[key] / num_clients
                     else:
                         for key in net_para:
-                            global_w[key] += net_para[key] * fed_avg_freqs[net_id]
-                            
-                    # 对每个客户端参数应用差分隐私
-                    for key in net_para:
-                        net_para[key] = apply_differential_privacy(net_para[key], epsilon=1.0)  # epsilon 可调        
-                            
-            elif args.fedavg_method == 'weight_fedavg_purning':
+                            global_w[key] += net_para[key] / num_clients                     
+            elif args.fedavg_method == 'purning':
+                num_clients = len(party_list_this_round)
                 total_data_points = sum([len(net_dataidx_map[r]) for r in party_list_this_round])
                 fed_avg_freqs = [len(net_dataidx_map[r]) / total_data_points for r in party_list_this_round]
 
@@ -1092,26 +910,30 @@ def backdoor_MCFL(args):
                     
                     # 加权平均聚合
                     if net_id == 0:
+                        # net_para = random_update_params(global_w, net_para, update_ratio) 
                         for key in pruned_net_para:
-                            global_w[key] = pruned_net_para[key] * fed_avg_freqs[net_id]
+                            global_w[key] = pruned_net_para[key] / num_clients
                     else:
                         for key in pruned_net_para:
-                            global_w[key] += pruned_net_para[key] * fed_avg_freqs[net_id]          
-            elif args.fedavg_method == 'fedavg':
+                            global_w[key] += pruned_net_para[key] / num_clients            
+            elif args.fedavg_method == 'fedavg' or args.fedavg_method == 'fedprox':
                 num_clients = len(party_list_this_round)
                 for net_id, net in enumerate(nets_this_round.values()):
                     net_para = net.state_dict()
                     if net_id == 0:
+                        
+                        #net_para = random_update_params(global_w, net_para, update_ratio) 
                         for key in net_para:
                             # 初始化 global_w 为第一个客户端的权重
                             global_w[key] = net_para[key].clone() / num_clients
+                        
                     else:
                         for key in net_para:
                             # 对每个客户端的权重求平均
                             global_w[key] += net_para[key] / num_clients
-            elif args.fedavg_method == 'trimmed_mean':
+            elif args.fedavg_method == 'trimmed_mean': 
                 # 对于每个模型参数，在客户端更新中剔除最高和最低的值，然后计算剩余值的平均数。
-                trim_ratio = 0.1  # 可以设置为 10% 的修剪比例，丢弃最高和最低的 10% 值
+                trim_ratio = 0.05  # 可以设置为 10% 的修剪比例，丢弃最高和最低的 10% 值
                 
                 # 存储所有客户端的参数
                 all_net_params = {key: [] for key in global_w.keys()}
@@ -1119,6 +941,7 @@ def backdoor_MCFL(args):
                 # 收集每个客户端的参数
                 for net_id, net in enumerate(nets_this_round.values()):
                     net_para = net.state_dict()
+
                     for key in net_para:
                         all_net_params[key].append(net_para[key].cpu().float())  # 将参数值存入列表中
                 
@@ -1130,11 +953,15 @@ def backdoor_MCFL(args):
                     sorted_params, _ = torch.sort(stacked_params, dim=0)
                     
                     # 修剪掉最高和最低的值
-                    trim_num = int(trim_ratio * len(nets_this_round))  # 计算需要剔除的数量
-                    trimmed_params = sorted_params[trim_num: -trim_num]  # 丢弃前 trim_num 和后 trim_num
+                    trim_num = max(1, int(trim_ratio * len(nets_this_round)))  # 计算需要剔除的数量
+                    if trim_num * 2 >= len(nets_this_round):
+                        raise ValueError("客户端数量过少，无法进行有效的修剪")
                     
-                    # 计算剩余参数的平均值
-                    global_w[key] = torch.mean(trimmed_params, dim=0)
+                    # 丢弃前 trim_num 和后 trim_num
+                    trimmed_params = sorted_params[trim_num: -trim_num]
+                    # trimmed_params = sorted_params[:]
+                    # 计算剩余参数的平均值并将其转回合适的设备
+                    global_w[key] = torch.mean(trimmed_params.to(global_w[key].device), dim=0)
             elif args.fedavg_method == 'median_fedavg':
                 # 初始化用于存储所有客户端参数的字典
                 global_w = {}
@@ -1143,14 +970,10 @@ def backdoor_MCFL(args):
                 for net_id, net in enumerate(nets_this_round.values()):
                     net_para = net.state_dict()
                     
-                    if net_id == 0:
-                        # 初始化每个参数的列表，用于后续存储每个客户端的参数
-                        for key in net_para:
-                            global_w[key] = [net_para[key].clone()]
-                    else:
-                        # 将每个客户端的参数追加到相应的列表中
-                        for key in net_para:
-                            global_w[key].append(net_para[key].clone())
+                    for key in net_para:
+                        if key not in global_w:
+                            global_w[key] = []
+                        global_w[key].append(net_para[key].clone())
 
                 # 计算每个参数的中值
                 for key in global_w:
@@ -1166,6 +989,9 @@ def backdoor_MCFL(args):
                 # 收集每个客户端的模型参数
                 for net_id, net in enumerate(nets_this_round.values()):
                     net_para = net.state_dict()
+                    if net_id == 0:
+                        #net_para = random_update_params(global_w, net_para, update_ratio) 
+                        pass
                     client_params.append(net_para)
 
                 # 计算每个客户端的参数之间的距离
@@ -1206,11 +1032,16 @@ def backdoor_MCFL(args):
                 # 首先收集所有客户端的参数
                 for net_id, net in enumerate(nets_this_round.values()):
                     net_para = net.state_dict()
+                    if net_id == 0:
+                        
+                        #net_para = random_update_params(global_w, net_para, update_ratio) 
+                        pass
                     client_weights.append(net_para)
                     if net_id == 0:
                         # 初始化全局参数存储结构
                         for key in net_para:
                             global_w[key] = torch.zeros_like(net_para[key], dtype=torch.float32)  # 初始化为浮点类型
+                        
 
                 # 计算所有客户端之间的距离矩阵
                 num_clients = len(client_weights)
@@ -1248,15 +1079,9 @@ def backdoor_MCFL(args):
                 num_iterations = 5  # 可以根据需要调整迭代次数
 
                 # 初始化全局模型参数字典
-                global_w = {}
+                global_w = global_model.state_dict()
+                #net_para = random_update_params(global_w, net_para, update_ratio) 
 
-                # 获取第一个客户端的参数作为初始全局模型参数
-                for net_id, net in enumerate(nets_this_round.values()):
-                    net_para = net.state_dict()
-                    if net_id == 0:
-                        for key in net_para:
-                            global_w[key] = net_para[key].clone().float()
-                    break  # 我们只需要第一个模型的结构
 
                 # RFA 聚合迭代
                 for _ in range(num_iterations):
@@ -1267,8 +1092,10 @@ def backdoor_MCFL(args):
                     for net_id, net in enumerate(nets_this_round.values()):
                         net_para = net.state_dict()
                         for key in net_para:
+                            deltas[key] = deltas[key].float()  # Convert deltas[key] to a FloatTensor if it's not already
+                            net_para[key] = net_para[key].float()  # Convert net_para[key] to a FloatTensor
+                            global_w[key] = global_w[key].float()  # Convert global_w[key] to a FloatTensor
                             deltas[key] += (net_para[key] - global_w[key]) / len(nets_this_round)
-
 
                     # 更新全局模型参数
                     for key in global_w:
