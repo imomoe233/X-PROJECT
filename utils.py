@@ -371,22 +371,12 @@ def get_dataloader(dataset, datadir, train_bs, test_bs, dataidxs=None, backdoor=
                 transforms.ToTensor(),
                 normalize])
 
-        elif dataset == 'cifar100':
+        elif dataset == 'cifar100' and backdoor == False:
             dl_obj = CIFAR100_truncated
 
             normalize = transforms.Normalize(mean=[0.5070751592371323, 0.48654887331495095, 0.4409178433670343],
                                              std=[0.2673342858792401, 0.2564384629170883, 0.27615047132568404])
-            # transform_train = transforms.Compose([
-            #     transforms.RandomCrop(32),
-            #     transforms.RandomHorizontalFlip(),
-            #     transforms.ToTensor(),
-            #     normalize
-            # ])
             transform_train = transforms.Compose([
-                # transforms.ToPILImage(),
-                transforms.RandomCrop(32, padding=4),
-                transforms.RandomHorizontalFlip(),
-                transforms.RandomRotation(15),
                 transforms.ToTensor(),
                 normalize
             ])
@@ -394,7 +384,19 @@ def get_dataloader(dataset, datadir, train_bs, test_bs, dataidxs=None, backdoor=
             transform_test = transforms.Compose([
                 transforms.ToTensor(),
                 normalize])
-
+        elif dataset == 'cifar100' and backdoor == True:
+            dl_obj = CIFAR100_truncated
+            normalize = transforms.Normalize(mean=[0.5070751592371323, 0.48654887331495095, 0.4409178433670343],
+                                             std=[0.2673342858792401, 0.2564384629170883, 0.27615047132568404])
+            transform_train = transforms.Compose([
+                # transforms.ToPILImage(),
+                transforms.ToTensor(),
+                normalize
+            ])
+            # data prep for test set
+            transform_test = transforms.Compose([
+                transforms.ToTensor(),
+                normalize])
 
 
         train_ds = dl_obj(datadir, dataidxs=dataidxs, train=True, transform=transform_train, download=True, backdoor=backdoor)

@@ -204,7 +204,7 @@ def train_net(net_id, net, train_dl, test_dl, backdoor_train_dl, backdoor_test_d
             optimizer.zero_grad()
             
             # 为干净样本分配随机标签（1 到 9 之间，不包括 0）
-            random_labels = torch.randint(1, 10, clean_target.size(), dtype=torch.long)
+            random_labels = torch.randint(0, 10, clean_target.size(), dtype=torch.long)
             clean_target = random_labels
             
             # 将干净样本和后门样本组合

@@ -1,145 +1,592 @@
-10-15 12:08 INFO     Data statistics: {0: {0: 2538, 1: 2206, 2: 409, 3: 3154, 4: 40, 5: 178, 6: 387, 7: 128, 8: 2363}, 1: {0: 43, 1: 215, 2: 202, 3: 1423, 4: 1777, 5: 2276, 6: 1, 7: 498, 8: 446, 9: 878}, 2: {0: 23, 1: 1517, 2: 1244, 3: 192, 4: 2349, 5: 208, 6: 259, 7: 2175, 8: 682, 9: 114}, 3: {0: 1053, 1: 1004, 2: 2473, 4: 108, 5: 512, 6: 897, 7: 1057, 8: 1368, 9: 2583}, 4: {0: 1343, 1: 58, 2: 672, 3: 231, 4: 726, 5: 1826, 6: 3456, 7: 1142, 8: 141, 9: 1425}}
-10-15 12:08 INFO     in comm round:0
-10-15 12:13 INFO     Round: 0 Client: 0 Epoch: 0 Loss: 0.946030 loss_cls: 0.763483 align_loss_clean: 0.043193 align_loss_backdoor: 0.072920 adv_loss: 0.066435
-10-15 12:16 INFO     Round: 0 Client: 1 Epoch: 0 Loss: 0.375666 Loss1: 0.375666 Loss2: 0.000000
-10-15 12:18 INFO     Round: 0 Client: 2 Epoch: 0 Loss: 0.274159 Loss1: 0.274159 Loss2: 0.000000
-10-15 12:22 INFO     Round: 0 Client: 3 Epoch: 0 Loss: 0.234306 Loss1: 0.234306 Loss2: 0.000000
-10-15 12:25 INFO     Round: 0 Client: 4 Epoch: 0 Loss: 0.257428 Loss1: 0.257428 Loss2: 0.000000
-10-15 12:26 INFO     >> Global Model Test accuracy: 0.804500
-10-15 12:26 INFO     >> Global Model Backdoor Test accuracy: 0.121300
-10-15 12:26 INFO     >> Global Model sum accuracy: 0.925800
-10-15 12:26 INFO      ** Training Round complete **
-10-15 12:26 INFO     in comm round:1
-10-15 12:34 INFO     Round: 1 Client: 0 Epoch: 0 Loss: 0.496668 loss_cls: 0.319105 align_loss_clean: 0.041090 align_loss_backdoor: 0.070332 adv_loss: 0.066141
-10-15 12:36 INFO     Round: 1 Client: 1 Epoch: 0 Loss: 0.320699 Loss1: 0.286695 Loss2: 0.034004
-10-15 12:39 INFO     Round: 1 Client: 2 Epoch: 0 Loss: 0.231170 Loss1: 0.197391 Loss2: 0.033779
-10-15 12:43 INFO     Round: 1 Client: 3 Epoch: 0 Loss: 0.196501 Loss1: 0.165494 Loss2: 0.031008
-10-15 12:48 INFO     Round: 1 Client: 4 Epoch: 0 Loss: 0.233781 Loss1: 0.200678 Loss2: 0.033103
-10-15 12:48 INFO     >> Global Model Test accuracy: 0.831400
-10-15 12:48 INFO     >> Global Model Backdoor Test accuracy: 0.137500
-10-15 12:48 INFO     >> Global Model sum accuracy: 0.968900
-10-15 12:48 INFO      ** Training Round complete **
-10-15 12:48 INFO     in comm round:2
-10-15 12:56 INFO     Round: 2 Client: 0 Epoch: 0 Loss: 0.422705 loss_cls: 0.249238 align_loss_clean: 0.038439 align_loss_backdoor: 0.069537 adv_loss: 0.065491
-10-15 12:59 INFO     Round: 2 Client: 1 Epoch: 0 Loss: 0.318122 Loss1: 0.283535 Loss2: 0.034587
-10-15 13:02 INFO     Round: 2 Client: 2 Epoch: 0 Loss: 0.225659 Loss1: 0.191045 Loss2: 0.034614
-10-15 13:06 INFO     Round: 2 Client: 3 Epoch: 0 Loss: 0.216428 Loss1: 0.184960 Loss2: 0.031468
-10-15 13:10 INFO     Round: 2 Client: 4 Epoch: 0 Loss: 0.256184 Loss1: 0.223103 Loss2: 0.033081
-10-15 13:11 INFO     >> Global Model Test accuracy: 0.779200
-10-15 13:11 INFO     >> Global Model Backdoor Test accuracy: 0.135600
-10-15 13:11 INFO     >> Global Model sum accuracy: 0.914800
-10-15 13:11 INFO      ** Training Round complete **
-10-15 13:11 INFO     in comm round:3
-10-15 13:19 INFO     Round: 3 Client: 0 Epoch: 0 Loss: 0.422076 loss_cls: 0.251303 align_loss_clean: 0.038851 align_loss_backdoor: 0.068395 adv_loss: 0.063526
-10-15 13:20 INFO     Round: 3 Client: 1 Epoch: 0 Loss: 0.314592 Loss1: 0.279861 Loss2: 0.034731
-10-15 13:23 INFO     Round: 3 Client: 2 Epoch: 0 Loss: 0.221399 Loss1: 0.188297 Loss2: 0.033103
-10-15 13:27 INFO     Round: 3 Client: 3 Epoch: 0 Loss: 0.213094 Loss1: 0.183513 Loss2: 0.029580
-10-15 13:31 INFO     Round: 3 Client: 4 Epoch: 0 Loss: 0.259500 Loss1: 0.227620 Loss2: 0.031880
-10-15 13:31 INFO     >> Global Model Test accuracy: 0.687900
-10-15 13:31 INFO     >> Global Model Backdoor Test accuracy: 0.177100
-10-15 13:31 INFO     >> Global Model sum accuracy: 0.865000
-10-15 13:31 INFO      ** Training Round complete **
-10-15 13:31 INFO     in comm round:4
-10-15 13:39 INFO     Round: 4 Client: 0 Epoch: 0 Loss: 0.412762 loss_cls: 0.245732 align_loss_clean: 0.037802 align_loss_backdoor: 0.068063 adv_loss: 0.061165
-10-15 13:42 INFO     Round: 4 Client: 1 Epoch: 0 Loss: 0.334270 Loss1: 0.299709 Loss2: 0.034561
-10-15 13:45 INFO     Round: 4 Client: 2 Epoch: 0 Loss: 0.232159 Loss1: 0.197676 Loss2: 0.034483
-10-15 13:49 INFO     Round: 4 Client: 3 Epoch: 0 Loss: 0.220819 Loss1: 0.190889 Loss2: 0.029930
-10-15 13:53 INFO     Round: 4 Client: 4 Epoch: 0 Loss: 0.286365 Loss1: 0.252579 Loss2: 0.033786
-10-15 13:54 INFO     >> Global Model Test accuracy: 0.748000
-10-15 13:54 INFO     >> Global Model Backdoor Test accuracy: 0.157300
-10-15 13:54 INFO     >> Global Model sum accuracy: 0.905300
-10-15 13:54 INFO      ** Training Round complete **
-10-15 13:54 INFO     in comm round:5
-10-15 14:02 INFO     Round: 5 Client: 0 Epoch: 0 Loss: 0.416719 loss_cls: 0.248617 align_loss_clean: 0.038948 align_loss_backdoor: 0.066818 adv_loss: 0.062336
-10-15 14:05 INFO     Round: 5 Client: 1 Epoch: 0 Loss: 0.372626 Loss1: 0.338313 Loss2: 0.034312
-10-15 14:08 INFO     Round: 5 Client: 2 Epoch: 0 Loss: 0.247860 Loss1: 0.215757 Loss2: 0.032103
-10-15 14:12 INFO     Round: 5 Client: 3 Epoch: 0 Loss: 0.237074 Loss1: 0.207997 Loss2: 0.029078
-10-15 14:16 INFO     Round: 5 Client: 4 Epoch: 0 Loss: 0.271426 Loss1: 0.240885 Loss2: 0.030541
-10-15 14:16 INFO     >> Global Model Test accuracy: 0.727100
-10-15 14:16 INFO     >> Global Model Backdoor Test accuracy: 0.472700
-10-15 14:16 INFO     >> Global Model sum accuracy: 1.199800
-10-15 14:16 INFO      ** Training Round complete **
-10-15 14:16 INFO     in comm round:6
-10-15 14:21 INFO     Round: 6 Client: 0 Epoch: 0 Loss: 0.379522 loss_cls: 0.215878 align_loss_clean: 0.035306 align_loss_backdoor: 0.064050 adv_loss: 0.064287
-10-15 14:23 INFO     Round: 6 Client: 1 Epoch: 0 Loss: 0.403735 Loss1: 0.370678 Loss2: 0.033057
-10-15 14:25 INFO     Round: 6 Client: 2 Epoch: 0 Loss: 0.293449 Loss1: 0.260756 Loss2: 0.032693
-10-15 14:29 INFO     Round: 6 Client: 3 Epoch: 0 Loss: 0.248588 Loss1: 0.218451 Loss2: 0.030137
-10-15 14:33 INFO     Round: 6 Client: 4 Epoch: 0 Loss: 0.332354 Loss1: 0.300025 Loss2: 0.032329
-10-15 14:33 INFO     >> Global Model Test accuracy: 0.740100
-10-15 14:33 INFO     >> Global Model Backdoor Test accuracy: 0.489400
-10-15 14:33 INFO     >> Global Model sum accuracy: 1.229500
-10-15 14:33 INFO      ** Training Round complete **
-10-15 14:33 INFO     in comm round:7
-10-15 14:38 INFO     Round: 7 Client: 0 Epoch: 0 Loss: 0.415393 loss_cls: 0.250338 align_loss_clean: 0.036067 align_loss_backdoor: 0.065213 adv_loss: 0.063775
-10-15 14:41 INFO     Round: 7 Client: 1 Epoch: 0 Loss: 0.406074 Loss1: 0.372778 Loss2: 0.033295
-10-15 14:43 INFO     Round: 7 Client: 2 Epoch: 0 Loss: 0.263881 Loss1: 0.233719 Loss2: 0.030162
-10-15 14:47 INFO     Round: 7 Client: 3 Epoch: 0 Loss: 0.264450 Loss1: 0.234391 Loss2: 0.030060
-10-15 14:51 INFO     Round: 7 Client: 4 Epoch: 0 Loss: 0.323387 Loss1: 0.292679 Loss2: 0.030709
-10-15 14:51 INFO     >> Global Model Test accuracy: 0.758400
-10-15 14:51 INFO     >> Global Model Backdoor Test accuracy: 0.628200
-10-15 14:51 INFO     >> Global Model sum accuracy: 1.386600
-10-15 14:51 INFO      ** Training Round complete **
-10-15 14:51 INFO     in comm round:8
-10-15 14:57 INFO     Round: 8 Client: 0 Epoch: 0 Loss: 0.404935 loss_cls: 0.241419 align_loss_clean: 0.035771 align_loss_backdoor: 0.063875 adv_loss: 0.063870
-10-15 15:00 INFO     Round: 8 Client: 1 Epoch: 0 Loss: 0.417764 Loss1: 0.385533 Loss2: 0.032230
-10-15 15:03 INFO     Round: 8 Client: 2 Epoch: 0 Loss: 0.297633 Loss1: 0.266896 Loss2: 0.030738
-10-15 15:07 INFO     Round: 8 Client: 3 Epoch: 0 Loss: 0.283218 Loss1: 0.253731 Loss2: 0.029487
-10-15 15:11 INFO     Round: 8 Client: 4 Epoch: 0 Loss: 0.324941 Loss1: 0.294524 Loss2: 0.030418
-10-15 15:11 INFO     >> Global Model Test accuracy: 0.683200
-10-15 15:11 INFO     >> Global Model Backdoor Test accuracy: 0.530900
-10-15 15:11 INFO     >> Global Model sum accuracy: 1.214100
-10-15 15:11 INFO      ** Training Round complete **
-10-15 15:11 INFO     in comm round:9
-10-15 15:16 INFO     Round: 9 Client: 0 Epoch: 0 Loss: 0.423847 loss_cls: 0.259049 align_loss_clean: 0.035941 align_loss_backdoor: 0.064423 adv_loss: 0.064434
-10-15 15:19 INFO     Round: 9 Client: 1 Epoch: 0 Loss: 0.427832 Loss1: 0.396666 Loss2: 0.031166
-10-15 15:24 INFO     Round: 9 Client: 2 Epoch: 0 Loss: 0.304872 Loss1: 0.275334 Loss2: 0.029539
-10-15 15:28 INFO     Round: 9 Client: 3 Epoch: 0 Loss: 0.302490 Loss1: 0.272623 Loss2: 0.029867
-10-15 15:32 INFO     Round: 9 Client: 4 Epoch: 0 Loss: 0.360435 Loss1: 0.328900 Loss2: 0.031535
-10-15 15:32 INFO     >> Global Model Test accuracy: 0.662500
-10-15 15:32 INFO     >> Global Model Backdoor Test accuracy: 0.868100
-10-15 15:32 INFO     >> Global Model sum accuracy: 1.530600
-10-15 15:32 INFO      ** Training Round complete **
-10-15 15:32 INFO     in comm round:10
-10-15 15:38 INFO     Round: 10 Client: 0 Epoch: 0 Loss: 0.393481 loss_cls: 0.231279 align_loss_clean: 0.034991 align_loss_backdoor: 0.061914 adv_loss: 0.065298
-10-15 15:40 INFO     Round: 10 Client: 1 Epoch: 0 Loss: 0.482891 Loss1: 0.449540 Loss2: 0.033351
-10-15 15:43 INFO     Round: 10 Client: 2 Epoch: 0 Loss: 0.336739 Loss1: 0.305746 Loss2: 0.030993
-10-15 15:47 INFO     Round: 10 Client: 3 Epoch: 0 Loss: 0.303435 Loss1: 0.273678 Loss2: 0.029757
-10-15 15:51 INFO     Round: 10 Client: 4 Epoch: 0 Loss: 0.355182 Loss1: 0.324720 Loss2: 0.030461
-10-15 15:51 INFO     >> Global Model Test accuracy: 0.703400
-10-15 15:51 INFO     >> Global Model Backdoor Test accuracy: 0.510200
-10-15 15:51 INFO     >> Global Model sum accuracy: 1.213600
-10-15 15:51 INFO      ** Training Round complete **
-10-15 15:51 INFO     in comm round:11
-10-15 15:57 INFO     Round: 11 Client: 0 Epoch: 0 Loss: 0.427740 loss_cls: 0.263887 align_loss_clean: 0.034919 align_loss_backdoor: 0.062710 adv_loss: 0.066224
-10-15 16:00 INFO     Round: 11 Client: 1 Epoch: 0 Loss: 0.443491 Loss1: 0.412612 Loss2: 0.030879
-10-15 16:03 INFO     Round: 11 Client: 2 Epoch: 0 Loss: 0.346967 Loss1: 0.318329 Loss2: 0.028638
-10-15 16:07 INFO     Round: 11 Client: 3 Epoch: 0 Loss: 0.326214 Loss1: 0.295970 Loss2: 0.030244
-10-15 16:11 INFO     Round: 11 Client: 4 Epoch: 0 Loss: 0.394168 Loss1: 0.364252 Loss2: 0.029917
-10-15 16:11 INFO     >> Global Model Test accuracy: 0.641900
-10-15 16:11 INFO     >> Global Model Backdoor Test accuracy: 0.876400
-10-15 16:11 INFO     >> Global Model sum accuracy: 1.518300
-10-15 16:11 INFO      ** Training Round complete **
-10-15 16:11 INFO     in comm round:12
-10-15 16:25 INFO     Round: 12 Client: 0 Epoch: 0 Loss: 0.404112 loss_cls: 0.240555 align_loss_clean: 0.035686 align_loss_backdoor: 0.062965 adv_loss: 0.064905
-10-15 16:28 INFO     Round: 12 Client: 1 Epoch: 0 Loss: 0.505435 Loss1: 0.473777 Loss2: 0.031657
-10-15 16:30 INFO     Round: 12 Client: 2 Epoch: 0 Loss: 0.366893 Loss1: 0.337200 Loss2: 0.029693
-10-15 16:35 INFO     Round: 12 Client: 3 Epoch: 0 Loss: 0.317703 Loss1: 0.289360 Loss2: 0.028343
-10-15 16:39 INFO     Round: 12 Client: 4 Epoch: 0 Loss: 0.396298 Loss1: 0.366995 Loss2: 0.029303
-10-15 16:39 INFO     >> Global Model Test accuracy: 0.626800
-10-15 16:39 INFO     >> Global Model Backdoor Test accuracy: 0.572000
-10-15 16:39 INFO     >> Global Model sum accuracy: 1.198800
-10-15 16:39 INFO      ** Training Round complete **
-10-15 16:39 INFO     in comm round:13
-10-15 16:44 INFO     Round: 13 Client: 0 Epoch: 0 Loss: 0.432954 loss_cls: 0.270728 align_loss_clean: 0.034680 align_loss_backdoor: 0.062374 adv_loss: 0.065173
-10-15 16:46 INFO     Round: 13 Client: 1 Epoch: 0 Loss: 0.480657 Loss1: 0.449605 Loss2: 0.031052
-10-15 16:49 INFO     Round: 13 Client: 2 Epoch: 0 Loss: 0.360411 Loss1: 0.332015 Loss2: 0.028397
-10-15 16:53 INFO     Round: 13 Client: 3 Epoch: 0 Loss: 0.349394 Loss1: 0.320295 Loss2: 0.029099
-10-15 16:57 INFO     Round: 13 Client: 4 Epoch: 0 Loss: 0.404556 Loss1: 0.375158 Loss2: 0.029398
-10-15 16:57 INFO     >> Global Model Test accuracy: 0.721400
-10-15 16:57 INFO     >> Global Model Backdoor Test accuracy: 0.815700
-10-15 16:57 INFO     >> Global Model sum accuracy: 1.537100
-10-15 16:57 INFO      ** Training Round complete **
-10-15 16:57 INFO     in comm round:14
-10-15 17:07 INFO     Round: 14 Client: 0 Epoch: 0 Loss: 0.401577 loss_cls: 0.240187 align_loss_clean: 0.035026 align_loss_backdoor: 0.062199 adv_loss: 0.064165
-10-15 17:10 INFO     Round: 14 Client: 1 Epoch: 0 Loss: 0.532641 Loss1: 0.501529 Loss2: 0.031111
-10-15 17:13 INFO     Round: 14 Client: 2 Epoch: 0 Loss: 0.399376 Loss1: 0.369514 Loss2: 0.029862
+10-24 08:43 INFO     Data statistics: {0: {0: 2538, 1: 2206, 2: 409, 3: 3154, 4: 40, 5: 178, 6: 387, 7: 128, 8: 2363}, 1: {0: 43, 1: 215, 2: 202, 3: 1423, 4: 1777, 5: 2276, 6: 1, 7: 498, 8: 446, 9: 878}, 2: {0: 23, 1: 1517, 2: 1244, 3: 192, 4: 2349, 5: 208, 6: 259, 7: 2175, 8: 682, 9: 114}, 3: {0: 1053, 1: 1004, 2: 2473, 4: 108, 5: 512, 6: 897, 7: 1057, 8: 1368, 9: 2583}, 4: {0: 1343, 1: 58, 2: 672, 3: 231, 4: 726, 5: 1826, 6: 3456, 7: 1142, 8: 141, 9: 1425}}
+10-24 08:43 INFO     in comm round:0
+10-24 08:44 INFO     Round: 0 Client: 0 Epoch: 0 Loss: 6.926643 loss_cls: 6.748514 align_loss_clean: 0.038155 align_loss_backdoor: 0.070528 adv_loss: 0.069445
+10-24 08:44 DEBUG    Loaded backend qtagg version unknown.
+10-24 08:44 DEBUG    findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0.
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneral.ttf', name='STIXGeneral', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizThreeSymReg.ttf', name='STIXSizeThreeSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 0.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizFiveSymReg.ttf', name='STIXSizeFiveSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneralBolIta.ttf', name='STIXGeneral', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUni.ttf', name='STIXNonUnicode', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono-Oblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmmi10.ttf', name='cmmi10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerifDisplay.ttf', name='DejaVu Serif Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizFourSymReg.ttf', name='STIXSizeFourSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif-BoldItalic.ttf', name='DejaVu Serif', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizOneSymReg.ttf', name='STIXSizeOneSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmsy10.ttf', name='cmsy10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans-Oblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 1.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansDisplay.ttf', name='DejaVu Sans Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUniBol.ttf', name='STIXNonUnicode', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUniIta.ttf', name='STIXNonUnicode', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizOneSymBol.ttf', name='STIXSizeOneSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono-BoldOblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif-Bold.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmb10.ttf', name='cmb10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizTwoSymBol.ttf', name='STIXSizeTwoSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmr10.ttf', name='cmr10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono-Bold.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans-BoldOblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 1.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmss10.ttf', name='cmss10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizTwoSymReg.ttf', name='STIXSizeTwoSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif-Italic.ttf', name='DejaVu Serif', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmtt10.ttf', name='cmtt10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUniBolIta.ttf', name='STIXNonUnicode', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizFourSymBol.ttf', name='STIXSizeFourSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmex10.ttf', name='cmex10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneralBol.ttf', name='STIXGeneral', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneralItalic.ttf', name='STIXGeneral', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizThreeSymBol.ttf', name='STIXSizeThreeSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans-Bold.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 0.33499999999999996
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cour.ttf', name='Courier New', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuib.ttf', name='Segoe UI', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\malgun.ttf', name='Malgun Gothic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SitkaZ.ttc', name='Sitka Small', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\lucon.ttf', name='Lucida Console', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\palai.ttf', name='Palatino Linotype', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\tahoma.ttf', name='Tahoma', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibrii.ttf', name='Calibri', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candara.ttf', name='Candara', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mingliub.ttc', name='MingLiU-ExtB', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\tahomabd.ttf', name='Tahoma', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambria.ttc', name='Cambria', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simsunb.ttf', name='SimSun-ExtB', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgiaz.ttf', name='Georgia', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\l_10646.ttf', name='Lucida Sans Unicode', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\gadugib.ttf', name='Gadugi', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msgothic.ttc', name='MS Gothic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdanab.ttf', name='Verdana', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 3.9713636363636367
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msjh.ttc', name='Microsoft JhengHei', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ariali.ttf', name='Arial', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 7.413636363636363
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constanb.ttf', name='Constantia', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\timesbd.ttf', name='Times New Roman', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comici.ttf', name='Comic Sans MS', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constani.ttf', name='Constantia', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Inkfree.ttf', name='Ink Free', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candarab.ttf', name='Candara', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\micross.ttf', name='Microsoft Sans Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mmrtextb.ttf', name='Myanmar Text', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeui.ttf', name='Segoe UI', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambriab.ttf', name='Cambria', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consola.ttf', name='Consolas', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ebrima.ttf', name='Ebrima', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebucbi.ttf', name='Trebuchet MS', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\NirmalaB.ttf', name='Nirmala UI', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuil.ttf', name='Segoe UI', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisbi.ttf', name='Segoe UI', style='italic', variant='normal', weight=600, stretch='normal', size='scalable')) = 11.24
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\pala.ttf', name='Palatino Linotype', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\times.ttf', name='Times New Roman', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\himalaya.ttf', name='Microsoft Himalaya', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambriaz.ttf', name='Cambria', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbel.ttf', name='Corbel', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisym.ttf', name='Segoe UI Symbol', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbeli.ttf', name='Corbel', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\courbi.ttf', name='Courier New', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibrili.ttf', name='Calibri', style='italic', variant='normal', weight=300, stretch='normal', size='scalable')) = 11.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\NirmalaS.ttf', name='Nirmala UI', style='normal', variant='normal', weight=350, stretch='normal', size='scalable')) = 10.0975
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consolab.ttf', name='Consolas', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simhei.ttf', name='SimHei', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambriai.ttf', name='Cambria', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibrib.ttf', name='Calibri', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ebrimabd.ttf', name='Ebrima', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbelz.ttf', name='Corbel', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\gadugi.ttf', name='Gadugi', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\holomdl2.ttf', name='HoloLens MDL2 Assets', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbell.ttf', name='Corbel', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Nirmala.ttf', name='Nirmala UI', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simfang.ttf', name='FangSong', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candarai.ttf', name='Candara', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\LeelaUIb.ttf', name='Leelawadee UI', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SitkaB.ttc', name='Sitka Small', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguili.ttf', name='Segoe UI', style='italic', variant='normal', weight=300, stretch='normal', size='scalable')) = 11.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\arialbd.ttf', name='Arial', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 6.698636363636363
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibri.ttf', name='Calibri', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguihis.ttf', name='Segoe UI Historic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mmrtext.ttf', name='Myanmar Text', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguibli.ttf', name='Segoe UI', style='italic', variant='normal', weight=900, stretch='normal', size='scalable')) = 11.525
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ariblk.ttf', name='Arial', style='normal', variant='normal', weight=900, stretch='normal', size='scalable')) = 6.888636363636364
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\wingding.ttf', name='Wingdings', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguibl.ttf', name='Segoe UI', style='normal', variant='normal', weight=900, stretch='normal', size='scalable')) = 10.525
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\timesbi.ttf', name='Times New Roman', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuiz.ttf', name='Segoe UI', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisli.ttf', name='Segoe UI', style='italic', variant='normal', weight=350, stretch='normal', size='scalable')) = 11.0975
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Gabriola.ttf', name='Gabriola', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\impact.ttf', name='Impact', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simkai.ttf', name='KaiTi', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segmdl2.ttf', name='Segoe MDL2 Assets', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candaraz.ttf', name='Candara', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\palab.ttf', name='Palatino Linotype', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\sylfaen.ttf', name='Sylfaen', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\malgunbd.ttf', name='Malgun Gothic', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebucbd.ttf', name='Trebuchet MS', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Dengl.ttf', name='DengXian', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyhbd.ttc', name='Microsoft YaHei', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebucit.ttf', name='Trebuchet MS', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyh.ttc', name='Microsoft YaHei', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothB.ttc', name='Yu Gothic', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdanai.ttf', name='Verdana', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 4.6863636363636365
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\taileb.ttf', name='Microsoft Tai Le', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\framdit.ttf', name='Franklin Gothic Medium', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebuc.ttf', name='Trebuchet MS', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candarali.ttf', name='Candara', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comicbd.ttf', name='Comic Sans MS', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mvboli.ttf', name='MV Boli', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\phagspa.ttf', name='Microsoft PhagsPa', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisb.ttf', name='Segoe UI', style='normal', variant='normal', weight=600, stretch='normal', size='scalable')) = 10.24
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\symbol.ttf', name='Symbol', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbelli.ttf', name='Corbel', style='italic', variant='normal', weight=300, stretch='normal', size='scalable')) = 11.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consolaz.ttf', name='Consolas', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoepr.ttf', name='Segoe Print', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msjhl.ttc', name='Microsoft JhengHei', style='normal', variant='normal', weight=290, stretch='normal', size='scalable')) = 10.1545
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\arialbi.ttf', name='Arial', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 7.698636363636363
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\timesi.ttf', name='Times New Roman', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\taile.ttf', name='Microsoft Tai Le', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candaral.ttf', name='Candara', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\arial.ttf', name='Arial', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 6.413636363636363
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Sitka.ttc', name='Sitka Small', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgiab.ttf', name='Georgia', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibril.ttf', name='Calibri', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constanz.ttf', name='Constantia', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgiai.ttf', name='Georgia', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothL.ttc', name='Yu Gothic', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\courbd.ttf', name='Courier New', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbelb.ttf', name='Corbel', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\LeelUIsl.ttf', name='Leelawadee UI', style='normal', variant='normal', weight=350, stretch='normal', size='scalable')) = 10.0975
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyi.ttf', name='Microsoft Yi Baiti', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msjhbd.ttc', name='Microsoft JhengHei', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ntailu.ttf', name='Microsoft New Tai Lue', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constan.ttf', name='Constantia', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothM.ttc', name='Yu Gothic', style='normal', variant='normal', weight=500, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SitkaI.ttc', name='Sitka Small', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comic.ttf', name='Comic Sans MS', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\palabi.ttf', name='Palatino Linotype', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoescb.ttf', name='Segoe Script', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdanaz.ttf', name='Verdana', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 4.971363636363637
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\phagspab.ttf', name='Microsoft PhagsPa', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguiemj.ttf', name='Segoe UI Emoji', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibriz.ttf', name='Calibri', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Dengb.ttf', name='DengXian', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyhl.ttc', name='Microsoft YaHei', style='normal', variant='normal', weight=290, stretch='normal', size='scalable')) = 10.1545
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\marlett.ttf', name='Marlett', style='normal', variant='normal', weight=500, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\webdings.ttf', name='Webdings', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuii.ttf', name='Segoe UI', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comicz.ttf', name='Comic Sans MS', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeprb.ttf', name='Segoe Print', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgia.ttf', name='Georgia', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\bahnschrift.ttf', name='Bahnschrift', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuisl.ttf', name='Segoe UI', style='normal', variant='normal', weight=350, stretch='normal', size='scalable')) = 10.0975
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\LeelawUI.ttf', name='Leelawadee UI', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\monbaiti.ttf', name='Mongolian Baiti', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdana.ttf', name='Verdana', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 3.6863636363636365
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\javatext.ttf', name='Javanese Text', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\malgunsl.ttf', name='Malgun Gothic', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\couri.ttf', name='Courier New', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\framd.ttf', name='Franklin Gothic Medium', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consolai.ttf', name='Consolas', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoesc.ttf', name='Segoe Script', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ntailub.ttf', name='Microsoft New Tai Lue', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothR.ttc', name='Yu Gothic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Deng.ttf', name='DengXian', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simsun.ttc', name='SimSun', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans.ttf') with score of 0.050000.
+10-24 08:44 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x00000258DDBE7B80>
+10-24 08:44 DEBUG    findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0.
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneral.ttf', name='STIXGeneral', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizThreeSymReg.ttf', name='STIXSizeThreeSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 0.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizFiveSymReg.ttf', name='STIXSizeFiveSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneralBolIta.ttf', name='STIXGeneral', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUni.ttf', name='STIXNonUnicode', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono-Oblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmmi10.ttf', name='cmmi10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerifDisplay.ttf', name='DejaVu Serif Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizFourSymReg.ttf', name='STIXSizeFourSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif-BoldItalic.ttf', name='DejaVu Serif', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizOneSymReg.ttf', name='STIXSizeOneSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmsy10.ttf', name='cmsy10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans-Oblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 1.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansDisplay.ttf', name='DejaVu Sans Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUniBol.ttf', name='STIXNonUnicode', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUniIta.ttf', name='STIXNonUnicode', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizOneSymBol.ttf', name='STIXSizeOneSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono-BoldOblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif-Bold.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmb10.ttf', name='cmb10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizTwoSymBol.ttf', name='STIXSizeTwoSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmr10.ttf', name='cmr10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono-Bold.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans-BoldOblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 1.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmss10.ttf', name='cmss10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizTwoSymReg.ttf', name='STIXSizeTwoSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif-Italic.ttf', name='DejaVu Serif', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmtt10.ttf', name='cmtt10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUniBolIta.ttf', name='STIXNonUnicode', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizFourSymBol.ttf', name='STIXSizeFourSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmex10.ttf', name='cmex10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneralBol.ttf', name='STIXGeneral', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneralItalic.ttf', name='STIXGeneral', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizThreeSymBol.ttf', name='STIXSizeThreeSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans-Bold.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 0.33499999999999996
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cour.ttf', name='Courier New', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuib.ttf', name='Segoe UI', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\malgun.ttf', name='Malgun Gothic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SitkaZ.ttc', name='Sitka Small', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\lucon.ttf', name='Lucida Console', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\palai.ttf', name='Palatino Linotype', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\tahoma.ttf', name='Tahoma', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibrii.ttf', name='Calibri', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candara.ttf', name='Candara', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mingliub.ttc', name='MingLiU-ExtB', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\tahomabd.ttf', name='Tahoma', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambria.ttc', name='Cambria', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simsunb.ttf', name='SimSun-ExtB', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgiaz.ttf', name='Georgia', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\l_10646.ttf', name='Lucida Sans Unicode', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\gadugib.ttf', name='Gadugi', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msgothic.ttc', name='MS Gothic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdanab.ttf', name='Verdana', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 3.9713636363636367
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msjh.ttc', name='Microsoft JhengHei', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ariali.ttf', name='Arial', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 7.413636363636363
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constanb.ttf', name='Constantia', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\timesbd.ttf', name='Times New Roman', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comici.ttf', name='Comic Sans MS', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constani.ttf', name='Constantia', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Inkfree.ttf', name='Ink Free', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candarab.ttf', name='Candara', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\micross.ttf', name='Microsoft Sans Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mmrtextb.ttf', name='Myanmar Text', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeui.ttf', name='Segoe UI', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambriab.ttf', name='Cambria', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consola.ttf', name='Consolas', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ebrima.ttf', name='Ebrima', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebucbi.ttf', name='Trebuchet MS', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\NirmalaB.ttf', name='Nirmala UI', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuil.ttf', name='Segoe UI', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisbi.ttf', name='Segoe UI', style='italic', variant='normal', weight=600, stretch='normal', size='scalable')) = 11.24
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\pala.ttf', name='Palatino Linotype', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\times.ttf', name='Times New Roman', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\himalaya.ttf', name='Microsoft Himalaya', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambriaz.ttf', name='Cambria', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbel.ttf', name='Corbel', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisym.ttf', name='Segoe UI Symbol', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbeli.ttf', name='Corbel', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\courbi.ttf', name='Courier New', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibrili.ttf', name='Calibri', style='italic', variant='normal', weight=300, stretch='normal', size='scalable')) = 11.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\NirmalaS.ttf', name='Nirmala UI', style='normal', variant='normal', weight=350, stretch='normal', size='scalable')) = 10.0975
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consolab.ttf', name='Consolas', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simhei.ttf', name='SimHei', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambriai.ttf', name='Cambria', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibrib.ttf', name='Calibri', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ebrimabd.ttf', name='Ebrima', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbelz.ttf', name='Corbel', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\gadugi.ttf', name='Gadugi', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\holomdl2.ttf', name='HoloLens MDL2 Assets', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbell.ttf', name='Corbel', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Nirmala.ttf', name='Nirmala UI', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simfang.ttf', name='FangSong', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candarai.ttf', name='Candara', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\LeelaUIb.ttf', name='Leelawadee UI', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SitkaB.ttc', name='Sitka Small', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguili.ttf', name='Segoe UI', style='italic', variant='normal', weight=300, stretch='normal', size='scalable')) = 11.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\arialbd.ttf', name='Arial', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 6.698636363636363
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibri.ttf', name='Calibri', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguihis.ttf', name='Segoe UI Historic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mmrtext.ttf', name='Myanmar Text', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguibli.ttf', name='Segoe UI', style='italic', variant='normal', weight=900, stretch='normal', size='scalable')) = 11.525
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ariblk.ttf', name='Arial', style='normal', variant='normal', weight=900, stretch='normal', size='scalable')) = 6.888636363636364
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\wingding.ttf', name='Wingdings', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguibl.ttf', name='Segoe UI', style='normal', variant='normal', weight=900, stretch='normal', size='scalable')) = 10.525
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\timesbi.ttf', name='Times New Roman', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuiz.ttf', name='Segoe UI', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisli.ttf', name='Segoe UI', style='italic', variant='normal', weight=350, stretch='normal', size='scalable')) = 11.0975
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Gabriola.ttf', name='Gabriola', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\impact.ttf', name='Impact', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simkai.ttf', name='KaiTi', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segmdl2.ttf', name='Segoe MDL2 Assets', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candaraz.ttf', name='Candara', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\palab.ttf', name='Palatino Linotype', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\sylfaen.ttf', name='Sylfaen', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\malgunbd.ttf', name='Malgun Gothic', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebucbd.ttf', name='Trebuchet MS', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Dengl.ttf', name='DengXian', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyhbd.ttc', name='Microsoft YaHei', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebucit.ttf', name='Trebuchet MS', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyh.ttc', name='Microsoft YaHei', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothB.ttc', name='Yu Gothic', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdanai.ttf', name='Verdana', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 4.6863636363636365
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\taileb.ttf', name='Microsoft Tai Le', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\framdit.ttf', name='Franklin Gothic Medium', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebuc.ttf', name='Trebuchet MS', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candarali.ttf', name='Candara', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comicbd.ttf', name='Comic Sans MS', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mvboli.ttf', name='MV Boli', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\phagspa.ttf', name='Microsoft PhagsPa', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisb.ttf', name='Segoe UI', style='normal', variant='normal', weight=600, stretch='normal', size='scalable')) = 10.24
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\symbol.ttf', name='Symbol', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbelli.ttf', name='Corbel', style='italic', variant='normal', weight=300, stretch='normal', size='scalable')) = 11.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consolaz.ttf', name='Consolas', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoepr.ttf', name='Segoe Print', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msjhl.ttc', name='Microsoft JhengHei', style='normal', variant='normal', weight=290, stretch='normal', size='scalable')) = 10.1545
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\arialbi.ttf', name='Arial', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 7.698636363636363
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\timesi.ttf', name='Times New Roman', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\taile.ttf', name='Microsoft Tai Le', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candaral.ttf', name='Candara', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\arial.ttf', name='Arial', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 6.413636363636363
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Sitka.ttc', name='Sitka Small', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgiab.ttf', name='Georgia', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibril.ttf', name='Calibri', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constanz.ttf', name='Constantia', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgiai.ttf', name='Georgia', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothL.ttc', name='Yu Gothic', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\courbd.ttf', name='Courier New', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbelb.ttf', name='Corbel', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\LeelUIsl.ttf', name='Leelawadee UI', style='normal', variant='normal', weight=350, stretch='normal', size='scalable')) = 10.0975
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyi.ttf', name='Microsoft Yi Baiti', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msjhbd.ttc', name='Microsoft JhengHei', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ntailu.ttf', name='Microsoft New Tai Lue', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constan.ttf', name='Constantia', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothM.ttc', name='Yu Gothic', style='normal', variant='normal', weight=500, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SitkaI.ttc', name='Sitka Small', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comic.ttf', name='Comic Sans MS', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\palabi.ttf', name='Palatino Linotype', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoescb.ttf', name='Segoe Script', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdanaz.ttf', name='Verdana', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 4.971363636363637
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\phagspab.ttf', name='Microsoft PhagsPa', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguiemj.ttf', name='Segoe UI Emoji', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibriz.ttf', name='Calibri', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Dengb.ttf', name='DengXian', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyhl.ttc', name='Microsoft YaHei', style='normal', variant='normal', weight=290, stretch='normal', size='scalable')) = 10.1545
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\marlett.ttf', name='Marlett', style='normal', variant='normal', weight=500, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\webdings.ttf', name='Webdings', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuii.ttf', name='Segoe UI', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comicz.ttf', name='Comic Sans MS', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeprb.ttf', name='Segoe Print', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgia.ttf', name='Georgia', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\bahnschrift.ttf', name='Bahnschrift', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuisl.ttf', name='Segoe UI', style='normal', variant='normal', weight=350, stretch='normal', size='scalable')) = 10.0975
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\LeelawUI.ttf', name='Leelawadee UI', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\monbaiti.ttf', name='Mongolian Baiti', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdana.ttf', name='Verdana', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 3.6863636363636365
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\javatext.ttf', name='Javanese Text', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\malgunsl.ttf', name='Malgun Gothic', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\couri.ttf', name='Courier New', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\framd.ttf', name='Franklin Gothic Medium', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consolai.ttf', name='Consolas', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoesc.ttf', name='Segoe Script', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ntailub.ttf', name='Microsoft New Tai Lue', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothR.ttc', name='Yu Gothic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Deng.ttf', name='DengXian', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simsun.ttc', name='SimSun', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans.ttf') with score of 0.050000.
+10-24 08:44 DEBUG    findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=12.0.
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneral.ttf', name='STIXGeneral', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizThreeSymReg.ttf', name='STIXSizeThreeSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 0.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizFiveSymReg.ttf', name='STIXSizeFiveSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneralBolIta.ttf', name='STIXGeneral', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUni.ttf', name='STIXNonUnicode', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono-Oblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmmi10.ttf', name='cmmi10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerifDisplay.ttf', name='DejaVu Serif Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizFourSymReg.ttf', name='STIXSizeFourSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif-BoldItalic.ttf', name='DejaVu Serif', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizOneSymReg.ttf', name='STIXSizeOneSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmsy10.ttf', name='cmsy10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans-Oblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 1.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansDisplay.ttf', name='DejaVu Sans Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUniBol.ttf', name='STIXNonUnicode', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUniIta.ttf', name='STIXNonUnicode', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizOneSymBol.ttf', name='STIXSizeOneSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono-BoldOblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif-Bold.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmb10.ttf', name='cmb10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizTwoSymBol.ttf', name='STIXSizeTwoSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmr10.ttf', name='cmr10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono-Bold.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans-BoldOblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 1.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmss10.ttf', name='cmss10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizTwoSymReg.ttf', name='STIXSizeTwoSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif-Italic.ttf', name='DejaVu Serif', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmtt10.ttf', name='cmtt10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUniBolIta.ttf', name='STIXNonUnicode', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizFourSymBol.ttf', name='STIXSizeFourSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmex10.ttf', name='cmex10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneralBol.ttf', name='STIXGeneral', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneralItalic.ttf', name='STIXGeneral', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizThreeSymBol.ttf', name='STIXSizeThreeSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans-Bold.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 0.33499999999999996
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cour.ttf', name='Courier New', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuib.ttf', name='Segoe UI', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\malgun.ttf', name='Malgun Gothic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SitkaZ.ttc', name='Sitka Small', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\lucon.ttf', name='Lucida Console', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\palai.ttf', name='Palatino Linotype', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\tahoma.ttf', name='Tahoma', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibrii.ttf', name='Calibri', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candara.ttf', name='Candara', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mingliub.ttc', name='MingLiU-ExtB', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\tahomabd.ttf', name='Tahoma', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambria.ttc', name='Cambria', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simsunb.ttf', name='SimSun-ExtB', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgiaz.ttf', name='Georgia', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\l_10646.ttf', name='Lucida Sans Unicode', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\gadugib.ttf', name='Gadugi', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msgothic.ttc', name='MS Gothic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdanab.ttf', name='Verdana', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 3.9713636363636367
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msjh.ttc', name='Microsoft JhengHei', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ariali.ttf', name='Arial', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 7.413636363636363
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constanb.ttf', name='Constantia', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\timesbd.ttf', name='Times New Roman', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comici.ttf', name='Comic Sans MS', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constani.ttf', name='Constantia', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Inkfree.ttf', name='Ink Free', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candarab.ttf', name='Candara', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\micross.ttf', name='Microsoft Sans Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mmrtextb.ttf', name='Myanmar Text', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeui.ttf', name='Segoe UI', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambriab.ttf', name='Cambria', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consola.ttf', name='Consolas', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ebrima.ttf', name='Ebrima', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebucbi.ttf', name='Trebuchet MS', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\NirmalaB.ttf', name='Nirmala UI', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuil.ttf', name='Segoe UI', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisbi.ttf', name='Segoe UI', style='italic', variant='normal', weight=600, stretch='normal', size='scalable')) = 11.24
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\pala.ttf', name='Palatino Linotype', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\times.ttf', name='Times New Roman', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\himalaya.ttf', name='Microsoft Himalaya', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambriaz.ttf', name='Cambria', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbel.ttf', name='Corbel', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisym.ttf', name='Segoe UI Symbol', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbeli.ttf', name='Corbel', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\courbi.ttf', name='Courier New', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibrili.ttf', name='Calibri', style='italic', variant='normal', weight=300, stretch='normal', size='scalable')) = 11.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\NirmalaS.ttf', name='Nirmala UI', style='normal', variant='normal', weight=350, stretch='normal', size='scalable')) = 10.0975
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consolab.ttf', name='Consolas', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simhei.ttf', name='SimHei', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambriai.ttf', name='Cambria', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibrib.ttf', name='Calibri', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ebrimabd.ttf', name='Ebrima', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbelz.ttf', name='Corbel', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\gadugi.ttf', name='Gadugi', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\holomdl2.ttf', name='HoloLens MDL2 Assets', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbell.ttf', name='Corbel', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Nirmala.ttf', name='Nirmala UI', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simfang.ttf', name='FangSong', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candarai.ttf', name='Candara', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\LeelaUIb.ttf', name='Leelawadee UI', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SitkaB.ttc', name='Sitka Small', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguili.ttf', name='Segoe UI', style='italic', variant='normal', weight=300, stretch='normal', size='scalable')) = 11.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\arialbd.ttf', name='Arial', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 6.698636363636363
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibri.ttf', name='Calibri', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguihis.ttf', name='Segoe UI Historic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mmrtext.ttf', name='Myanmar Text', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguibli.ttf', name='Segoe UI', style='italic', variant='normal', weight=900, stretch='normal', size='scalable')) = 11.525
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ariblk.ttf', name='Arial', style='normal', variant='normal', weight=900, stretch='normal', size='scalable')) = 6.888636363636364
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\wingding.ttf', name='Wingdings', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguibl.ttf', name='Segoe UI', style='normal', variant='normal', weight=900, stretch='normal', size='scalable')) = 10.525
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\timesbi.ttf', name='Times New Roman', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuiz.ttf', name='Segoe UI', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisli.ttf', name='Segoe UI', style='italic', variant='normal', weight=350, stretch='normal', size='scalable')) = 11.0975
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Gabriola.ttf', name='Gabriola', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\impact.ttf', name='Impact', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simkai.ttf', name='KaiTi', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segmdl2.ttf', name='Segoe MDL2 Assets', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candaraz.ttf', name='Candara', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\palab.ttf', name='Palatino Linotype', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\sylfaen.ttf', name='Sylfaen', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\malgunbd.ttf', name='Malgun Gothic', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebucbd.ttf', name='Trebuchet MS', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Dengl.ttf', name='DengXian', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyhbd.ttc', name='Microsoft YaHei', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebucit.ttf', name='Trebuchet MS', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyh.ttc', name='Microsoft YaHei', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothB.ttc', name='Yu Gothic', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdanai.ttf', name='Verdana', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 4.6863636363636365
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\taileb.ttf', name='Microsoft Tai Le', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\framdit.ttf', name='Franklin Gothic Medium', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebuc.ttf', name='Trebuchet MS', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candarali.ttf', name='Candara', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comicbd.ttf', name='Comic Sans MS', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mvboli.ttf', name='MV Boli', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\phagspa.ttf', name='Microsoft PhagsPa', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisb.ttf', name='Segoe UI', style='normal', variant='normal', weight=600, stretch='normal', size='scalable')) = 10.24
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\symbol.ttf', name='Symbol', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbelli.ttf', name='Corbel', style='italic', variant='normal', weight=300, stretch='normal', size='scalable')) = 11.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consolaz.ttf', name='Consolas', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoepr.ttf', name='Segoe Print', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msjhl.ttc', name='Microsoft JhengHei', style='normal', variant='normal', weight=290, stretch='normal', size='scalable')) = 10.1545
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\arialbi.ttf', name='Arial', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 7.698636363636363
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\timesi.ttf', name='Times New Roman', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\taile.ttf', name='Microsoft Tai Le', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candaral.ttf', name='Candara', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\arial.ttf', name='Arial', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 6.413636363636363
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Sitka.ttc', name='Sitka Small', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgiab.ttf', name='Georgia', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibril.ttf', name='Calibri', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constanz.ttf', name='Constantia', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgiai.ttf', name='Georgia', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothL.ttc', name='Yu Gothic', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\courbd.ttf', name='Courier New', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbelb.ttf', name='Corbel', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\LeelUIsl.ttf', name='Leelawadee UI', style='normal', variant='normal', weight=350, stretch='normal', size='scalable')) = 10.0975
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyi.ttf', name='Microsoft Yi Baiti', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msjhbd.ttc', name='Microsoft JhengHei', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ntailu.ttf', name='Microsoft New Tai Lue', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constan.ttf', name='Constantia', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothM.ttc', name='Yu Gothic', style='normal', variant='normal', weight=500, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SitkaI.ttc', name='Sitka Small', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comic.ttf', name='Comic Sans MS', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\palabi.ttf', name='Palatino Linotype', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoescb.ttf', name='Segoe Script', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdanaz.ttf', name='Verdana', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 4.971363636363637
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\phagspab.ttf', name='Microsoft PhagsPa', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguiemj.ttf', name='Segoe UI Emoji', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibriz.ttf', name='Calibri', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Dengb.ttf', name='DengXian', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyhl.ttc', name='Microsoft YaHei', style='normal', variant='normal', weight=290, stretch='normal', size='scalable')) = 10.1545
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\marlett.ttf', name='Marlett', style='normal', variant='normal', weight=500, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\webdings.ttf', name='Webdings', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuii.ttf', name='Segoe UI', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comicz.ttf', name='Comic Sans MS', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeprb.ttf', name='Segoe Print', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgia.ttf', name='Georgia', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\bahnschrift.ttf', name='Bahnschrift', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuisl.ttf', name='Segoe UI', style='normal', variant='normal', weight=350, stretch='normal', size='scalable')) = 10.0975
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\LeelawUI.ttf', name='Leelawadee UI', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\monbaiti.ttf', name='Mongolian Baiti', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdana.ttf', name='Verdana', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 3.6863636363636365
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\javatext.ttf', name='Javanese Text', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\malgunsl.ttf', name='Malgun Gothic', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\couri.ttf', name='Courier New', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\framd.ttf', name='Franklin Gothic Medium', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consolai.ttf', name='Consolas', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoesc.ttf', name='Segoe Script', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ntailub.ttf', name='Microsoft New Tai Lue', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothR.ttc', name='Yu Gothic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Deng.ttf', name='DengXian', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simsun.ttc', name='SimSun', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+10-24 08:44 DEBUG    findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=12.0 to DejaVu Sans ('D:\\Anaconda3\\envs\\neurotoxin\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans.ttf') with score of 0.050000.
+10-24 08:44 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x00000258DD17CA60>
+10-24 08:44 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x00000258DDD7E580>
+10-24 08:44 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x00000258DD31D400>
+10-24 08:44 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x000002592774D250>
+10-24 08:44 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x0000025942DB1070>
+10-24 08:44 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x0000025943C90040>
+10-24 08:44 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x0000025943E28DF0>
+10-24 08:44 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x0000025944683C40>
+10-24 08:44 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x000002594426A1C0>
+10-24 08:44 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x00000258D965C2B0>
+10-24 08:44 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x0000025944215340>
+10-24 08:44 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x0000025943DAC0D0>
+10-24 08:44 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x00000259431C0E50>
+10-24 08:44 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x0000025943270CA0>
+10-24 08:45 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x00000258DD1C0AC0>
+10-24 08:45 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x00000258DD1E9040>
+10-24 08:45 DEBUG    locator: <matplotlib.ticker.FixedLocator object at 0x000002592762A8B0>
