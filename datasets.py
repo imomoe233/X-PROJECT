@@ -37,9 +37,10 @@ class CIFAR10_truncated(data.Dataset):
         self.backdoor = backdoor
 
         self.data, self.target = self.__build_truncated_dataset__()
-        
+        '''
         if self.backdoor:
             self._apply_backdoor()
+        '''
 
     def __build_truncated_dataset__(self):
         with open(os.devnull, 'w') as fnull:
@@ -70,14 +71,52 @@ class CIFAR10_truncated(data.Dataset):
     def _apply_backdoor(self):
         # Apply white 5x5 square to the bottom-right corner of each image
         square_size = 5
+        method = 'DBA'
         for img in self.data:
             # 检查图像形状
-            if img.shape == (32, 32, 3):
-                # 高度、宽度、通道
-                img[-square_size:, -square_size:, :] = 255
-            elif img.shape == (3, 32, 32):
-                # 通道、高度、宽度
-                img[:, -square_size:, -square_size:] = 255
+            if method == 'badnets':
+                if img.shape == (32, 32, 3):
+                    # 高度、宽度、通道
+                    img[-square_size:, -square_size:, :] = 255
+                elif img.shape == (3, 32, 32):
+                    # 通道、高度、宽度
+                    img[:, -square_size:, -square_size:] = 255
+            elif method == 'DBA':
+                if img.shape == (32, 32, 3):
+                    # 高度、宽度、通道
+                    img[0, 0:3, 0] = 255
+                    img[0, 0:3, 1] = 20
+                    img[0, 0:3, 2] = 147
+                    
+                    img[0, 5:8, 0] = 0
+                    img[0, 5:8, 1] = 191
+                    img[0, 5:8, 2] = 255
+                    
+                    img[3, 0:3, 0] = 173
+                    img[3, 0:3, 1] = 255
+                    img[3, 0:3, 2] = 47
+                    
+                    img[3, 5:8, 0] = 255
+                    img[3, 5:8, 1] = 127
+                    img[3, 5:8, 2] = 80
+                    
+                elif img.shape == (3, 32, 32):
+                    # 高度、宽度、通道
+                    img[0, 0:3, 0] = 255
+                    img[1, 0:3, 0] = 20
+                    img[2, 0:3, 0] = 147
+                    
+                    img[0, 5:8, 0] = 0
+                    img[1, 5:8, 0] = 191
+                    img[2, 5:8, 0] = 255
+                    
+                    img[0, 0:3, 3] = 173
+                    img[1, 0:3, 3] = 255
+                    img[2, 0:3, 3] = 47
+                    
+                    img[0, 5:8, 3] = 255
+                    img[1, 5:8, 3] = 127
+                    img[2, 5:8, 3] = 80
                 
         self.target = np.zeros_like(self.target)
 

@@ -24,9 +24,9 @@ from utils import *
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--log_file_name', type=str, default='cifar10_resnet50_FL_BadNets_purning✅', help='The log file name')
+    parser.add_argument('--log_file_name', type=str, default='cifar10_resnet50_FL_BadNets_fedavg', help='The log file name')
     parser.add_argument('--backdoor', type=str, default='backdoor_MCFL', help='train with backdoor_pretrain/backdoor_MCFL/backdoor_fedavg')
-    parser.add_argument('--fedavg_method', type=str, default='purning', help='fedavg✅/weight_fedavg✅/multi_krum✅/trimmed_mean✅/median_fedavg✅/rfa✅/fedprox✅/DP✅/purning✅')
+    parser.add_argument('--fedavg_method', type=str, default='fedavg', help='fedavg✅/weight_fedavg✅/multi_krum✅/trimmed_mean✅/median_fedavg✅/rfa✅/fedprox✅/DP✅/purning✅')
     parser.add_argument('--modeldir', type=str, required=False, default="./models/cifar10_resnet50/MCFL/", help='Model save directory path')
     parser.add_argument('--partition', type=str, default='noniid', help='the data partitioning strategy noniid/iid')
     parser.add_argument('--min_data_ratio', type=float, default='0.1')
@@ -113,18 +113,11 @@ def get_args():
         
     return args
 
-def add_noise_to_gradients(model, noise_multiplier=1.0, max_grad_norm=0.01):
+def add_noise_to_gradients(model, noise_multiplier=1.0, max_grad_norm=0.1):
     """为模型的梯度添加高斯噪声以实现差分隐私。"""
     # 计算每个参数的梯度
     for param in model.parameters():
         if param.grad is not None:
-
-            # 计算L2范数
-            grad_norm = param.grad.data.norm(2)
-            # 进行梯度裁剪
-            if grad_norm > max_grad_norm:
-                param.grad.data = param.grad.data / grad_norm * max_grad_norm
-
             if noise_multiplier > 0.0:
                 noise = torch.normal(0, noise_multiplier * max_grad_norm, param.grad.size()).to(param.device)
                 param.grad.data += noise
@@ -316,7 +309,7 @@ def remove_module_prefix(state_dict):
   
 
 
-def prune_model_updates_with_mask(net_para, threshold=3.0):
+def prune_model_updates_with_mask(net_para, threshold=1.0):
     """生成超过阈值的参数掩码，而不直接修改参数。"""
     mask_dict = {}
     total_zeros = 0
@@ -401,7 +394,7 @@ def train_net(net_id, net, train_dataloader, test_dataloader, backdoor_train_dl,
     cnt = 0
     
     if args.fedavg_method == 'purning':
-        mask_dict = prune_model_updates_with_mask(net.state_dict(), threshold=3.0)
+        mask_dict = prune_model_updates_with_mask(net.state_dict())
 
 
 
@@ -422,7 +415,7 @@ def train_net(net_id, net, train_dataloader, test_dataloader, backdoor_train_dl,
                 combined_x.requires_grad = False
                 combined_target.requires_grad = False
                 combined_target = combined_target.long()
-                
+                imshow(backdoor_x[0].clone().cpu())
                 # Forward pass
                 _, _, out = net(combined_x)
 

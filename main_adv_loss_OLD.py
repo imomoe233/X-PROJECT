@@ -150,69 +150,6 @@ def are_models_equal(model1, model2):
 
     return True
 
-def random_update_params(global_w, net_para, update_ratio):
-    """
-    让 net_para 中的部分参数按照 update_ratio 比例进行更新，未更新的部分保持与 global_w 一致。
-    并且将最大的 5% 和最小的 5% 参数值调整到与第 11% 的参数值相同，以避免被修剪。
-    
-    :param global_w: 全局模型的参数 (state_dict)
-    :param net_para: 当前客户端的参数 (state_dict)
-    :param update_ratio: 本轮希望更新的参数比例 (0~1)
-    :return: 更新后的 net_para 参数 (state_dict)，部分参数更新，其他与 global_w 一致。
-    """
-    for key in net_para:
-        # 获取全局参数和当前客户端参数
-        global_param = global_w[key].float()
-        net_param = net_para[key].float()
-
-        # 计算参数的数量
-        num_params = net_param.numel()
-        num_update_params = int(update_ratio * num_params)
-
-        # 将参数展平成一维张量
-        flat_net_param = net_param.view(-1)
-        flat_global_param = global_param.view(-1)
-
-        # 随机更新部分参数，其余保持与全局参数一致
-        if num_update_params > 0:
-            indices = torch.randperm(num_params)[:num_update_params]
-            with torch.no_grad():
-                flat_net_param.copy_(flat_global_param)  # 将所有参数设置为全局参数
-                # 对选定的参数添加微小扰动
-                # flat_net_param[indices] += 0.01 * torch.randn_like(flat_net_param[indices])
-
-        continue
-
-        # 调整最大的5%和最小的5%参数值
-        with torch.no_grad():
-            # 对参数进行排序，获取排序后的索引
-            sorted_indices = torch.argsort(flat_net_param)
-            num_adjust_params = max(1, int(0.05 * num_params))  # 确保至少有一个参数被调整
-
-            if num_adjust_params * 2 < num_params:
-                # 计算第11%位置的索引
-                lower_threshold_idx = int(0.10 * num_params)
-                upper_threshold_idx = int(0.90 * num_params)
-
-                # 获取第11%位置的参数值
-                lower_threshold_value = flat_net_param[sorted_indices[lower_threshold_idx]].clone()
-                upper_threshold_value = flat_net_param[sorted_indices[upper_threshold_idx]].clone()
-
-                # 调整最小的5%参数值
-                smallest_indices = sorted_indices[:num_adjust_params]
-                flat_net_param[smallest_indices] = lower_threshold_value
-
-                # 调整最大的5%参数值
-                largest_indices = sorted_indices[-num_adjust_params:]
-                flat_net_param[largest_indices] = upper_threshold_value
-            else:
-                # 如果参数数量过少，直接跳过调整
-                pass
-
-        # 将调整后的参数重新赋值回 net_para
-        net_para[key] = flat_net_param.view_as(net_param)
-
-    return net_para
 
 def remove_module_prefix(state_dict):
     new_state_dict = {}
@@ -243,29 +180,6 @@ def apply_differential_privacy(param, epsilon=100.0, delta=0.1):
 
     return param + noise
 
-def differential_privacy_update(global_weights, clip_base=1.0, noise_base=0.5):
-    """
-    实现联邦学习中带有差分隐私保护的更新，自动根据模型参数大小调整差分隐私参数。
-
-    参数：
-    - global_weights (torch.Tensor): 全局模型的权重。
-    - clip_base (float): 梯度剪切基准值。
-    - noise_base (float): 噪声基准值。
-
-    返回：
-    - updated_global_weights (torch.Tensor): 更新后的全局模型权重。
-    """
-    param_size = global_weights.numel()  # 模型参数的总数
-
-    # 根据参数大小自动调整剪切阈值和噪声强度
-    clip_threshold = clip_base * torch.sqrt(torch.tensor(param_size, dtype=torch.float32))
-    noise_multiplier = noise_base / torch.sqrt(torch.tensor(param_size, dtype=torch.float32))
-
-    # 添加噪声
-    noise = torch.randn_like(global_weights) * (clip_threshold * noise_multiplier)
-    dp_weights = global_weights + noise
-
-    return dp_weights
 
 def prune_model_updates(net_para, threshold=1.0):
     """剪枝模型参数中超过阈值的部分."""
@@ -889,11 +803,14 @@ def backdoor_MCFL(args):
 
                 for net_id, net in enumerate(nets_this_round.values()):
                     net_para = net.state_dict()
-                    #net_para = random_update_params(global_w, net_para, update_ratio) 
-                    # 对每个客户端参数应用差分隐私，差分隐私在聚合前做效果更好
-                    for key in net_para:
-                        net_para[key] = apply_differential_privacy(net_para[key])  # epsilon 可调
-                        global_w[key] += net_para[key] / num_clients                                    
+                    # 加权平均聚合
+                    if net_id == 0:
+                        # net_para = random_update_params(global_w, net_para, update_ratio) 
+                        for key in pruned_net_para:
+                            global_w[key] = pruned_net_para[key] / num_clients
+                    else:
+                        for key in pruned_net_para:
+                            global_w[key] += pruned_net_para[key] / num_clients                                    
             elif args.fedavg_method == 'purning':
                 num_clients = len(party_list_this_round)
                 total_data_points = sum([len(net_dataidx_map[r]) for r in party_list_this_round])
@@ -1270,16 +1187,14 @@ def backdoor_fedavg(args):
             for net_id, net in enumerate(nets_this_round.values()):
                 net_para = net.state_dict()
 
-                # 对每个客户端参数应用差分隐私
-                for key in net_para:
-                    net_para[key] = apply_differential_privacy(net_para[key], epsilon=1.0)  # epsilon 可调
-
+                # 加权平均聚合
                 if net_id == 0:
-                    for key in net_para:
-                        global_w[key] = net_para[key] * fed_avg_freqs[net_id]
+                    # net_para = random_update_params(global_w, net_para, update_ratio) 
+                    for key in pruned_net_para:
+                        global_w[key] = pruned_net_para[key] / num_clients
                 else:
-                    for key in net_para:
-                        global_w[key] += net_para[key] * fed_avg_freqs[net_id]
+                    for key in pruned_net_para:
+                        global_w[key] += pruned_net_para[key] / num_clients 
         elif args.fedavg_method == 'weight_fedavg_purning':
             total_data_points = sum([len(net_dataidx_map[r]) for r in party_list_this_round])
             fed_avg_freqs = [len(net_dataidx_map[r]) / total_data_points for r in party_list_this_round]

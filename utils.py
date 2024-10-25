@@ -25,6 +25,100 @@ def mkdirs(dirpath):
         pass
 
 
+class ApplyBackdoor:
+    def __init__(self, square_size=5, method='badnets', random=True):
+        self.square_size = square_size
+        self.method = method
+        self.random = random
+
+    def __call__(self, img):
+        img = torch.clone(img)  # 确保我们不会修改原始数据
+        if self.method == 'badnets':
+            if img.shape == (3, 32, 32):  # CIFAR-10 图像通常是 (3, 32, 32)
+                img[:, -self.square_size:, -self.square_size:] = 255  # 设置白色 square
+            elif img.shape == (32, 32, 3):
+                # 通道、高度、宽度
+                img[-self.square_size:, -self.square_size:, :] = 255
+        elif self.method == 'DBA':
+            if img.shape == (32, 32, 3):
+                if self.random == True:
+                    # 高度、宽度、通道
+                    selected_region = random.choice([1, 2, 3, 4])  # 随机选择 1 到 4 之间的一个数字
+
+                    if selected_region == 1:
+                        img[0, 0:3, 0] = 255 / 255
+                        img[0, 0:3, 1] = 20 / 255
+                        img[0, 0:3, 2] = 147 / 255
+                    elif selected_region == 2:
+                        img[0, 5:8, 0] = 0 / 255
+                        img[0, 5:8, 1] = 191 / 255
+                        img[0, 5:8, 2] = 255 / 255
+                    elif selected_region == 3:
+                        img[3, 0:3, 0] = 173 / 255
+                        img[3, 0:3, 1] = 255 / 255
+                        img[3, 0:3, 2] = 47 / 255
+                    elif selected_region == 4:
+                        img[3, 5:8, 0] = 255 / 255
+                        img[3, 5:8, 1] = 127 / 255
+                        img[3, 5:8, 2] = 80 / 255
+                else:
+                    # 高度、宽度、通道
+                    img[0, 0:3, 0] = 255/255
+                    img[0, 0:3, 1] = 20/255
+                    img[0, 0:3, 2] = 147/255
+                    
+                    img[0, 5:8, 0] = 0/255
+                    img[0, 5:8, 1] = 191/255
+                    img[0, 5:8, 2] = 255/255
+                    
+                    img[3, 0:3, 0] = 173/255
+                    img[3, 0:3, 1] = 255/255
+                    img[3, 0:3, 2] = 47/255
+                    
+                    img[3, 5:8, 0] = 255/255
+                    img[3, 5:8, 1] = 127/255
+                    img[3, 5:8, 2] = 80/255
+                
+            elif img.shape == (3, 32, 32):
+                if self.random == True:
+                    # 高度、宽度、通道
+                    selected_region = random.choice([1, 2, 3, 4])  # 随机选择 1 到 4 之间的一个数字
+
+                    if selected_region == 1:
+                        img[0, 0, 0:3] = 255 / 255
+                        img[1, 0, 0:3] = 20 / 255
+                        img[2, 0, 0:3] = 147 / 255
+                    elif selected_region == 2:
+                        img[0, 0, 5:8] = 0 / 255
+                        img[1, 0, 5:8] = 191 / 255
+                        img[2, 0, 5:8] = 255 / 255
+                    elif selected_region == 3:
+                        img[0, 3, 0:3] = 173 / 255
+                        img[1, 3, 0:3] = 255 / 255
+                        img[2, 3, 0:3] = 47 / 255
+                    elif selected_region == 4:
+                        img[0, 3, 5:8] = 255 / 255
+                        img[1, 3, 5:8] = 127 / 255
+                        img[2, 3, 5:8] = 80 / 255
+                else:
+                    # 高度、宽度、通道
+                    img[0, 0, 0:3] = 255 / 255
+                    img[1, 0, 0:3] = 20 / 255
+                    img[2, 0, 0:3] = 147 / 255
+                    
+                    img[0, 0, 5:8] = 0 / 255
+                    img[1, 0, 5:8] = 191 / 255
+                    img[2, 0, 5:8] = 255 / 255
+                    
+                    img[0, 3, 0:3] = 173 / 255
+                    img[1, 3, 0:3] = 255 / 255
+                    img[2, 3, 0:3] = 47 / 255
+                    
+                    img[0, 3, 5:8] = 255 / 255
+                    img[1, 3, 5:8] = 127 / 255
+                    img[2, 3, 5:8] = 80 / 255
+        return img
+
 
 def load_cifar10_data(datadir):
     transform = transforms.Compose([transforms.ToTensor()])
@@ -364,11 +458,13 @@ def get_dataloader(dataset, datadir, train_bs, test_bs, dataidxs=None, backdoor=
                                              std=[x / 255.0 for x in [63.0, 62.1, 66.7]])
             transform_train = transforms.Compose([
                 transforms.ToTensor(),
+                ApplyBackdoor(square_size=5, method='badnets', random=True),
                 normalize
             ])
             # data prep for test set
             transform_test = transforms.Compose([
                 transforms.ToTensor(),
+                ApplyBackdoor(square_size=5, method='badnets', random=False),
                 normalize])
 
         elif dataset == 'cifar100' and backdoor == False:

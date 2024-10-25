@@ -1,0 +1,36 @@
+10-24 20:34 INFO     Data statistics: {0: {0: 2538, 1: 2206, 2: 409, 3: 3154, 4: 40, 5: 178, 6: 387, 7: 128, 8: 2363}, 1: {0: 43, 1: 215, 2: 202, 3: 1423, 4: 1777, 5: 2276, 6: 1, 7: 498, 8: 446, 9: 878}, 2: {0: 23, 1: 1517, 2: 1244, 3: 192, 4: 2349, 5: 208, 6: 259, 7: 2175, 8: 682, 9: 114}, 3: {0: 1053, 1: 1004, 2: 2473, 4: 108, 5: 512, 6: 897, 7: 1057, 8: 1368, 9: 2583}, 4: {0: 1343, 1: 58, 2: 672, 3: 231, 4: 726, 5: 1826, 6: 3456, 7: 1142, 8: 141, 9: 1425}}
+10-24 20:34 INFO     in comm round:0
+10-24 20:35 INFO     Round: 0 Client: 0 Epoch: 0 Loss: 1.884585 Loss1: 0.844810 Loss2: 0.042516 Loss3: 0.858533 Loss4: 0.071896 Adv_Loss: 0.066830
+10-24 20:35 INFO     Round: 0 Client: 0 Epoch: 0 train_clean_acc: 0.681374 train_backdoor_acc: 0.787287
+10-24 20:35 INFO     Round: 0 Client: 1 Epoch: 0 Loss: 0.378862 Loss1: 0.342627 Loss2: 0.036235
+10-24 20:35 INFO     Round: 0 Client: 1 Epoch: 0 train_clean_acc: 0.891016
+10-24 20:35 INFO     Round: 0 Client: 2 Epoch: 0 Loss: 0.269099 Loss1: 0.233280 Loss2: 0.035819
+10-24 20:35 INFO     Round: 0 Client: 2 Epoch: 0 train_clean_acc: 0.928194
+10-24 20:35 INFO     Round: 0 Client: 3 Epoch: 0 Loss: 0.246636 Loss1: 0.210474 Loss2: 0.036162
+10-24 20:35 INFO     Round: 0 Client: 3 Epoch: 0 train_clean_acc: 0.931868
+10-24 20:36 INFO     Round: 0 Client: 4 Epoch: 0 Loss: 0.280037 Loss1: 0.245400 Loss2: 0.034636
+10-24 20:36 INFO     Round: 0 Client: 4 Epoch: 0 train_clean_acc: 0.924964
+10-24 20:36 INFO     >> Global Model Test accuracy: 0.100000
+10-24 20:36 INFO     >> Global Model Backdoor Test accuracy: 0.000000
+10-24 20:36 INFO     >> Global Model sum accuracy: 0.100000
+10-24 20:36 INFO      ** Training Round complete **
+10-24 20:36 INFO     in comm round:1
+10-24 20:37 INFO     Round: 1 Client: 0 Epoch: 0 Loss: 2.703251 Loss1: 1.732945 Loss2: 0.065208 Loss3: 0.776752 Loss4: 0.068630 Adv_Loss: 0.059717
+10-24 20:37 INFO     Round: 1 Client: 0 Epoch: 0 train_clean_acc: 0.345703 train_backdoor_acc: 0.920987
+10-24 20:37 INFO     Round: 1 Client: 1 Epoch: 0 Loss: 1.524558 Loss1: 1.472754 Loss2: 0.051804
+10-24 20:37 INFO     Round: 1 Client: 1 Epoch: 0 train_clean_acc: 0.622135
+10-24 20:37 INFO     Round: 1 Client: 2 Epoch: 0 Loss: 1.383463 Loss1: 1.326899 Loss2: 0.056564
+10-24 20:37 INFO     Round: 1 Client: 2 Epoch: 0 train_clean_acc: 0.700253
+10-24 20:37 INFO     Round: 1 Client: 3 Epoch: 0 Loss: 1.387557 Loss1: 1.326403 Loss2: 0.061154
+10-24 20:37 INFO     Round: 1 Client: 3 Epoch: 0 train_clean_acc: 0.586755
+10-24 20:38 INFO     Round: 1 Client: 4 Epoch: 0 Loss: 1.302194 Loss1: 1.247805 Loss2: 0.054388
+10-24 20:38 INFO     Round: 1 Client: 4 Epoch: 0 train_clean_acc: 0.722656
+10-24 20:38 INFO     >> Global Model Test accuracy: 0.100000
+10-24 20:38 INFO     >> Global Model Backdoor Test accuracy: 0.000000
+10-24 20:38 INFO     >> Global Model sum accuracy: 0.100000
+10-24 20:38 INFO      ** Training Round complete **
+10-24 20:38 INFO     in comm round:2
+10-24 20:38 INFO     Round: 2 Client: 0 Epoch: 0 Loss: 3.863891 Loss1: 2.194726 Loss2: 0.049692 Loss3: 1.499127 Loss4: 0.064949 Adv_Loss: 0.055398
+10-24 20:38 INFO     Round: 2 Client: 0 Epoch: 0 train_clean_acc: 0.216708 train_backdoor_acc: 0.819602
+10-24 20:39 INFO     Round: 2 Client: 1 Epoch: 0 Loss: 2.169598 Loss1: 2.125187 Loss2: 0.044411
+10-24 20:39 INFO     Round: 2 Client: 1 Epoch: 0 train_clean_acc: 0.292708
