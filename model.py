@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import math
 import torchvision.models as models
-from resnetcifar import ResNet18_cifar10, ResNet50_cifar10
+from resnetcifar import ResNet18_cifar10, ResNet50_cifar10, ResNet50_MNIST
 
 #import pytorch_lightning as pl
 
@@ -555,6 +555,10 @@ class ModelFedCon(nn.Module):
         elif base_model == 'simple-cnn-mnist':
             self.features = SimpleCNNMNIST_header(input_dim=(16 * 4 * 4), hidden_dims=[120, 84], output_dim=n_classes)
             num_ftrs = 84
+        elif base_model == "resnet50-MNIST":
+            basemodel = ResNet50_MNIST()
+            self.features = nn.Sequential(*list(basemodel.children())[:-1])
+            num_ftrs = basemodel.fc.in_features
 
         #summary(self.features.to('cuda:0'), (3,32,32))
         #print("features:", self.features)

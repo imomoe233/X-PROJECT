@@ -21,25 +21,27 @@ import wandb
 from model import *
 from utils import *
 
+# 设置 CUDA_LAUNCH_BLOCKING=1
+os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--log_file_name', type=str, default='cifar100_resnet50_backdoor_pretrain(cleanOnly)', help='The log file name')
+    parser.add_argument('--log_file_name', type=str, default='MNIST_resnet50_backdoor_pretrain(cleanOnly)', help='The log file name')
     parser.add_argument('--backdoor', type=str, default='backdoor_pretrain', help='train with backdoor_pretrain/backdoor_MCFL/backdoor_fedavg')
     parser.add_argument('--fedavg_method', type=str, default='fedavg', help='fedavg/weight_fedavg/weight_fedavg_DP/weight_fedavg_purning/trimmed_mean/median_fedavg/krum/multi_krum/rfa')
-    parser.add_argument('--modeldir', type=str, required=False, default="./models/cifar100_resnet50/", help='Model save directory path')
+    parser.add_argument('--modeldir', type=str, required=False, default="./models/MNIST_resnet50/", help='Model save directory path')
     parser.add_argument('--partition', type=str, default='iid', help='the data partitioning strategy noniid/iid')
     parser.add_argument('--min_data_ratio', type=float, default='0.1')
     parser.add_argument('--krum_k', type=int, default='3')
-    parser.add_argument('--batch-size', type=int, default=256, help='input batch size for training (default: 64)')
+    parser.add_argument('--batch-size', type=int, default=128, help='input batch size for training (default: 64)')
     parser.add_argument('--alg', type=str, default='backdoor_MCFL',
                         help='communication strategy: fedavg/fedprox/moon/local_training')
-    parser.add_argument('--model', type=str, default='resnet50', help='neural network used in training')
-    parser.add_argument('--dataset', type=str, default='cifar100', help='dataset used for training')
+    parser.add_argument('--model', type=str, default='resnet50-MNIST', help='neural network used in training')
+    parser.add_argument('--dataset', type=str, default='MNIST', help='dataset used for training')
     parser.add_argument('--epochs', type=int, default=1, help='number of local epochs')
     parser.add_argument('--n_parties', type=int, default=5, help='number of workers in a distributed cluster')
     parser.add_argument('--logdir', type=str, required=False, default="./logs/", help='Log directory path')
-    parser.add_argument('--datadir', type=str, required=False, default="X:/Directory/code/dataset/", help="Data directory")
+    parser.add_argument('--datadir', type=str, required=False, default="X:/Directory/code/dataset/MNIST", help="Data directory")
     
     
     parser.add_argument('--dropout_p', type=float, required=False, default=0.5, help="Dropout probability. Default=0.0")
@@ -112,7 +114,7 @@ def get_args():
 
 def init_nets(net_configs, n_parties, args, device='cpu'):
     nets = {net_i: None for net_i in range(n_parties)}
-    if args.dataset in {'mnist', 'cifar10', 'svhn', 'fmnist'}:
+    if args.dataset in {'MNIST', 'cifar10', 'svhn', 'fmnist'}:
         n_classes = 10
     elif args.dataset == 'celeba':
         n_classes = 2
@@ -165,7 +167,7 @@ def imshow(tensor):
     # 反归一化处理
     img = inv_normalize(tensor)
     # 将tensor转为numpy数组
-    img = img.permute(1, 2, 0).numpy()
+    img = img.permute(1, 2, 0).cpu().numpy()
     # 裁剪到合法的像素值范围
     img = np.clip(img, 0, 255)
     img = img.astype(np.uint8)
@@ -194,7 +196,7 @@ def train_net(net_id, net, train_dl, test_dl, backdoor_train_dl, backdoor_test_d
     train_dl = tqdm(train_dl)
     
     
-    for epoch in range(200):
+    for epoch in range(20000):
         epoch_loss_collector = []
 
         train_dl.set_description(f"Training traindata clean | round:{epoch} client:{net_id}")
@@ -203,7 +205,8 @@ def train_net(net_id, net, train_dl, test_dl, backdoor_train_dl, backdoor_test_d
 
             clean_x, clean_target = clean_x.cuda(), clean_target.cuda()
             clean_target = clean_target.long()
-            
+            #imshow(clean_x[0])
+            #print(clean_target[0])
             # 前向传播
             _, _, out = net(clean_x)
 

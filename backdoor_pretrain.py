@@ -21,31 +21,33 @@ import wandb
 from model import *
 from utils import *
 
-
+# 设置 CUDA_LAUNCH_BLOCKING=1
+os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
+XX=1
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--log_file_name', type=str, default='cifar100_resnet50_backdoor_pretrain(triggerOnly)', help='The log file name')
+    parser.add_argument('--log_file_name', type=str, default='MNIST_resnet50_backdoor_pretrain(triggerOnly)', help='The log file name')
     parser.add_argument('--backdoor', type=str, default='backdoor_pretrain', help='train with backdoor_pretrain/backdoor_MCFL/backdoor_fedavg')
     parser.add_argument('--fedavg_method', type=str, default='fedavg', help='fedavg/weight_fedavg/weight_fedavg_DP/weight_fedavg_purning/trimmed_mean/median_fedavg/krum/multi_krum/rfa')
-    parser.add_argument('--modeldir', type=str, required=False, default="./models/cifar100_resnet50/MCFL/", help='Model save directory path')
+    parser.add_argument('--modeldir', type=str, required=False, default="./models/MNIST_resnet50/", help='Model save directory path')
     parser.add_argument('--partition', type=str, default='iid', help='the data partitioning strategy noniid/iid')
     parser.add_argument('--min_data_ratio', type=float, default='0.1')
     parser.add_argument('--krum_k', type=int, default='3')
-    parser.add_argument('--batch-size', type=int, default=256, help='input batch size for training (default: 64)')
+    parser.add_argument('--batch-size', type=int, default=64, help='input batch size for training (default: 64)')
     parser.add_argument('--alg', type=str, default='backdoor_MCFL',
                         help='communication strategy: fedavg/fedprox/moon/local_training')
-    parser.add_argument('--model', type=str, default='resnet50', help='neural network used in training')
-    parser.add_argument('--dataset', type=str, default='cifar100', help='dataset used for training')
+    parser.add_argument('--model', type=str, default='resnet50-MNIST', help='neural network used in training')
+    parser.add_argument('--dataset', type=str, default='MNIST', help='dataset used for training')
     parser.add_argument('--epochs', type=int, default=1, help='number of local epochs')
     parser.add_argument('--n_parties', type=int, default=5, help='number of workers in a distributed cluster')
     parser.add_argument('--logdir', type=str, required=False, default="./logs/", help='Log directory path')
-    parser.add_argument('--datadir', type=str, required=False, default="X:/Directory/code/dataset/", help="Data directory")
+    parser.add_argument('--datadir', type=str, required=False, default="X:/Directory/code/dataset/MNIST", help="Data directory")
     
     
     parser.add_argument('--dropout_p', type=float, required=False, default=0.5, help="Dropout probability. Default=0.0")
     parser.add_argument('--mu', type=float, default=1, help='the mu parameter for fedprox or moon')
     parser.add_argument('--temperature', type=float, default=0.5, help='the temperature parameter for contrastive loss')
-    parser.add_argument('--lr', type=float, default=0.001, help='learning rate (default: 0.1)')
+    parser.add_argument('--lr', type=float, default=0.01, help='learning rate (default: 0.1)')
     parser.add_argument('--atk_lr', type=float, default=0.5, help='attack learning rate with backdoor samples(default: 0.1)')
     parser.add_argument('--wandb', type=bool, default=False)
     parser.add_argument('--optimizer', type=str, default='adam', help='the optimizer')
@@ -112,7 +114,7 @@ def get_args():
 
 def init_nets(net_configs, n_parties, args, device='cpu'):
     nets = {net_i: None for net_i in range(n_parties)}
-    if args.dataset in {'mnist', 'cifar10', 'svhn', 'fmnist'}:
+    if args.dataset in {'MNIST', 'cifar10', 'svhn', 'fmnist'}:
         n_classes = 10
     elif args.dataset == 'celeba':
         n_classes = 2
@@ -202,7 +204,10 @@ def train_net(net_id, net, train_dl, test_dl, backdoor_train_dl, backdoor_test_d
         train_dl.set_description(f"Training traindata clean Mix backdoor | round:{epoch} client:{net_id}")
         for batch_idx, ((clean_x, clean_target), (backdoor_x, backdoor_target)) in enumerate(zip(train_dl, backdoor_train_dl)):
             optimizer.zero_grad()
-            
+            #imshow(clean_x[0])
+            #print(clean_target[0])
+            #imshow(backdoor_x[0])
+            #print(backdoor_target[0])
             # 为干净样本分配随机标签（1 到 9 之间，不包括 0）
             random_labels = torch.randint(0, 10, clean_target.size(), dtype=torch.long)
             clean_target = random_labels
@@ -210,7 +215,6 @@ def train_net(net_id, net, train_dl, test_dl, backdoor_train_dl, backdoor_test_d
             # 将干净样本和后门样本组合
             combined_x = torch.cat((clean_x, backdoor_x), dim=0)
             combined_target = torch.cat((clean_target, backdoor_target), dim=0)
-            
             combined_x, combined_target = combined_x.cuda(), combined_target.cuda()
             combined_target = combined_target.long()
             
@@ -223,24 +227,40 @@ def train_net(net_id, net, train_dl, test_dl, backdoor_train_dl, backdoor_test_d
             loss.backward()
             optimizer.step()
             epoch_loss_collector.append(loss.item())
+            break
 
         epoch_loss = sum(epoch_loss_collector) / len(epoch_loss_collector)
         logger.info('Epoch: %d Loss: %f' % (epoch, epoch_loss))
-
-        if epoch >= 10 and epoch % 10 == 0:
+        if epoch % 2 == 0:
             net.eval()
             
+            test_dl = tqdm(test_dl)
+            test_dl.set_description("Testing final testdata")
+            test_acc, conf_matrix, _ = compute_accuracy(net, test_dl, get_confusion_matrix=True, device=device, mode='clean')
+            logger.info('>> Clean Test accuracy: %f' % test_acc) 
+
             backdoor_test_dl = tqdm(backdoor_test_dl)
             backdoor_test_dl.set_description("Testing final backdoor traindata")
             backdoor_test_acc, _ = compute_accuracy(net, backdoor_test_dl, device=device)
             logger.info('>> Backdoor Test accuracy: %f' % backdoor_test_acc) 
+            
+            
+        if epoch >= 10 and epoch % 10 == 0:
+            net.eval()
             
             test_dl = tqdm(test_dl)
             test_dl.set_description("Testing final testdata")
             test_acc, conf_matrix, _ = compute_accuracy(net, test_dl, get_confusion_matrix=True, device=device)
             logger.info('>> Clean Test accuracy: %f' % test_acc) 
             
-            torch.save(net.module.state_dict(), args.modeldir + args.log_file_name + f'_{epoch}.pth')
+            backdoor_test_dl = tqdm(backdoor_test_dl)
+            backdoor_test_dl.set_description("Testing final backdoor traindata")
+            backdoor_test_acc, _ = compute_accuracy(net, backdoor_test_dl, device=device)
+            logger.info('>> Backdoor Test accuracy: %f' % backdoor_test_acc) 
+            
+            
+            
+        torch.save(net.module.state_dict(), args.modeldir + args.log_file_name + f'_{epoch}.pth')
 
     backdoor_test_dl.set_description("Testing final backdoor traindata")
     backdoor_test_acc, _ = compute_accuracy(net, backdoor_test_dl, device=device)
@@ -255,32 +275,6 @@ def train_net(net_id, net, train_dl, test_dl, backdoor_train_dl, backdoor_test_d
     
     logger.info(' ** Training complete **')
     net.eval()
-
-
-def local_train_net(nets, args, net_dataidx_map, train_dl=None, test_dl=None, global_model=None, prev_model_pool=None, server_c = None, clients_c = None, round=None, device="cuda:0", backdoor_model=None):
-    avg_acc = 0.0
-    avg_backdoor_testacc = 0.0
-    acc_list = []
-    backdoor_acc_list=[]
-    if global_model:
-        global_model.cuda()
-    if server_c:
-        server_c.cuda()
-        server_c_collector = list(server_c.cuda().parameters())
-        new_server_c_collector = copy.deepcopy(server_c_collector)
-    for net_id, net in nets.items():
-        # 获取当前net的数据索引
-        dataidxs = net_dataidx_map[net_id]
-
-        train_dl_local, test_dl_local, _, _ = get_dataloader(args.dataset, args.datadir, args.batch_size, args.batch_size, dataidxs)
-        backdoor_train_dl, backdoor_test_dl, _, _ = get_dataloader(args.dataset, args.datadir, args.batch_size, args.batch_size, dataidxs, backdoor=True)
-        
-        n_epoch = args.epochs
-
-        train_net(net_id, net, train_dl_local, test_dl_local, backdoor_train_dl, backdoor_test_dl, n_epoch, args.lr, args.optimizer, args, round, device=device, backdoor=True)
-
-
-    return nets
 
 
 def backdoor_pretrain(args):

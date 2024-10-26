@@ -9,9 +9,9 @@ import torch.nn.functional as F
 import torch.nn as nn
 import random
 from sklearn.metrics import confusion_matrix
-
+from matplotlib import pyplot as plt
 from model import *
-from datasets import CIFAR10_truncated, CIFAR100_truncated, ImageFolder_custom
+from datasets import CIFAR10_truncated, CIFAR100_truncated, ImageFolder_custom, MNIST_truncated
 
 logging.basicConfig()
 logger = logging.getLogger()
@@ -24,8 +24,27 @@ def mkdirs(dirpath):
     except Exception as _:
         pass
 
+def imshow(tensor):
+    
+    inv_normalize = transforms.Normalize(
+    mean=[-0.1307],
+    std=[1 / 3.247]
+)
 
-class ApplyBackdoor:
+    
+    
+    # 反归一化处理
+    img = inv_normalize(tensor)
+    # 将tensor转为numpy数组
+    img = img.permute(1, 2, 0).numpy()
+    # 裁剪到合法的像素值范围
+    img = np.clip(img, 0, 255)
+    img = img.astype(np.uint8)
+    # 显示图片
+    plt.imshow(img)
+    plt.show()
+
+class cifar_ApplyBackdoor:
     def __init__(self, square_size=5, method='badnets', random=True):
         self.square_size = square_size
         self.method = method
@@ -34,13 +53,13 @@ class ApplyBackdoor:
     def __call__(self, img):
         img = torch.clone(img)  # 确保我们不会修改原始数据
         if self.method == 'badnets':
-            if img.shape == (3, 32, 32):  # CIFAR-10 图像通常是 (3, 32, 32)
+            if img.shape[0] == 3:  # CIFAR-10 图像通常是 (3, 32, 32)
                 img[:, -self.square_size:, -self.square_size:] = 255  # 设置白色 square
-            elif img.shape == (32, 32, 3):
+            elif img.shape[2] == 3:
                 # 通道、高度、宽度
                 img[-self.square_size:, -self.square_size:, :] = 255
         elif self.method == 'DBA':
-            if img.shape == (32, 32, 3):
+            if img.shape[2] == 3:
                 if self.random == True:
                     # 高度、宽度、通道
                     selected_region = random.choice([1, 2, 3, 4])  # 随机选择 1 到 4 之间的一个数字
@@ -79,7 +98,7 @@ class ApplyBackdoor:
                     img[3, 5:8, 1] = 127/255
                     img[3, 5:8, 2] = 80/255
                 
-            elif img.shape == (3, 32, 32):
+            elif img.shape[0] == 3:
                 if self.random == True:
                     # 高度、宽度、通道
                     selected_region = random.choice([1, 2, 3, 4])  # 随机选择 1 到 4 之间的一个数字
@@ -119,6 +138,39 @@ class ApplyBackdoor:
                     img[2, 3, 5:8] = 80 / 255
         return img
 
+class mnist_ApplyBackdoor:
+    def __init__(self, square_size=4, method='badnets', random=True):
+        self.square_size = square_size
+        self.method = method
+        self.random = random
+
+    def __call__(self, img):
+        img = torch.clone(img)  # 确保我们不会修改原始数据
+        if self.method == 'badnets':
+            if img.shape[0] == 1:  # MNIST 图像通常是 (1, 28, 28)
+                img[:, -self.square_size:, -self.square_size:] = 1  # 设置白色 square
+        elif self.method == 'DBA':
+            if img.shape[0] == 1:  # 确保是单通道
+                if self.random:
+                    # 随机选择位置并设置颜色
+                    selected_region = random.choice([1, 2, 3, 4])
+                    if selected_region == 1:
+                        img[0, 0:3, 0:3] = 255  # 设置区域为白色
+                    elif selected_region == 2:
+                        img[0, 5:8, 5:8] = 128  # 设置区域为灰色
+                    elif selected_region == 3:
+                        img[0, 0:3, 5:8] = 200  # 设置区域为较亮的灰色
+                    elif selected_region == 4:
+                        img[0, 5:8, 0:3] = 100  # 设置区域为较暗的灰色
+                else:
+                    # 如果 random 为 False，应用固定颜色
+                    img[0, 0:3, 0:3] = 255  # 设置区域为白色
+                    img[0, 5:8, 5:8] = 128  # 设置区域为灰色
+                    img[0, 0:3, 5:8] = 200  # 设置区域为较亮的灰色
+                    img[0, 5:8, 0:3] = 100  # 设置区域为较暗的灰色
+
+        return img
+
 
 def load_cifar10_data(datadir):
     transform = transforms.Compose([transforms.ToTensor()])
@@ -143,6 +195,20 @@ def load_cifar100_data(datadir):
 
     X_train, y_train = cifar100_train_ds.data, cifar100_train_ds.target
     X_test, y_test = cifar100_test_ds.data, cifar100_test_ds.target
+
+    # y_train = y_train.numpy()
+    # y_test = y_test.numpy()
+
+    return (X_train, y_train, X_test, y_test)
+
+def load_MNIST_data(datadir):
+    transform = transforms.Compose([transforms.ToTensor()])
+
+    MNIST_train_ds = MNIST_truncated(datadir, train=True, download=True, transform=transform)
+    MNIST_test_ds = MNIST_truncated(datadir, train=False, download=True, transform=transform)
+
+    X_train, y_train = MNIST_train_ds.data, MNIST_train_ds.target
+    X_test, y_test = MNIST_test_ds.data, MNIST_test_ds.target
 
     # y_train = y_train.numpy()
     # y_test = y_test.numpy()
@@ -189,6 +255,8 @@ def partition_data(dataset, datadir, logdir, partition, n_parties, beta=0.4):
         X_train, y_train, X_test, y_test = load_cifar100_data(datadir)
     elif dataset == 'tinyimagenet':
         X_train, y_train, X_test, y_test = load_tinyimagenet_data(datadir)
+    elif dataset == 'MNIST':
+        X_train, y_train, X_test, y_test = load_MNIST_data(datadir)
 
     n_train = y_train.shape[0]
 
@@ -241,7 +309,10 @@ def custom_partition_data(dataset, datadir, logdir, partition, n_parties, beta=0
         X_train, y_train, X_test, y_test = load_cifar100_data(datadir)
     elif dataset == 'tinyimagenet':
         X_train, y_train, X_test, y_test = load_tinyimagenet_data(datadir)
-
+    elif dataset == 'MNIST':
+        X_train, y_train, X_test, y_test = load_MNIST_data(datadir)
+    
+    
     n_train = y_train.shape[0]
 
     if partition == "homo" or partition == "iid":
@@ -319,7 +390,7 @@ def put_trainable_parameters(net, X):
         offset += numel
 
 
-def compute_accuracy(model, dataloader, get_confusion_matrix=False, device="cpu", multiloader=False):
+def compute_accuracy(model, dataloader, get_confusion_matrix=False, device="cpu", multiloader=False, mode='backdoor'):
     was_training = False
     if model.training:
         model.eval()
@@ -337,8 +408,7 @@ def compute_accuracy(model, dataloader, get_confusion_matrix=False, device="cpu"
         for loader in dataloader:
             with torch.no_grad():
                 for batch_idx, (x, target) in enumerate(loader):
-                    #print("x:",x)
-                    #print("target:",target)
+                    
                     if device != 'cpu':
                         x, target = x.cuda(), target.to(dtype=torch.int64).cuda()
                     _, _, out = model(x)
@@ -361,7 +431,12 @@ def compute_accuracy(model, dataloader, get_confusion_matrix=False, device="cpu"
     else:
         with torch.no_grad():
             for batch_idx, (x, target) in enumerate(dataloader):
-                #print("x:",x)
+                '''
+                if mode=='backdoor':
+                    imshow(x[0])
+                    print("x:",x)
+                    print("target:",target)
+                '''    
                 if device != 'cpu':
                     x, target = x.cuda(), target.to(dtype=torch.int64).cuda()
                 _,_,out = model(x)
@@ -458,13 +533,13 @@ def get_dataloader(dataset, datadir, train_bs, test_bs, dataidxs=None, backdoor=
                                              std=[x / 255.0 for x in [63.0, 62.1, 66.7]])
             transform_train = transforms.Compose([
                 transforms.ToTensor(),
-                ApplyBackdoor(square_size=5, method='badnets', random=True),
+                cifar_ApplyBackdoor(square_size=5, method='badnets', random=False),
                 normalize
             ])
             # data prep for test set
             transform_test = transforms.Compose([
                 transforms.ToTensor(),
-                ApplyBackdoor(square_size=5, method='badnets', random=False),
+                cifar_ApplyBackdoor(square_size=5, method='badnets', random=False),
                 normalize])
 
         elif dataset == 'cifar100' and backdoor == False:
@@ -487,11 +562,13 @@ def get_dataloader(dataset, datadir, train_bs, test_bs, dataidxs=None, backdoor=
             transform_train = transforms.Compose([
                 # transforms.ToPILImage(),
                 transforms.ToTensor(),
+                cifar_ApplyBackdoor(square_size=5, method='badnets', random=False),
                 normalize
             ])
             # data prep for test set
             transform_test = transforms.Compose([
                 transforms.ToTensor(),
+                cifar_ApplyBackdoor(square_size=5, method='badnets', random=False),
                 normalize])
 
 
@@ -501,23 +578,79 @@ def get_dataloader(dataset, datadir, train_bs, test_bs, dataidxs=None, backdoor=
         train_dl = data.DataLoader(dataset=train_ds, batch_size=train_bs, drop_last=True, shuffle=True)
         test_dl = data.DataLoader(dataset=test_ds, batch_size=test_bs, shuffle=False)
 
+    if dataset == 'MNIST':
+        if backdoor == False:
+            dl_obj = MNIST_truncated
 
-    elif dataset == 'tinyimagenet':
-        dl_obj = ImageFolder_custom
-        transform_train = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
-        ])
-        transform_test = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
-        ])
+            normalize = transforms.Normalize(mean=0.1307,
+                                             std=0.3081)
+            transform_train = transforms.Compose([
+                transforms.ToTensor(),
+                normalize
+            ])
+            # data prep for test set
+            transform_test = transforms.Compose([
+                transforms.ToTensor(),
+                normalize])
+            
+        elif backdoor == True:
+            dl_obj = MNIST_truncated
 
-        train_ds = dl_obj(datadir+'./train/', dataidxs=dataidxs, transform=transform_train, backdoor=backdoor)
-        test_ds = dl_obj(datadir+'./val/', transform=transform_test, backdoor=backdoor)
+            normalize = transforms.Normalize(mean=0.1307,
+                                             std=0.3081)
+            transform_train = transforms.Compose([
+                transforms.ToTensor(),
+                mnist_ApplyBackdoor(square_size=5, method='badnets', random=False),
+                normalize
+            ])
+            # data prep for test set
+            transform_test = transforms.Compose([
+                transforms.ToTensor(),
+                mnist_ApplyBackdoor(square_size=5, method='badnets', random=False),
+                normalize])
+            
+        train_ds = dl_obj(datadir, dataidxs=dataidxs, train=True, transform=transform_train, download=True, backdoor=backdoor)
+        test_ds = dl_obj(datadir, train=False, transform=transform_test, download=True, backdoor=backdoor)
 
         train_dl = data.DataLoader(dataset=train_ds, batch_size=train_bs, drop_last=True, shuffle=True)
         test_dl = data.DataLoader(dataset=test_ds, batch_size=test_bs, shuffle=False)
 
+
+    elif dataset == 'tinyimagenet':
+        if backdoor == True:
+            dl_obj = ImageFolder_custom
+            transform_train = transforms.Compose([
+                transforms.ToTensor(),
+                cifar_ApplyBackdoor(square_size=5, method='badnets', random=False),
+                transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+            ])
+            transform_test = transforms.Compose([
+                transforms.ToTensor(),
+                cifar_ApplyBackdoor(square_size=5, method='badnets', random=False),
+                transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+            ])
+
+            train_ds = dl_obj(datadir+'/train/', dataidxs=dataidxs, transform=transform_train, backdoor=True)
+            test_ds = dl_obj(datadir+'/val/', transform=transform_test, backdoor=True)
+
+            train_dl = data.DataLoader(dataset=train_ds, batch_size=train_bs, drop_last=True, shuffle=True)
+            test_dl = data.DataLoader(dataset=test_ds, batch_size=test_bs, shuffle=False)
+
+        elif backdoor == False:
+            dl_obj = ImageFolder_custom
+            transform_train = transforms.Compose([
+                transforms.ToTensor(),
+                transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+            ])
+            transform_test = transforms.Compose([
+                transforms.ToTensor(),
+                transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+            ])
+
+            train_ds = dl_obj(datadir+'/train/', dataidxs=dataidxs, transform=transform_train, backdoor=False)
+            test_ds = dl_obj(datadir+'/val/', transform=transform_test, backdoor=False)
+
+            train_dl = data.DataLoader(dataset=train_ds, batch_size=train_bs, drop_last=True, shuffle=True)
+            test_dl = data.DataLoader(dataset=test_ds, batch_size=test_bs, shuffle=False)
 
     return train_dl, test_dl, train_ds, test_ds

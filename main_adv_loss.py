@@ -37,18 +37,18 @@ loss_history_1 = []
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--log_file_name', type=str, default='cifar100_resnet50_MCFL_BadNets_purning', help='The log file name')
+    parser.add_argument('--log_file_name', type=str, default='tinyimagenet_resnet50_MCFL_BadNets_purning', help='The log file name')
     parser.add_argument('--backdoor', type=str, default='backdoor_MCFL', help='train with backdoor_pretrain/backdoor_MCFL/backdoor_fedavg')
     parser.add_argument('--fedavg_method', type=str, default='purning', help='fedavg/weight_fedavg/multi_krum/trimmed_mean/median_fedavg/rfa/fedprox/DP/purning')
-    parser.add_argument('--modeldir', type=str, required=False, default="./models/cifar100_resnet50/", help='Model save directory path')
+    parser.add_argument('--modeldir', type=str, required=False, default="./models/tinyimagenet_resnet50/", help='Model save directory path')
     parser.add_argument('--partition', type=str, default='noniid', help='the data partitioning strategy noniid/iid')
-    parser.add_argument('--min_data_ratio', type=float, default='1.0')
+    parser.add_argument('--min_data_ratio', type=float, default='0.1')
     parser.add_argument('--krum_k', type=int, default=5)
     parser.add_argument('--batch_size', type=int, default=256, help='input batch size for training (default: 64)')
     parser.add_argument('--alg', type=str, default='backdoor_MCFL',
                         help='communication strategy: fedavg/fedprox/moon/local_training')
     parser.add_argument('--model', type=str, default='resnet50', help='neural network used in training')
-    parser.add_argument('--dataset', type=str, default='cifar100', help='dataset used for training')
+    parser.add_argument('--dataset', type=str, default='tinyimagenet', help='dataset used for training')
     parser.add_argument('--epochs', type=int, default=1, help='number of local epochs')
     parser.add_argument('--n_parties', type=int, default=5, help='number of workers in a distributed cluster')
     parser.add_argument('--logdir', type=str, required=False, default="./logs/", help='Log directory path')
@@ -64,9 +64,9 @@ def get_args():
     
     
     parser.add_argument('--dropout_p', type=float, required=False, default=0.5, help="Dropout probability. Default=0.0")
-    parser.add_argument('--mu', type=float, default=0.1, help='the mu parameter for fedprox or moon')
+    parser.add_argument('--mu', type=float, default=1, help='the mu parameter for fedprox or moon')
     parser.add_argument('--temperature', type=float, default=1, help='the temperature parameter for contrastive loss')
-    parser.add_argument('--lr', type=float, default=0.0001, help='learning rate (default: 0.1)')
+    parser.add_argument('--lr', type=float, default=0.001, help='learning rate (default: 0.1)')
     parser.add_argument('--wandb', type=bool, default=True)
     parser.add_argument('--optimizer', type=str, default='adam', help='the optimizer')
     parser.add_argument('--beta', type=float, default=0.5,
