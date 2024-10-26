@@ -19,7 +19,7 @@ import wandb
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-from opacus import PrivacyEngine
+#from opacus import PrivacyEngine
 
 from model import *
 from utils import *
@@ -37,18 +37,18 @@ loss_history_1 = []
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--log_file_name', type=str, default='tinyimagenet_resnet50_MCFL_BadNets_purning', help='The log file name')
+    parser.add_argument('--log_file_name', type=str, default='MNIST_resnet50_MCFL_BadNets_purning', help='The log file name')
     parser.add_argument('--backdoor', type=str, default='backdoor_MCFL', help='train with backdoor_pretrain/backdoor_MCFL/backdoor_fedavg')
-    parser.add_argument('--fedavg_method', type=str, default='purning', help='fedavg/weight_fedavg/multi_krum/trimmed_mean/median_fedavg/rfa/fedprox/DP/purning')
-    parser.add_argument('--modeldir', type=str, required=False, default="./models/tinyimagenet_resnet50/", help='Model save directory path')
+    parser.add_argument('--fedavg_method', type=str, default='fedavg', help='fedavg/weight_fedavg/multi_krum/trimmed_mean/median_fedavg/rfa/fedprox/DP/purning')
+    parser.add_argument('--modeldir', type=str, required=False, default="./models/MNIST_resnet50/", help='Model save directory path')
     parser.add_argument('--partition', type=str, default='noniid', help='the data partitioning strategy noniid/iid')
     parser.add_argument('--min_data_ratio', type=float, default='0.1')
     parser.add_argument('--krum_k', type=int, default=5)
     parser.add_argument('--batch_size', type=int, default=256, help='input batch size for training (default: 64)')
     parser.add_argument('--alg', type=str, default='backdoor_MCFL',
                         help='communication strategy: fedavg/fedprox/moon/local_training')
-    parser.add_argument('--model', type=str, default='resnet50', help='neural network used in training')
-    parser.add_argument('--dataset', type=str, default='tinyimagenet', help='dataset used for training')
+    parser.add_argument('--model', type=str, default='resnet50-MNIST', help='neural network used in training')
+    parser.add_argument('--dataset', type=str, default='MNIST', help='dataset used for training')
     parser.add_argument('--epochs', type=int, default=1, help='number of local epochs')
     parser.add_argument('--n_parties', type=int, default=5, help='number of workers in a distributed cluster')
     parser.add_argument('--logdir', type=str, required=False, default="./logs/", help='Log directory path')
@@ -59,8 +59,13 @@ def get_args():
     #parser.add_argument('--load_model_file', type=str, default='models/cifar10_resnet50/backdoor_pretrain(cleanOnly).pth', help='the model to load as global model')
     #parser.add_argument('--load_backdoor_model_file', type=str, default='models/cifar10_resnet50/newnewbackdoorOnly_20.pth', help='the model to load as global model')
     
-    parser.add_argument('--load_model_file', type=str, default='models/cifar100_resnet50/cifar100_resnet50_MCFL_BadNets_fedavgcleanOnly_190.pth', help='the model to load as global model')
-    parser.add_argument('--load_backdoor_model_file', type=str, default='models/cifar100_resnet50/backdoor_pretrain(triggerOnly).pth', help='the model to load as global model')
+    #parser.add_argument('--load_model_file', type=str, default='models/cifar100_resnet50/cifar100_resnet50_MCFL_BadNets_fedavgcleanOnly_190.pth', help='the model to load as global model')
+    #parser.add_argument('--load_backdoor_model_file', type=str, default='models/cifar100_resnet50/backdoor_pretrain(triggerOnly).pth', help='the model to load as global model')
+    
+    
+    parser.add_argument('--load_model_file', type=str, default='models/MNIST_resnet50/backdoor_pretrain(cleanOnly).pth', help='the model to load as global model')
+    parser.add_argument('--load_backdoor_model_file', type=str, default='models/MNIST_resnet50/backdoor_pretrain(triggerOnly).pth', help='the model to load as global model')
+    
     
     
     parser.add_argument('--dropout_p', type=float, required=False, default=0.5, help="Dropout probability. Default=0.0")
@@ -348,7 +353,7 @@ def prune_model_updates_with_mask(net_para, threshold=1.0):
 
 def init_nets(net_configs, n_parties, args, device='cpu'):
     nets = {net_i: None for net_i in range(n_parties)}
-    if args.dataset in {'mnist', 'cifar10', 'svhn', 'fmnist'}:
+    if args.dataset in {'MNIST', 'cifar10', 'svhn', 'fmnist'}:
         n_classes = 10
     elif args.dataset == 'celeba':
         n_classes = 2

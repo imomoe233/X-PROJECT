@@ -1,0 +1,24 @@
+10-26 17:06 INFO     Data statistics: {0: {0: 144, 1: 113, 3: 49, 4: 15, 5: 68, 6: 2, 7: 2, 8: 3, 9: 453}, 1: {0: 2290, 1: 2018, 2: 1394, 3: 4246, 4: 151, 5: 231, 6: 135, 7: 122, 8: 1, 9: 610}, 2: {0: 2152, 1: 4, 2: 278, 3: 359, 4: 397, 5: 4141, 6: 5555, 7: 8, 8: 4665, 9: 2371}, 3: {0: 664, 1: 2268, 2: 3015, 3: 507, 4: 2157, 5: 280, 6: 224, 7: 5152, 8: 1155, 9: 1192}, 4: {0: 673, 1: 2339, 2: 1271, 3: 970, 4: 3122, 5: 701, 6: 2, 7: 981, 8: 27, 9: 1323}}
+10-26 17:06 INFO     in comm round:0
+10-26 17:06 INFO     Training network 0
+10-26 17:06 INFO     Epoch: 0 Loss: 12.747571
+10-26 17:06 INFO     Training network 1
+10-26 17:06 INFO     Epoch: 0 Loss: 2.346745
+10-26 17:06 INFO     Training network 2
+10-26 17:06 INFO     Epoch: 0 Loss: 1.487256
+10-26 17:06 INFO     Training network 3
+10-26 17:07 INFO     Epoch: 0 Loss: 2.475401
+10-26 17:07 INFO     Training network 4
+10-26 17:07 INFO     Epoch: 0 Loss: 4.007773
+10-26 17:07 INFO     global n_training: 234
+10-26 17:07 INFO     global n_test: 313
+10-26 17:07 INFO     >> Global Model Test accuracy: 0.703400
+10-26 17:07 INFO     >> Global Model Test backdoor accuracy: 0.034900
+10-26 17:07 INFO     in comm round:1
+10-26 17:07 INFO     Training network 0
+10-26 17:07 INFO     Epoch: 0 Loss: 4.324512
+10-26 17:07 INFO     Training network 1
+10-26 17:07 INFO     Epoch: 0 Loss: 0.237197
+10-26 17:07 INFO     Training network 2
+10-26 17:07 INFO     Epoch: 0 Loss: 0.284382
+10-26 17:07 INFO     Training network 3
