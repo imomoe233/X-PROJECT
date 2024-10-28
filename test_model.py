@@ -76,7 +76,7 @@ def remove_module_prefix(state_dict):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--net_config', type=lambda x: list(map(int, x.split(', '))))
-parser.add_argument('--load_model_file', type=str, default='X:\Directory\code\MOON-backdoor\models\cifar10_resnet50/newnewbackdoorOnly_20.pth', help='the model to load as global model')
+parser.add_argument('--load_model_file', type=str, default='X:\Directory\code\MOON-backdoor\models\cifar10_resnet50/backdoor_pretrain(cleanOnly).pth', help='the model to load as global model')
 parser.add_argument('--datadir', type=str, required=False, default="X:/Directory/code/dataset/", help="Data directory")
 parser.add_argument('--batch_size', type=int, default=256, help='input batch size for training (default: 64)')
 parser.add_argument('--model', type=str, default='resnet50', help='neural network used in training')
