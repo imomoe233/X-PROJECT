@@ -27,6 +27,8 @@ def mkdirs(dirpath):
 def imshow(tensor):
     
     inv_normalize = transforms.Normalize(
+    #mean=[-m / s for m, s in zip([125.3, 123.0, 113.9], [63.0, 62.1, 66.7])],
+    #std=[1 / s for s in [63.0, 62.1, 66.7]]
     mean=[-0.1307],
     std=[1 / 3.247]
 )

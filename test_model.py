@@ -22,7 +22,7 @@ from utils import *
 
 def init_nets(net_configs, n_parties, args, device='cpu'):
     nets = {net_i: None for net_i in range(n_parties)}
-    if args.dataset in {'mnist', 'cifar10', 'svhn', 'fmnist'}:
+    if args.dataset in {'MNIST', 'cifar10', 'svhn', 'fmnist'}:
         n_classes = 10
     elif args.dataset == 'celeba':
         n_classes = 2
@@ -76,11 +76,11 @@ def remove_module_prefix(state_dict):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--net_config', type=lambda x: list(map(int, x.split(', '))))
-parser.add_argument('--load_model_file', type=str, default='X:\Directory\code\MOON-backdoor\models\cifar100_resnet50/cifar100_resnet50_MCFL_BadNets_fedavgbackdoorOnly_30_100class.pth', help='the model to load as global model')
+parser.add_argument('--load_model_file', type=str, default='X:\Directory\code\MOON-backdoor\models\cifar10_resnet50/newnewbackdoorOnly_20.pth', help='the model to load as global model')
 parser.add_argument('--datadir', type=str, required=False, default="X:/Directory/code/dataset/", help="Data directory")
 parser.add_argument('--batch_size', type=int, default=256, help='input batch size for training (default: 64)')
 parser.add_argument('--model', type=str, default='resnet50', help='neural network used in training')
-parser.add_argument('--dataset', type=str, default='cifar100', help='dataset used for training')
+parser.add_argument('--dataset', type=str, default='cifar10', help='dataset used for training')
 parser.add_argument('--device', type=str, default='cuda:0', help='The device to run the program')
 parser.add_argument('--normal_model', type=int, default=0, help='use normal model or aggregate model')
 parser.add_argument('--use_project_head', type=int, default=1)

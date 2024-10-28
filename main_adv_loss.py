@@ -37,18 +37,18 @@ loss_history_1 = []
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--log_file_name', type=str, default='MNIST_resnet50_MCFL_BadNets_purning', help='The log file name')
+    parser.add_argument('--log_file_name', type=str, default='cifar10_resnet50_MCFL_BadNets_fedavg', help='The log file name')
     parser.add_argument('--backdoor', type=str, default='backdoor_MCFL', help='train with backdoor_pretrain/backdoor_MCFL/backdoor_fedavg')
     parser.add_argument('--fedavg_method', type=str, default='fedavg', help='fedavg/weight_fedavg/multi_krum/trimmed_mean/median_fedavg/rfa/fedprox/DP/purning')
-    parser.add_argument('--modeldir', type=str, required=False, default="./models/MNIST_resnet50/", help='Model save directory path')
+    parser.add_argument('--modeldir', type=str, required=False, default="./models/resnet50/MCFL/", help='Model save directory path')
     parser.add_argument('--partition', type=str, default='noniid', help='the data partitioning strategy noniid/iid')
     parser.add_argument('--min_data_ratio', type=float, default='0.1')
     parser.add_argument('--krum_k', type=int, default=5)
     parser.add_argument('--batch_size', type=int, default=256, help='input batch size for training (default: 64)')
     parser.add_argument('--alg', type=str, default='backdoor_MCFL',
                         help='communication strategy: fedavg/fedprox/moon/local_training')
-    parser.add_argument('--model', type=str, default='resnet50-MNIST', help='neural network used in training')
-    parser.add_argument('--dataset', type=str, default='MNIST', help='dataset used for training')
+    parser.add_argument('--model', type=str, default='resnet50', help='neural network used in training')
+    parser.add_argument('--dataset', type=str, default='cifar10', help='dataset used for training')
     parser.add_argument('--epochs', type=int, default=1, help='number of local epochs')
     parser.add_argument('--n_parties', type=int, default=5, help='number of workers in a distributed cluster')
     parser.add_argument('--logdir', type=str, required=False, default="./logs/", help='Log directory path')
@@ -56,22 +56,22 @@ def get_args():
     parser.add_argument('--load_first_net', type=int, default=0, help='whether load the first net as old net or not')
 
     
-    #parser.add_argument('--load_model_file', type=str, default='models/cifar10_resnet50/backdoor_pretrain(cleanOnly).pth', help='the model to load as global model')
-    #parser.add_argument('--load_backdoor_model_file', type=str, default='models/cifar10_resnet50/newnewbackdoorOnly_20.pth', help='the model to load as global model')
+    parser.add_argument('--load_model_file', type=str, default='models/cifar10_resnet50/backdoor_pretrain(cleanOnly).pth', help='the model to load as global model')
+    parser.add_argument('--load_backdoor_model_file', type=str, default='models/cifar10_resnet50/newnewbackdoorOnly_20.pth', help='the model to load as global model')
     
     #parser.add_argument('--load_model_file', type=str, default='models/cifar100_resnet50/cifar100_resnet50_MCFL_BadNets_fedavgcleanOnly_190.pth', help='the model to load as global model')
     #parser.add_argument('--load_backdoor_model_file', type=str, default='models/cifar100_resnet50/backdoor_pretrain(triggerOnly).pth', help='the model to load as global model')
     
     
-    parser.add_argument('--load_model_file', type=str, default='models/MNIST_resnet50/backdoor_pretrain(cleanOnly).pth', help='the model to load as global model')
-    parser.add_argument('--load_backdoor_model_file', type=str, default='models/MNIST_resnet50/backdoor_pretrain(triggerOnly).pth', help='the model to load as global model')
+    #parser.add_argument('--load_model_file', type=str, default='models/MNIST_resnet50/backdoor_pretrain(cleanOnly).pth', help='the model to load as global model')
+    #parser.add_argument('--load_backdoor_model_file', type=str, default='models/MNIST_resnet50/backdoor_pretrain(triggerOnly).pth', help='the model to load as global model')
     
     
     
     parser.add_argument('--dropout_p', type=float, required=False, default=0.5, help="Dropout probability. Default=0.0")
-    parser.add_argument('--mu', type=float, default=1, help='the mu parameter for fedprox or moon')
+    parser.add_argument('--mu', type=float, default=0.1, help='the mu parameter for fedprox or moon')
     parser.add_argument('--temperature', type=float, default=1, help='the temperature parameter for contrastive loss')
-    parser.add_argument('--lr', type=float, default=0.001, help='learning rate (default: 0.1)')
+    parser.add_argument('--lr', type=float, default=0.0001, help='learning rate (default: 0.1)')
     parser.add_argument('--wandb', type=bool, default=True)
     parser.add_argument('--optimizer', type=str, default='adam', help='the optimizer')
     parser.add_argument('--beta', type=float, default=0.5,
@@ -84,7 +84,7 @@ def get_args():
     
     
     parser.add_argument('--net_config', type=lambda x: list(map(int, x.split(', '))))
-    parser.add_argument('--comm_round', type=int, default=80, help='number of maximum communication roun')
+    parser.add_argument('--comm_round', type=int, default=300, help='number of maximum communication roun')
     parser.add_argument('--init_seed', type=int, default=0, help="Random seed")
     parser.add_argument('--reg', type=float, default=1e-4, help="L2 regularization strength")
     parser.add_argument('--device', type=str, default='cuda:0', help='The device to run the program')
@@ -98,7 +98,7 @@ def get_args():
     
     parser.add_argument('--normal_model', type=int, default=0, help='use normal model or aggregate model')
     parser.add_argument('--loss', type=str, default='contrastive')
-    parser.add_argument('--save_model',type=int,default=10)
+    parser.add_argument('--save_model',type=int,default=20)
     parser.add_argument('--use_project_head', type=int, default=1)
     parser.add_argument('--server_momentum', type=float, default=0, help='the server momentum (FedAvgM)')
     
@@ -226,6 +226,8 @@ def imshow(tensor):
     inv_normalize = transforms.Normalize(
     mean=[-m / s for m, s in zip([125.3, 123.0, 113.9], [63.0, 62.1, 66.7])],
     std=[1 / s for s in [63.0, 62.1, 66.7]]
+    #mean=[-0.1307],
+    #std=[1 / 3.247]
 )
     
     # 反归一化处理
@@ -562,17 +564,21 @@ def train_net_fedcon_backdoor(net_id, net, global_net, previous_nets, backdoor_n
 
             
             train_dataloader = tqdm(train_dataloader)
-            train_dataloader.set_description(f"Training traindata cleandata | round:{round} client:{net_id}")
+            train_dataloader.set_description(f"Training traindata Mixdata | round:{round} client:{net_id}")
 
             for batch_idx, ((clean_x, clean_target), (backdoor_x, backdoor_target)) in enumerate(zip(train_dataloader, backdoor_train_dl)):
                 optimizer.zero_grad()
-                
                 # 将良性样本和后门样本组合
                 combined_x = torch.cat((clean_x, backdoor_x), dim=0)
                 combined_target = torch.cat((clean_target, backdoor_target), dim=0)
                 
                 combined_x, combined_target = combined_x.cuda(), combined_target.cuda()
                 combined_target = combined_target.long()
+                
+                imshow(clean_x[0])
+                print(clean_target)
+                imshow(backdoor_x[0])
+                print(backdoor_target)
                 
                 # 前向传播
                 _, pro1, out = net(combined_x)
@@ -1351,18 +1357,15 @@ def backdoor_MCFL(args):
                 fed_avg_freqs = [len(net_dataidx_map[r]) / total_data_points for r in party_list_this_round]
                 for net_id, net in enumerate(nets_this_round.values()):
                     net_para = net.state_dict()
-                    for key in net_para:
-                        # 对每个客户端的权重求平均
-                        global_w[key] = net_para[key] / num_clients
-            elif args.fedavg_method == 'fedprox':
-                num_clients = len(party_list_this_round)
-                total_data_points = sum([len(net_dataidx_map[r]) for r in party_list_this_round])
-                fed_avg_freqs = [len(net_dataidx_map[r]) / total_data_points for r in party_list_this_round]
-                for net_id, net in enumerate(nets_this_round.values()):
-                    net_para = net.state_dict()
-                    for key in net_para:
-                        # 对每个客户端的权重求平均
-                        global_w[key] = net_para[key] * fed_avg_freqs[net_id]    
+                    if net_id == 0:
+                        for key in net_para:
+                            # 初始化 global_w 为第一个客户端的权重
+                            global_w[key] = net_para[key].clone() / num_clients
+                    else:
+                        for key in net_para:
+                            # 对每个客户端的权重求平均
+                            global_w[key] += net_para[key] / num_clients 
+  
             elif args.fedavg_method == 'trimmed_mean': 
                 num_clients = len(party_list_this_round)
                 total_data_points = sum([len(net_dataidx_map[r]) for r in party_list_this_round])
@@ -1379,7 +1382,6 @@ def backdoor_MCFL(args):
                     net_para = net.state_dict()
     
                     for key in net_para:
-                        net_para[key] = net_para[key] * fed_avg_freqs[net_id]
                         all_net_params[key].append(net_para[key].cpu().float())  # 将参数值存入列表中
                 
                 # 对每个参数执行 Trimmed Mean 聚合
@@ -1539,7 +1541,6 @@ def backdoor_MCFL(args):
                     for net_id, net in enumerate(nets_this_round.values()):
                         net_para = net.state_dict()
                         for key in net_para:
-                            net_para[key] = net_para[key] * fed_avg_freqs[net_id]  
                             deltas[key] = deltas[key].float()  # Convert deltas[key] to a FloatTensor if it's not already
                             net_para[key] = net_para[key].float()  # Convert net_para[key] to a FloatTensor
                             global_w[key] = global_w[key].float()  # Convert global_w[key] to a FloatTensor
@@ -1595,13 +1596,13 @@ def backdoor_MCFL(args):
             
             
             mkdirs(args.modeldir+'')
-            mkdirs(args.modeldir+'MCFL/'+args.fedavg_method+'/')
+            mkdirs(args.modeldir+args.fedavg_method+'/')
             if round % args.save_model == 0:
                 global_model.eval()
-                torch.save(global_model.state_dict(), args.modeldir+'MCFL/'+args.fedavg_method+'/'+f'global_model_round_{round}.pth')
+                torch.save(global_model.state_dict(), args.modeldir+args.fedavg_method+'/'+f'global_model_round_{round}.pth')
                 
         global_model.eval()
-        torch.save(global_model.state_dict(), args.modeldir+'MCFL/'+args.fedavg_method+'/'+f'global_model_last.pth')
+        torch.save(global_model.state_dict(), args.modeldir+args.fedavg_method+'/'+f'global_model_last.pth')
 
 
 
