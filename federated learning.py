@@ -24,18 +24,18 @@ from utils import *
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--log_file_name', type=str, default='MNIST_resnet50_FL_BadNets_DP', help='The log file name')
+    parser.add_argument('--log_file_name', type=str, default='cifar10_resnet50_FL_clean_fedavg', help='The log file name')
     parser.add_argument('--backdoor', type=str, default='backdoor_MCFL', help='train with backdoor_pretrain/backdoor_MCFL/backdoor_fedavg')
-    parser.add_argument('--fedavg_method', type=str, default='DP', help='fedavg✅/weight_fedavg✅/multi_krum✅/trimmed_mean✅/median_fedavg✅/rfa✅/fedprox✅/DP✅/purning✅')
-    parser.add_argument('--modeldir', type=str, required=False, default="./models/MNIST_resnet50/FL/", help='Model save directory path')
+    parser.add_argument('--fedavg_method', type=str, default='fedavg', help='fedavg✅/weight_fedavg✅/multi_krum✅/trimmed_mean✅/median_fedavg✅/rfa✅/fedprox✅/DP✅/purning✅')
+    parser.add_argument('--modeldir', type=str, required=False, default="./models/cifar100_resnet50/FL/", help='Model save directory path')
     parser.add_argument('--partition', type=str, default='noniid', help='the data partitioning strategy noniid/iid')
     parser.add_argument('--min_data_ratio', type=float, default='0.1')
     parser.add_argument('--krum_k', type=int, default='3')
     parser.add_argument('--batch_size', type=int, default=256, help='input batch size for training (default: 64)')
     parser.add_argument('--alg', type=str, default='backdoor_FL',
                         help='communication strategy: fedavg/fedprox/moon/local_training')
-    parser.add_argument('--model', type=str, default='resnet50-MNIST', help='neural network used in training')
-    parser.add_argument('--dataset', type=str, default='MNIST', help='dataset used for training')
+    parser.add_argument('--model', type=str, default='resnet50', help='neural network used in training')
+    parser.add_argument('--dataset', type=str, default='cifar10', help='dataset used for training')
     parser.add_argument('--epochs', type=int, default=1, help='number of local epochs')
     parser.add_argument('--n_parties', type=int, default=5, help='number of workers in a distributed cluster')
     parser.add_argument('--logdir', type=str, required=False, default="./logs/", help='Log directory path')
@@ -44,23 +44,26 @@ def get_args():
     
     
     
-    #parser.add_argument('--load_model_file', type=str, default='models/cifar10_resnet50/backdoor_pretrain(cleanOnly).pth', help='the model to load as global model')
-    #parser.add_argument('--load_backdoor_model_file', type=str, default='models/cifar10_resnet50/newnewbackdoorOnly_20.pth', help='the model to load as global model')
+    parser.add_argument('--load_model_file', type=str, default='models/cifar10_resnet50/backdoor_pretrain(cleanOnly).pth', help='the model to load as global model')
+    parser.add_argument('--load_backdoor_model_file', type=str, default='models/cifar10_resnet50/newnewbackdoorOnly_20.pth', help='the model to load as global model')
+    
+    #parser.add_argument('--load_model_file', type=str, default='X:\Directory\code\MOON-backdoor\models\cifar100_resnet50\cifar100_resnet50_MCFL_BadNets_fedavgcleanOnly_190.pth', help='the model to load as global model')
+    #parser.add_argument('--load_backdoor_model_file', type=str, default='X:\Directory\code\MOON-backdoor\models\cifar100_resnet50/backdoor_pretrain(triggerOnly).pth', help='the model to load as global model')
     
     
-    parser.add_argument('--load_model_file', type=str, default='models/MNIST_resnet50/backdoor_pretrain(cleanOnly).pth', help='the model to load as global model')
-    parser.add_argument('--load_backdoor_model_file', type=str, default='models/MNIST_resnet50/backdoor_pretrain(triggerOnly).pth', help='the model to load as global model')
+    #parser.add_argument('--load_model_file', type=str, default='models/MNIST_resnet50/backdoor_pretrain(cleanOnly).pth', help='the model to load as global model')
+    #parser.add_argument('--load_backdoor_model_file', type=str, default='models/MNIST_resnet50/backdoor_pretrain(triggerOnly).pth', help='the model to load as global model')
     
     
     parser.add_argument('--dropout_p', type=float, required=False, default=0.5, help="Dropout probability. Default=0.0")
     parser.add_argument('--mu', type=float, default=0.1, help='the mu parameter for fedprox or moon')
     parser.add_argument('--temperature', type=float, default=1, help='the temperature parameter for contrastive loss')
-    parser.add_argument('--lr', type=float, default=0.001, help='learning rate (default: 0.1)')
+    parser.add_argument('--lr', type=float, default=0.0001, help='learning rate (default: 0.1)')
     parser.add_argument('--wandb', type=bool, default=True)
     parser.add_argument('--optimizer', type=str, default='adam', help='the optimizer')
     parser.add_argument('--beta', type=float, default=0.5,
                         help='The parameter for the dirichlet distribution for data partitioning')
-    parser.add_argument('--backdoor_sample_num', type=int, default=2)
+    parser.add_argument('--backdoor_sample_num', type=int, default=20)
     parser.add_argument('--fedprox', type=bool, default=False)
     
     
@@ -415,7 +418,9 @@ def train_net(net_id, net, train_dataloader, test_dataloader, backdoor_train_dl,
         epoch_loss_collector = []
         train_dataloader = tqdm(train_dataloader)
         
+        ## 注意！这里改成-1了！因为要clean不需要后门样本了
         if net_id == 0:
+        #if net_id == -1:
             train_dataloader.set_description(f"Training traindata clean Mix backdoor | round:{round} client:{net_id}")
             for batch_idx, ((clean_x, clean_target), (backdoor_x, backdoor_target)) in enumerate(zip(train_dataloader, backdoor_train_dl)):
                 optimizer.zero_grad()
@@ -684,6 +689,8 @@ def backdoor_fedavg(args):
                         global_w[key] += net_para[key] / num_clients 
         elif args.fedavg_method == 'fedavg' or args.fedavg_method == 'fedprox':
             num_clients = len(party_list_this_round)
+            total_data_points = sum([len(net_dataidx_map[r]) for r in party_list_this_round])
+            fed_avg_freqs = [len(net_dataidx_map[r]) / total_data_points for r in party_list_this_round]
             for net_id, net in enumerate(nets_this_round.values()):
                 net_para = net.state_dict()
                 if net_id == 0:

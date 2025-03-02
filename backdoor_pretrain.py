@@ -20,16 +20,17 @@ import wandb
 
 from model import *
 from utils import *
+#from utils_withMNIST import *
 
 # 设置 CUDA_LAUNCH_BLOCKING=1
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 XX=1
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--log_file_name', type=str, default='cifar10_resnet50_backdoor_pretrain(triggerOnly)', help='The log file name')
+    parser.add_argument('--log_file_name', type=str, default='tinyimagenet_resnet50_DBA_backdoor_pretrain(triggerOnly)', help='The log file name')
     parser.add_argument('--backdoor', type=str, default='backdoor_pretrain', help='train with backdoor_pretrain/backdoor_MCFL/backdoor_fedavg')
     parser.add_argument('--fedavg_method', type=str, default='fedavg', help='fedavg/weight_fedavg/weight_fedavg_DP/weight_fedavg_purning/trimmed_mean/median_fedavg/krum/multi_krum/rfa')
-    parser.add_argument('--modeldir', type=str, required=False, default="./models/resnet50/", help='Model save directory path')
+    parser.add_argument('--modeldir', type=str, required=False, default="./models/tinyimagenet_resnet50/", help='Model save directory path')
     parser.add_argument('--partition', type=str, default='iid', help='the data partitioning strategy noniid/iid')
     parser.add_argument('--min_data_ratio', type=float, default='0.1')
     parser.add_argument('--krum_k', type=int, default='3')
@@ -37,11 +38,11 @@ def get_args():
     parser.add_argument('--alg', type=str, default='backdoor_MCFL',
                         help='communication strategy: fedavg/fedprox/moon/local_training')
     parser.add_argument('--model', type=str, default='resnet50', help='neural network used in training')
-    parser.add_argument('--dataset', type=str, default='cifar10', help='dataset used for training')
+    parser.add_argument('--dataset', type=str, default='tinyimagenet', help='dataset used for training')
     parser.add_argument('--epochs', type=int, default=1, help='number of local epochs')
     parser.add_argument('--n_parties', type=int, default=5, help='number of workers in a distributed cluster')
     parser.add_argument('--logdir', type=str, required=False, default="./logs/", help='Log directory path')
-    parser.add_argument('--datadir', type=str, required=False, default="X:/Directory/code/dataset/", help="Data directory")
+    parser.add_argument('--datadir', type=str, required=False, default="X:\Directory\code\dataset/tinyimagenet", help="Data directory")
     
     
     parser.add_argument('--dropout_p', type=float, required=False, default=0.5, help="Dropout probability. Default=0.0")
@@ -155,7 +156,7 @@ def init_nets(net_configs, n_parties, args, device='cpu'):
         model_meta_data.append(v.shape)
         layer_type.append(k)
 
-    return nets, model_meta_data, layer_type
+    return nets, model_meta_data, layer_type, n_classes
 
 
 def imshow(tensor):
@@ -178,7 +179,7 @@ def imshow(tensor):
     plt.show()
 
 
-def train_net(net_id, net, train_dl, test_dl, backdoor_train_dl, backdoor_test_dl, args, device="cpu", backdoor=False):
+def train_net(net_id, net, train_dl, test_dl, backdoor_train_dl, backdoor_test_dl, args, device="cpu", backdoor=False, n_classes=None):
     net = nn.DataParallel(net)
     net.cuda()
     net.train()
@@ -211,7 +212,7 @@ def train_net(net_id, net, train_dl, test_dl, backdoor_train_dl, backdoor_test_d
             #imshow(backdoor_x[0])
             #print(backdoor_target[0])
             # 为干净样本分配随机标签（1 到 9 之间，不包括 0）
-            random_labels = torch.randint(0, 10, clean_target.size(), dtype=torch.long)
+            random_labels = torch.randint(0, n_classes, clean_target.size(), dtype=torch.long)
             clean_target = random_labels
             
             # 将干净样本和后门样本组合
@@ -233,12 +234,12 @@ def train_net(net_id, net, train_dl, test_dl, backdoor_train_dl, backdoor_test_d
 
         epoch_loss = sum(epoch_loss_collector) / len(epoch_loss_collector)
         logger.info('Epoch: %d Loss: %f' % (epoch, epoch_loss))
-        if epoch % 2 == 0:
+        if epoch % 2000 == 0:
             net.eval()
             
             test_dl = tqdm(test_dl)
             test_dl.set_description("Testing final testdata")
-            test_acc, conf_matrix, _ = compute_accuracy(net, test_dl, get_confusion_matrix=True, device=device, mode='clean')
+            test_acc, conf_matrix, _ = compute_accuracy(net, test_dl, get_confusion_matrix=True, device=device)
             logger.info('>> Clean Test accuracy: %f' % test_acc) 
 
             backdoor_test_dl = tqdm(backdoor_test_dl)
@@ -262,7 +263,7 @@ def train_net(net_id, net, train_dl, test_dl, backdoor_train_dl, backdoor_test_d
             
             
             
-        torch.save(net.module.state_dict(), args.modeldir + args.log_file_name + f'_{epoch}.pth')
+            torch.save(net.module.state_dict(), args.modeldir + args.log_file_name + f'_{epoch}.pth')
 
     backdoor_test_dl.set_description("Testing final backdoor traindata")
     backdoor_test_acc, _ = compute_accuracy(net, backdoor_test_dl, device=device)
@@ -283,13 +284,13 @@ def backdoor_pretrain(args):
     # Initialize model
     net_configs = args.net_config
     args.n_parties = 1
-    nets, model_meta_data, layer_type = init_nets(net_configs, args.n_parties, args, device=args.device)
+    nets, model_meta_data, layer_type, n_classes = init_nets(net_configs, args.n_parties, args, device=args.device)
 
     # Get DataLoader
     train_dl, test_dl, _, _ = get_dataloader(args.dataset, args.datadir, args.batch_size, 32)
-    backdoor_train_dl, backdoor_test_dl, _, _ = get_dataloader(args.dataset, args.datadir, args.batch_size, 32, backdoor=True)
+    backdoor_train_dl, backdoor_test_dl, _, _ = get_dataloader(args.dataset, args.datadir, args.batch_size, 32, backdoor=True, DBA='yes')
 
-    train_net(0, nets[0], train_dl, test_dl, backdoor_train_dl, backdoor_test_dl, args, device=args.device, backdoor=False)
+    train_net(0, nets[0], train_dl, test_dl, backdoor_train_dl, backdoor_test_dl, args, device=args.device, backdoor=False, n_classes=n_classes)
 
     torch.save(nets[0].state_dict(), args.modeldir + args.log_file_name + '_backdoorOnly_last.pth')
 

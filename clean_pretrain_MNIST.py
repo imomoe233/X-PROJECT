@@ -19,24 +19,24 @@ import wandb
 
 
 from model import *
-from utils import *
+from utils_withMNIST import *
 
 # 设置 CUDA_LAUNCH_BLOCKING=1
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--log_file_name', type=str, default='MNIST_resnet50_backdoor_pretrain(cleanOnly)', help='The log file name')
+    parser.add_argument('--log_file_name', type=str, default='MNIST_resnet18_backdoor_pretrain(cleanOnly)', help='The log file name')
     parser.add_argument('--backdoor', type=str, default='backdoor_pretrain', help='train with backdoor_pretrain/backdoor_MCFL/backdoor_fedavg')
     parser.add_argument('--fedavg_method', type=str, default='fedavg', help='fedavg/weight_fedavg/weight_fedavg_DP/weight_fedavg_purning/trimmed_mean/median_fedavg/krum/multi_krum/rfa')
-    parser.add_argument('--modeldir', type=str, required=False, default="./models/MNIST_resnet50/", help='Model save directory path')
+    parser.add_argument('--modeldir', type=str, required=False, default="./models/MNIST_resnet18/", help='Model save directory path')
     parser.add_argument('--partition', type=str, default='iid', help='the data partitioning strategy noniid/iid')
     parser.add_argument('--min_data_ratio', type=float, default='0.1')
     parser.add_argument('--krum_k', type=int, default='3')
     parser.add_argument('--batch-size', type=int, default=128, help='input batch size for training (default: 64)')
     parser.add_argument('--alg', type=str, default='backdoor_MCFL',
                         help='communication strategy: fedavg/fedprox/moon/local_training')
-    parser.add_argument('--model', type=str, default='resnet50-MNIST', help='neural network used in training')
+    parser.add_argument('--model', type=str, default='resnet18-MNIST', help='neural network used in training')
     parser.add_argument('--dataset', type=str, default='MNIST', help='dataset used for training')
     parser.add_argument('--epochs', type=int, default=1, help='number of local epochs')
     parser.add_argument('--n_parties', type=int, default=5, help='number of workers in a distributed cluster')

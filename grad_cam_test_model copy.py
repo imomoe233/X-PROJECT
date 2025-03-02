@@ -51,17 +51,18 @@ def init_nets(net_configs, n_parties, args, device='cpu'):
     return nets, model_meta_data, layer_type
 
 def remove_module_prefix(state_dict):
-    if isinstance(state_dict, torch.nn.DataParallel):
-        state_dict = state_dict.module.state_dict()
-    return {key[len('module.'):]: value if key.startswith('module.') else value for key, value in state_dict.items()}
-
+    new_state_dict = {}
+    for key, value in state_dict.items():
+        new_key = key.replace('module.', '') if key.startswith('module.') else key
+        new_state_dict[new_key] = value
+    return new_state_dict
 
 # Argument parsing and initialization
 parser = argparse.ArgumentParser()
 parser.add_argument('--net_config', type=lambda x: list(map(int, x.split(', '))))
-parser.add_argument('--load_model_file', type=str, default='X:\Directory\code\MOON-backdoor\models\cifar10_resnet50\MCFL\DP\globalmodel70.pth', help='the model to load as global model')
+parser.add_argument('--load_model_file', type=str, default='Y:\FRDA\model\cifar10_resnet50\FL/fedavg.pth', help='the model to load as global model')
 parser.add_argument('--datadir', type=str, required=False, default="X:/Directory/code/dataset/", help="Data directory")
-parser.add_argument('--batch_size', type=int, default=256, help='input batch size for training (default: 64)')
+parser.add_argument('--batch_size', type=int, default=8, help='input batch size for training (default: 64)')
 parser.add_argument('--model', type=str, default='resnet50', help='neural network used in training')
 parser.add_argument('--dataset', type=str, default='cifar10', help='dataset used for training')
 parser.add_argument('--device', type=str, default='cpu', help='The device to run the program')
@@ -77,7 +78,6 @@ backdoor_train_dl_global, backdoor_test_dl_global, backdoor_train_ds_global, bac
 sample_data, _ = next(iter(backdoor_test_dl_global))
 sample_data = sample_data.to(device=args.device)  # Move sample_data to the correct device
 
-
 # Network initialization
 net_configs = args.net_config
 args.n_parties = 1
@@ -86,98 +86,99 @@ nets, model_meta_data, layer_type = init_nets(net_configs, args.n_parties, args,
 # Model loading
 if args.load_model_file:
     try:
-        nets[0].load_state_dict(torch.load(args.load_model_file))
+        nets[0].load_state_dict(torch.load(args.load_model_file, map_location=args.device))
         global_model = copy.deepcopy(nets[0])
     except:
         global_model = nn.DataParallel(nets[0])
-        global_model.load_state_dict(remove_module_prefix(torch.load(args.load_model_file)))
+        state_dict = torch.load(args.load_model_file, map_location=args.device)
+        state_dict = remove_module_prefix(state_dict)
+        global_model.load_state_dict(state_dict)
 
-model = global_model
+model = global_model.to(args.device)
 
-# 现在假设你已经准备好训练好的模型和预处理输入了
-
+# 准备钩子函数存储梯度和特征图
 grad_block = []	# 存放grad图
-feaure_block = []	# 存放特征图
+feature_block = []	# 存放特征图
 
 # 获取梯度的函数
-def backward_hook(module, grad_in, grad_out):
-    grad_block.append(grad_out[0].detach())
+# backward_hook 函数
+def backward_hook(module, grad_input, grad_output):
+    grad_block.append(grad_output[0].detach())
 
 # 获取特征层的函数
-def farward_hook(module, input, output):
-    feaure_block.append(output)
+def forward_hook(module, input, output):
+    feature_block.append(output)
 
 # 已知原图、梯度、特征图，开始计算可视化图
 def cam_show_img(img, feature_map, grads):
     cam = np.zeros(feature_map.shape[1:], dtype=np.float32)  # 二维，用于叠加
-    grads = grads.reshape([grads.shape[0], -1])
-    # 梯度图中，每个通道计算均值得到一个值，作为对应特征图通道的权重
-    weights = np.mean(grads, axis=1)	
-    for i, w in enumerate(weights):
-        cam += w * feature_map[i, :, :]	# 特征图加权和
-    cam = np.maximum(cam, 0)
-    cam_max = cam.max() if cam.max() > 0 else 1e-8  # 避免除以零
-    cam = cam / cam_max  # 归一化
-    cam = cv2.resize(cam, (32, 32))
-    
-    # cam.dim=2 heatmap.dim=3
-    heatmap = cv2.applyColorMap(np.uint8(255 * cam), cv2.COLORMAP_JET)	# 伪彩色
-    cam_img = 0.7 * heatmap + 0.7 * img
 
+    # 计算每个通道的权重
+    weights = np.mean(grads, axis=(1, 2))
+    for i, w in enumerate(weights):
+        cam += w * feature_map[i, :, :].cpu().data.numpy()  # 特征图加权和
+
+    cam = np.maximum(cam, 0)
+    cam = cam / (cam.max() + 1e-8)  # 归一化，避免除以零
+    cam = cv2.resize(cam, (img.shape[1], img.shape[0]))
+
+    # 生成热力图
+    heatmap = cv2.applyColorMap(np.uint8(255 * cam), cv2.COLORMAP_JET)
+
+    # 将原始图像像素值调整到 [0, 255] 范围
+    if img.max() <= 1.0:
+        img = (img * 255).astype(np.uint8)
+
+    # 叠加热力图和原始图像
+    cam_img = 0.7 * heatmap.astype(np.float32) + 0.3 * img.astype(np.float32)
+    cam_img = cam_img / cam_img.max() * 255
+    cam_img = np.uint8(cam_img)
+
+    # 保存结果
     cv2.imwrite("0_2.jpg", cam_img)
 
+# 选择目标层，通常是最后一个卷积层
+target_layer = model.features[6][-1].conv3
+
+# 注册钩子
+target_layer.register_forward_hook(forward_hook)
+target_layer.register_full_backward_hook(backward_hook)
 
 
-model.features[6][2].conv3.register_forward_hook(farward_hook)
-model.features[6][2].conv3.register_backward_hook(backward_hook)
-
-#model.l2.register_forward_hook(farward_hook)
-#model.l2.register_backward_hook(backward_hook)
-
+print(model)
 
 # forward 
-# 在前向推理时，会生成特征图和预测值
-sample_tensor = sample_data[1, :, :, :].clone().detach()  # 转换为 Tensor
+# 获取输入图像
+sample_tensor = sample_data[1]  # shape: [3, H, W]
 
-# 读取图像
-img = Image.open("./0_1.png")
+# 将输入图像添加批次维度并传入模型
+output = model(sample_tensor.unsqueeze(0))
 
-# 定义转换
-transform = transforms.Compose([
-    transforms.Resize((32, 32)),  # 调整大小为 32x32 像素
-    transforms.ToTensor()  # 将图像转换为张量，并将值归一化到 [0, 1]
-])
-
-# 应用转换
-img_tensor = transform(img)
-
-output = model(sample_tensor.unsqueeze(0))  # 增加一个维度以符合模型输入要求
-print(output)
-# 确保 output 是一个 Tensor
 if isinstance(output, tuple):
-    output = output[2]  # 只获取第一个输出，假设这是你需要的结果
-#print(model)
-print(output.shape)
-max_idx = np.argmax(output.cpu().data.numpy())
-print("predict:{}".format(max_idx))
+    # 假设 logits 在 output[0] 中，如果不是，请根据实际情况调整
+    output = output[2]
+
+print("Adjusted output shape:", output.shape)
+
+if output.dim() == 1:
+    max_idx = output.argmax().item()
+elif output.dim() == 2:
+    max_idx = output.argmax(dim=1).item()
+else:
+    raise ValueError("Unexpected output dimensions")
 
 # backward
 model.zero_grad()
-# 取最大类别的值作为loss，这样计算的结果是模型对该类最感兴趣的cam图
-# 根据 output 的维度获取 class_loss
-if output.dim() == 1:  # 一维 Tensor
-    class_loss = output[max_idx]
-else:
-    class_loss = output[0, max_idx]  # 如果是二维 Tensor，请确保维度是正确的
-class_loss.backward()	# 反向梯度，得到梯度图
+class_loss = output[0]
+class_loss.backward()
 
-# grads
-grads_val = grad_block[0].cpu().data.numpy().squeeze()
-fmap = feaure_block[0].cpu().data.numpy().squeeze()
-# 我的模型中
-# grads_cal.shape=[1280,2,2]
-# fmap.shape=[1280,2,2]
+# 提取梯度和特征图
+grads_val = grad_block[0].cpu().data.numpy()
+fmap = feature_block[0].squeeze(0)  # 移除批次维度
 
-raw_img = cv2.imread("./0_1.png")
-# save cam
-cam_show_img(raw_img, fmap, grads_val)
+# 将 sample_tensor 转换为图像格式
+img = sample_tensor.cpu().numpy().transpose(1, 2, 0)  # shape: [H, W, 3]
+img = np.clip(img, 0, 1)  # 确保像素值在 [0, 1] 范围内
+
+# 生成并保存 Grad-CAM 图像
+cam_show_img(img, fmap, grads_val)

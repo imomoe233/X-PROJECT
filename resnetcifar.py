@@ -4,7 +4,7 @@ Reference:
 [1] Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun
     Deep Residual Learning for Image Recognition. arXiv:1512.03385
 '''
-
+import torchvision.models as models
 import torch
 import torch.nn as nn
 def conv3x3(in_planes, out_planes, stride=1, groups=1, dilation=1):
@@ -296,6 +296,19 @@ class ResNetMNIST(nn.Module):
     def forward(self, x):
         return self._forward_impl(x)
 
+def ResNet18_MNIST(**kwargs):
+    """
+    构建适用于 MNIST 数据集的 ResNet-18 模型。
+
+    参数：
+        **kwargs：其他关键字参数，可用于设置模型的特定配置。
+
+    返回：
+        ResNetMNIST 的实例。
+    """
+    return ResNetMNIST(BasicBlock, [2, 2, 2, 2], **kwargs)
+
+
 def ResNet18_cifar10(**kwargs):
     r"""ResNet-18 model from
     `"Deep Residual Learning for Image Recognition" <https://arxiv.org/pdf/1512.03385.pdf>`_
@@ -327,3 +340,150 @@ def ResNet50_MNIST(**kwargs):
         progress (bool): If True, displays a progress bar of the download to stderr
     """
     return ResNetMNIST(Bottleneck, [2, 2, 2, 2], **kwargs)
+
+
+class VGG16_CIFAR10(nn.Module):
+    def __init__(self, num_classes=10):
+        super(VGG16_CIFAR10, self).__init__()
+        self.vgg16 = models.vgg16(pretrained=False)
+        # 修改输入通道数
+        self.vgg16.features[0] = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1)
+        # 修改全连接层输出
+        self.vgg16.classifier[6] = nn.Linear(4096, num_classes)
+        # 提取特征部分
+        self.features = self.vgg16.features
+        self.num_ftrs = 512  # 修改为展平后的输出特征的实际维度
+
+    def forward(self, x):
+        x = self.features(x)
+        x = torch.flatten(x, 1)  # 展平特征图
+        x = self.vgg16.classifier(x)
+        return x
+
+
+
+class VGG19_CIFAR10(nn.Module):
+    def __init__(self, num_classes=10):
+        super(VGG19_CIFAR10, self).__init__()
+        self.vgg19 = models.vgg19(pretrained=False)
+        # 修改输入通道数
+        self.vgg19.features[0] = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1)
+        # 修改全连接层输出
+        self.vgg19.classifier[6] = nn.Linear(4096, num_classes)
+        # 提取特征部分
+        self.features = self.vgg19.features
+        self.num_ftrs = 512  # 修改为展平后的输出特征的实际维度
+
+    def forward(self, x):
+        x = self.features(x)
+        x = torch.flatten(x, 1)  # 展平特征图
+        x = self.vgg19.classifier(x)
+        return x
+
+# VGG16 和 VGG19 的 MNIST 类
+class VGG16_MNIST(nn.Module):
+    def __init__(self, num_classes=10):
+        super(VGG16_MNIST, self).__init__()
+        self.vgg16 = models.vgg16(pretrained=False)
+        # 修改输入通道数
+        self.vgg16.features[0] = nn.Conv2d(1, 64, kernel_size=3, stride=1, padding=1)
+        self.vgg16.features[4] = nn.MaxPool2d(kernel_size=2, stride=1, padding=1)
+        # 修改全连接层输出
+        self.vgg16.classifier[6] = nn.Linear(4096, num_classes)
+        # 提取特征部分
+        self.features = self.vgg16.features
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))  # 添加自适应池化层
+        self.num_ftrs = 512
+
+    def forward(self, x):
+        x = self.features(x)
+        x = self.avgpool(x)  # 自适应池化
+        x = torch.flatten(x, 1)  # 展平特征图
+        x = self.vgg16.classifier(x)
+        return x
+
+
+
+class VGG19_MNIST(nn.Module):
+    def __init__(self, num_classes=10):
+        super(VGG19_MNIST, self).__init__()
+        self.vgg19 = models.vgg19(pretrained=False)
+        # 修改输入通道数
+        self.vgg19.features[0] = nn.Conv2d(1, 64, kernel_size=3, stride=1, padding=1)
+        self.vgg19.features[4] = nn.MaxPool2d(kernel_size=2, stride=1, padding=1)
+        # 修改全连接层输出
+        self.vgg19.classifier[6] = nn.Linear(4096, num_classes)
+        # 提取特征部分
+        self.features = self.vgg19.features
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))  # 添加自适应池化层
+        self.num_ftrs = 512
+
+    def forward(self, x):
+        x = self.features(x)
+        x = self.avgpool(x)  # 自适应池化
+        x = torch.flatten(x, 1)  # 展平特征图
+        x = self.vgg19.classifier(x)
+        return x
+
+# VGG16 和 VGG19 的工厂方法，用于构建适用于 CIFAR-10 和 MNIST 的模型
+def VGG16_cifar10(**kwargs):
+    return VGG16_CIFAR10(**kwargs)
+
+def VGG19_cifar10(**kwargs):
+    return VGG19_CIFAR10(**kwargs)
+
+def VGG16_mnist(**kwargs):
+    return VGG16_MNIST(**kwargs)
+
+def VGG19_mnist(**kwargs):
+    return VGG19_MNIST(**kwargs)
+
+
+# DenseNet for CIFAR-10
+class DenseNet_CIFAR10(nn.Module):
+    def __init__(self, num_classes=10):
+        super(DenseNet_CIFAR10, self).__init__()
+        self.densenet = models.densenet121(pretrained=False)
+        # Modify the first convolutional layer to be suitable for CIFAR-10
+        self.features = self.densenet.features
+        self.features[0] = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1, bias=False)
+        # Add adaptive pooling layer to reduce the feature map size
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+        # Modify the classifier layer to output the required number of classes
+        self.num_ftrs = self.densenet.classifier.in_features
+        self.projection = nn.Linear(self.num_ftrs, 1024)  # Projection layer to match the expected input to l1
+
+    def forward(self, x):
+        x = self.features(x)
+        x = self.avgpool(x)  # Adaptive pooling to reduce feature map size
+        x = torch.flatten(x, 1)  # Flatten the feature map
+        x = self.projection(x)  # Projection to match l1 input size
+        return x
+
+# DenseNet for MNIST
+class DenseNet_MNIST(nn.Module):
+    def __init__(self, num_classes=10):
+        super(DenseNet_MNIST, self).__init__()
+        self.densenet = models.densenet121(pretrained=False)
+        # Modify the first convolutional layer to be suitable for CIFAR-10
+        self.features = self.densenet.features
+        self.features[0] = nn.Conv2d(1, 64, kernel_size=3, stride=1, padding=1, bias=False)
+        # Add adaptive pooling layer to reduce the feature map size
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+        # Modify the classifier layer to output the required number of classes
+        self.num_ftrs = self.densenet.classifier.in_features
+        self.projection = nn.Linear(self.num_ftrs, 1024)  # Projection layer to match the expected input to l1
+
+    def forward(self, x):
+        x = self.features(x)
+        x = self.avgpool(x)  # Adaptive pooling to reduce feature map size
+        x = torch.flatten(x, 1)  # Flatten the feature map
+        x = self.projection(x)  # Projection to match l1 input size
+        return x
+
+# Factory methods for DenseNet models for CIFAR-10 and MNIST
+def DenseNet_cifar10(**kwargs):
+    return DenseNet_CIFAR10(**kwargs)
+
+def DenseNet_mnist(**kwargs):
+    return DenseNet_MNIST(**kwargs)

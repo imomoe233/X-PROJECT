@@ -11,6 +11,7 @@ import random
 from sklearn.metrics import confusion_matrix
 from matplotlib import pyplot as plt
 from model import *
+
 from datasets_withMNIST import CIFAR10_truncated, CIFAR100_truncated, ImageFolder_custom, MNIST_truncated
 
 logging.basicConfig()
@@ -512,7 +513,7 @@ def load_model(model, model_index, device="cpu"):
     return model
 
 []
-def get_dataloader(dataset, datadir, train_bs, test_bs, dataidxs=None, backdoor=False):
+def get_dataloader(dataset, datadir, train_bs, test_bs, dataidxs=None, backdoor=False, DBA='No'):
     if dataset in ('cifar10', 'cifar100'):
         if dataset == 'cifar10' and backdoor == False:
             dl_obj = CIFAR10_truncated

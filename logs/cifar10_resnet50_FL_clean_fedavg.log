@@ -1,0 +1,93 @@
+01-25 22:51 INFO     Data statistics: {0: {0: 267, 1: 233, 2: 45, 3: 327, 4: 4, 5: 19, 6: 42, 7: 14, 8: 249, 9: 431}, 1: {0: 82, 1: 366, 2: 218, 3: 3602, 4: 1790, 5: 2351, 6: 1, 7: 510, 8: 805, 9: 803}, 2: {0: 45, 1: 2589, 2: 1343, 3: 486, 4: 2366, 5: 215, 6: 278, 7: 2225, 8: 1227, 9: 104}, 3: {0: 2023, 1: 1713, 2: 2668, 4: 109, 5: 529, 6: 965, 7: 1082, 8: 2465, 9: 2360}, 4: {0: 2583, 1: 99, 2: 726, 3: 585, 4: 731, 5: 1886, 6: 3714, 7: 1169, 8: 254, 9: 1302}}
+01-25 22:51 INFO     in comm round:0
+01-25 22:51 INFO     Training network 0
+01-25 22:51 INFO     Epoch: 0 Loss: 2.951847
+01-25 22:51 INFO     Training network 1
+01-25 22:51 INFO     Epoch: 0 Loss: 0.332388
+01-25 22:51 INFO     Training network 2
+01-25 22:51 INFO     Epoch: 0 Loss: 0.256737
+01-25 22:51 INFO     Training network 3
+01-25 22:51 INFO     Epoch: 0 Loss: 0.220818
+01-25 22:52 INFO     Training network 4
+01-25 22:52 INFO     Epoch: 0 Loss: 0.229174
+01-25 22:52 INFO     global n_training: 195
+01-25 22:52 INFO     global n_test: 313
+01-25 22:52 INFO     >> Global Model Test accuracy: 0.858500
+01-25 22:52 INFO     >> Global Model Test backdoor accuracy: 0.100800
+01-25 22:52 INFO     in comm round:1
+01-25 22:52 INFO     Training network 0
+01-25 22:52 INFO     Epoch: 0 Loss: 1.469624
+01-25 22:52 INFO     Training network 1
+01-25 22:52 INFO     Epoch: 0 Loss: 0.236852
+01-25 22:52 INFO     Training network 2
+01-25 22:53 INFO     Epoch: 0 Loss: 0.126486
+01-25 22:53 INFO     Training network 3
+01-25 22:53 INFO     Epoch: 0 Loss: 0.124235
+01-25 22:53 INFO     Training network 4
+01-25 22:53 INFO     Epoch: 0 Loss: 0.157061
+01-25 22:53 INFO     global n_training: 195
+01-25 22:53 INFO     global n_test: 313
+01-25 22:53 INFO     >> Global Model Test accuracy: 0.881400
+01-25 22:53 INFO     >> Global Model Test backdoor accuracy: 0.110100
+01-25 22:53 INFO     in comm round:2
+01-25 22:53 INFO     Training network 0
+01-25 22:54 INFO     Epoch: 0 Loss: 1.287000
+01-25 22:54 INFO     Training network 1
+01-25 22:54 INFO     Epoch: 0 Loss: 0.167393
+01-25 22:54 INFO     Training network 2
+01-25 22:54 INFO     Epoch: 0 Loss: 0.104504
+01-25 22:54 INFO     Training network 3
+01-25 22:55 INFO     Epoch: 0 Loss: 0.107167
+01-25 22:55 INFO     Training network 4
+01-25 22:55 INFO     Epoch: 0 Loss: 0.109922
+01-25 22:55 INFO     global n_training: 195
+01-25 22:55 INFO     global n_test: 313
+01-25 22:55 INFO     >> Global Model Test accuracy: 0.880600
+01-25 22:55 INFO     >> Global Model Test backdoor accuracy: 0.111800
+01-25 22:55 INFO     in comm round:3
+01-25 22:55 INFO     Training network 0
+01-25 22:55 INFO     Epoch: 0 Loss: 1.181614
+01-25 22:55 INFO     Training network 1
+01-25 22:55 INFO     Epoch: 0 Loss: 0.143646
+01-25 22:55 INFO     Training network 2
+01-25 22:56 INFO     Epoch: 0 Loss: 0.069980
+01-25 22:56 INFO     Training network 3
+01-25 22:56 INFO     Epoch: 0 Loss: 0.083470
+01-25 22:56 INFO     Training network 4
+01-25 22:56 INFO     Epoch: 0 Loss: 0.100189
+01-25 22:56 INFO     global n_training: 195
+01-25 22:56 INFO     global n_test: 313
+01-25 22:56 INFO     >> Global Model Test accuracy: 0.883000
+01-25 22:56 INFO     >> Global Model Test backdoor accuracy: 0.126100
+01-25 22:56 INFO     in comm round:4
+01-25 22:56 INFO     Training network 0
+01-25 22:57 INFO     Epoch: 0 Loss: 1.122839
+01-25 22:57 INFO     Training network 1
+01-25 22:57 INFO     Epoch: 0 Loss: 0.113755
+01-25 22:57 INFO     Training network 2
+01-25 22:57 INFO     Epoch: 0 Loss: 0.067217
+01-25 22:57 INFO     Training network 3
+01-25 22:57 INFO     Epoch: 0 Loss: 0.073242
+01-25 22:58 INFO     Training network 4
+01-25 22:58 INFO     Epoch: 0 Loss: 0.078325
+01-25 22:58 INFO     global n_training: 195
+01-25 22:58 INFO     global n_test: 313
+01-25 22:58 INFO     >> Global Model Test accuracy: 0.882800
+01-25 22:58 INFO     >> Global Model Test backdoor accuracy: 0.136100
+01-25 22:58 INFO     in comm round:5
+01-25 22:58 INFO     Training network 0
+01-25 22:58 INFO     Epoch: 0 Loss: 1.079327
+01-25 22:58 INFO     Training network 1
+01-25 22:58 INFO     Epoch: 0 Loss: 0.094312
+01-25 22:58 INFO     Training network 2
+01-25 22:58 INFO     Epoch: 0 Loss: 0.053107
+01-25 22:59 INFO     Training network 3
+01-25 22:59 INFO     Epoch: 0 Loss: 0.061563
+01-25 22:59 INFO     Training network 4
+01-25 22:59 INFO     Epoch: 0 Loss: 0.063777
+01-25 22:59 INFO     global n_training: 195
+01-25 22:59 INFO     global n_test: 313
+01-25 22:59 INFO     >> Global Model Test accuracy: 0.882700
+01-25 22:59 INFO     >> Global Model Test backdoor accuracy: 0.161000
+01-25 22:59 INFO     in comm round:6
+01-25 22:59 INFO     Training network 0

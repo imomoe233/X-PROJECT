@@ -19,35 +19,36 @@ import wandb
 
 
 from model import *
-from utils import *
+#from utils import *
+from utils_withMNIST import *
 
 # 设置 CUDA_LAUNCH_BLOCKING=1
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--log_file_name', type=str, default='MNIST_resnet50_backdoor_pretrain(cleanOnly)', help='The log file name')
+    parser.add_argument('--log_file_name', type=str, default='MNIST_densenet_backdoor_pretrain(cleanOnly)', help='The log file name')
     parser.add_argument('--backdoor', type=str, default='backdoor_pretrain', help='train with backdoor_pretrain/backdoor_MCFL/backdoor_fedavg')
     parser.add_argument('--fedavg_method', type=str, default='fedavg', help='fedavg/weight_fedavg/weight_fedavg_DP/weight_fedavg_purning/trimmed_mean/median_fedavg/krum/multi_krum/rfa')
-    parser.add_argument('--modeldir', type=str, required=False, default="./models/MNIST_resnet50/", help='Model save directory path')
+    parser.add_argument('--modeldir', type=str, required=False, default="./models/MNIST_densenet/", help='Model save directory path')
     parser.add_argument('--partition', type=str, default='iid', help='the data partitioning strategy noniid/iid')
     parser.add_argument('--min_data_ratio', type=float, default='0.1')
     parser.add_argument('--krum_k', type=int, default='3')
     parser.add_argument('--batch-size', type=int, default=128, help='input batch size for training (default: 64)')
     parser.add_argument('--alg', type=str, default='backdoor_MCFL',
                         help='communication strategy: fedavg/fedprox/moon/local_training')
-    parser.add_argument('--model', type=str, default='resnet50-MNIST', help='neural network used in training')
+    parser.add_argument('--model', type=str, default='densenet-MNIST', help='neural network used in training')
     parser.add_argument('--dataset', type=str, default='MNIST', help='dataset used for training')
     parser.add_argument('--epochs', type=int, default=1, help='number of local epochs')
     parser.add_argument('--n_parties', type=int, default=5, help='number of workers in a distributed cluster')
     parser.add_argument('--logdir', type=str, required=False, default="./logs/", help='Log directory path')
-    parser.add_argument('--datadir', type=str, required=False, default="X:/Directory/code/dataset/MNIST", help="Data directory")
+    parser.add_argument('--datadir', type=str, required=False, default="X:/Directory/code/dataset/", help="Data directory")
     
     
     parser.add_argument('--dropout_p', type=float, required=False, default=0.5, help="Dropout probability. Default=0.0")
     parser.add_argument('--mu', type=float, default=1, help='the mu parameter for fedprox or moon')
-    parser.add_argument('--temperature', type=float, default=0.5, help='the temperature parameter for contrastive loss')
-    parser.add_argument('--lr', type=float, default=0.001, help='learning rate (default: 0.1)')
+    parser.add_argument('--temperature', type=float, default=1, help='the temperature parameter for contrastive loss')
+    parser.add_argument('--lr', type=float, default=0.0001, help='learning rate (default: 0.1)')
     parser.add_argument('--atk_lr', type=float, default=0.5, help='attack learning rate with backdoor samples(default: 0.1)')
     parser.add_argument('--wandb', type=bool, default=False)
     parser.add_argument('--optimizer', type=str, default='adam', help='the optimizer')
@@ -60,7 +61,7 @@ def get_args():
     
     
     parser.add_argument('--net_config', type=lambda x: list(map(int, x.split(', '))))
-    parser.add_argument('--comm_round', type=int, default=500, help='number of maximum communication roun')
+    parser.add_argument('--comm_round', type=int, default=5000, help='number of maximum communication roun')
     parser.add_argument('--init_seed', type=int, default=0, help="Random seed")
     parser.add_argument('--reg', type=float, default=1e-5, help="L2 regularization strength")
     parser.add_argument('--device', type=str, default='cuda:0', help='The device to run the program')

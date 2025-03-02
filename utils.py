@@ -11,7 +11,9 @@ import random
 from sklearn.metrics import confusion_matrix
 
 from model import *
-from datasets import CIFAR10_truncated, CIFAR100_truncated, ImageFolder_custom
+#from utils_withMNIST import *
+
+from datasets import CIFAR10_truncated, CIFAR100_truncated, ImageFolder_custom, TinyImageNet_truncated
 
 logging.basicConfig()
 logger = logging.getLogger()
@@ -56,7 +58,7 @@ def load_cifar100_data(datadir):
     return (X_train, y_train, X_test, y_test)
 
 
-def load_tinyimagenet_data(datadir):
+def load_custom_data(datadir):
     transform = transforms.Compose([transforms.ToTensor()])
     xray_train_ds = ImageFolder_custom(datadir+'./train/', transform=transform)
     xray_test_ds = ImageFolder_custom(datadir+'./val/', transform=transform)
@@ -66,6 +68,19 @@ def load_tinyimagenet_data(datadir):
 
     return (X_train, y_train, X_test, y_test)
 
+def load_tinyimagenet_data(datadir):
+    transform = transforms.Compose([transforms.ToTensor()])
+
+    train_ds = TinyImageNet_truncated(datadir, train=True, download=False, transform=transform)
+    test_ds = TinyImageNet_truncated(datadir, train=False, download=False, transform=transform)
+
+    X_train, y_train = train_ds.data, train_ds.target
+    X_test, y_test = test_ds.data, test_ds.target
+
+    # y_train = y_train.numpy()
+    # y_test = y_test.numpy()
+
+    return (X_train, y_train, X_test, y_test)
 
 def record_net_data_stats(y_train, net_dataidx_map, logdir):
     net_cls_counts = {}
@@ -156,37 +171,66 @@ def custom_partition_data(dataset, datadir, logdir, partition, n_parties, beta=0
         net_dataidx_map = {i: batch_idxs[i] for i in range(n_parties)}
 
     elif partition == "noniid-labeldir" or partition == "noniid":
-        min_size = 0
-        min_require_size = 10
         K = 10
         if dataset == 'cifar100':
             K = 100
         elif dataset == 'tinyimagenet':
             K = 200
 
-        N = y_train.shape[0]
+        # 一次性创建 n_parties 个空的 idx 列表
+        idx_batch = [[] for _ in range(n_parties)]
+
+        # 对每个类别 k，做 Dirichlet 分配
+        for k in range(K):
+            idx_k = np.where(y_train == k)[0]
+            np.random.shuffle(idx_k)
+
+            # 设置第 0 个客户端占比更小
+            proportions = np.random.dirichlet(np.repeat(beta, n_parties))
+            proportions[0] = min_data_ratio * proportions[0]
+            proportions[1:] = proportions[1:] * (1 - min_data_ratio) / proportions[1:].sum()
+
+            proportions = proportions / proportions.sum()
+            # 用 cumulative sum 来分割 idx_k
+            splits = (np.cumsum(proportions) * len(idx_k)).astype(int)[:-1]
+            split_res = np.split(idx_k, splits)
+
+            # 分别添加到 idx_batch[j]
+            for j in range(n_parties):
+                idx_batch[j].extend(split_res[j].tolist())
+
+        # 拼好后 shuffle 一下
         net_dataidx_map = {}
-
-        while min_size < min_require_size:
-            idx_batch = [[] for _ in range(n_parties)]
-            for k in range(K):
-                idx_k = np.where(y_train == k)[0]
-                np.random.shuffle(idx_k)
-                
-                # 设置第0个客户端的较小比例
-                proportions = np.random.dirichlet(np.repeat(beta, n_parties))
-                proportions[0] = min_data_ratio * proportions[0]  # 控制第0个客户端的比例较小
-                proportions[1:] = proportions[1:] * (1 - min_data_ratio) / proportions[1:].sum()  # 平衡剩余客户端
-                
-                proportions = proportions / proportions.sum()
-                proportions = (np.cumsum(proportions) * len(idx_k)).astype(int)[:-1]
-                idx_batch = [idx_j + idx.tolist() for idx_j, idx in zip(idx_batch, np.split(idx_k, proportions))]
-                min_size = min([len(idx_j) for idx_j in idx_batch])
-
         for j in range(n_parties):
             np.random.shuffle(idx_batch[j])
-            net_dataidx_map[j] = idx_batch[j]
+            net_dataidx_map[j] = np.array(idx_batch[j], dtype=int)
 
+    # ========== 后处理：确保每个客户端至少 1 条样本 ==========
+    # 如果真有客户端拿到 0 条，就从拿得最多的客户端挪 1 条给它
+    for j in range(n_parties):
+        if len(net_dataidx_map[j]) == 0:
+            # 找到当前拿得最多的那个客户端
+            max_client = max(range(n_parties), key=lambda x: len(net_dataidx_map[x]))
+            if len(net_dataidx_map[max_client]) > 1:
+                # 挪1条过来
+                net_dataidx_map[j] = net_dataidx_map[max_client][-1:].copy()
+                net_dataidx_map[max_client] = net_dataidx_map[max_client][:-1]
+            print(f"[post-process] client {j} had 0, took 1 from {max_client}")
+
+    '''
+    # ========== 如果还想让 net_id=0 再次强制只剩10% ==========
+    attacker_id = 0
+    attacker_indices = net_dataidx_map[attacker_id]
+    orig_len = len(attacker_indices)
+    desired_len = int(orig_len * 0.1)
+    if desired_len < 1 and orig_len > 0:
+        desired_len = 1
+    np.random.shuffle(attacker_indices)
+    net_dataidx_map[attacker_id] = attacker_indices[:desired_len]
+    print(f"[post-process] attacker net_id=0: from {orig_len} => {desired_len} samples")
+    '''
+
+    # 最后记录
     traindata_cls_counts = record_net_data_stats(y_train, net_dataidx_map, logdir)
     return (X_train, y_train, X_test, y_test, net_dataidx_map, traindata_cls_counts)
 
@@ -341,7 +385,7 @@ def load_model(model, model_index, device="cpu"):
     return model
 
 []
-def get_dataloader(dataset, datadir, train_bs, test_bs, dataidxs=None, backdoor=False):
+def get_dataloader(dataset, datadir, train_bs, test_bs, dataidxs=None, backdoor=False, DBA='No'):
     if dataset in ('cifar10', 'cifar100'):
         if dataset == 'cifar10' and backdoor == False:
             dl_obj = CIFAR10_truncated
@@ -385,15 +429,62 @@ def get_dataloader(dataset, datadir, train_bs, test_bs, dataidxs=None, backdoor=
                 transforms.ToTensor(),
                 normalize])
 
+        if DBA=='yes':#传进来yes说名需要DBA的数据出去
+            train_ds = dl_obj(datadir, dataidxs=dataidxs, train=True, transform=transform_train, download=True, backdoor=backdoor, DBA='test')
+            test_ds = dl_obj(datadir, train=False, transform=transform_test, download=True, backdoor=backdoor, DBA='test')
+        else:#否则就是正常
+            train_ds = dl_obj(datadir, dataidxs=dataidxs, train=True, transform=transform_train, download=True, backdoor=backdoor)
+            test_ds = dl_obj(datadir, train=False, transform=transform_test, download=True, backdoor=backdoor)
 
-
-        train_ds = dl_obj(datadir, dataidxs=dataidxs, train=True, transform=transform_train, download=True, backdoor=backdoor)
-        test_ds = dl_obj(datadir, train=False, transform=transform_test, download=True, backdoor=backdoor)
-
-        train_dl = data.DataLoader(dataset=train_ds, batch_size=train_bs, drop_last=True, shuffle=True)
+        train_dl = data.DataLoader(dataset=train_ds, batch_size=train_bs, drop_last=False, shuffle=True)
         test_dl = data.DataLoader(dataset=test_ds, batch_size=test_bs, shuffle=False)
 
+    
+    elif dataset == 'tinyimagenet':
+        dl_obj = TinyImageNet_truncated  # 对应我们自定义的 TinyImageNet 数据集类
+        
+        # 这里的均值和标准差可以根据实际数据统计更新
+        normalize = transforms.Normalize(
+            mean=[0.4802, 0.4481, 0.3975],
+            std=[0.2770, 0.2691, 0.2821]
+        )
+        
+        # 如果仅仅是区分 backdoor=False / True，可以写成两段
+        if backdoor == False:
+            transform_train = transforms.Compose([
+                transforms.ToTensor(),
+                normalize
+            ])
+            
+            transform_test = transforms.Compose([
+                transforms.ToTensor(),
+                normalize
+            ])
+        else:
+            # 这里 backdoor == True 情况下，依然使用同样的 transform
+            # 具体触发器注入逻辑（DBA='No'/'train'/'test'）在数据集类内部处理即可
+            transform_train = transforms.Compose([
+                transforms.ToTensor(),
+                normalize
+            ])
+            
+            transform_test = transforms.Compose([
+                transforms.ToTensor(),
+                normalize
+            ])
 
+        if DBA=='yes':#传进来yes说名需要DBA的数据出去
+            train_ds = dl_obj(datadir, dataidxs=dataidxs, train=True, transform=transform_train, download=False, backdoor=backdoor, DBA='test')
+            test_ds = dl_obj(datadir, train=False, transform=transform_test, download=False, backdoor=backdoor, DBA='test')
+        else:#否则就是正常
+            train_ds = dl_obj(datadir, dataidxs=dataidxs, train=True, transform=transform_train, download=False, backdoor=backdoor)
+            test_ds = dl_obj(datadir, train=False, transform=transform_test, download=False, backdoor=backdoor)
+
+        train_dl = data.DataLoader(dataset=train_ds, batch_size=train_bs, drop_last=False, shuffle=True)
+        test_dl = data.DataLoader(dataset=test_ds, batch_size=test_bs, shuffle=False)
+
+        
+    '''
     elif dataset == 'tinyimagenet':
         dl_obj = ImageFolder_custom
         transform_train = transforms.Compose([
@@ -408,8 +499,8 @@ def get_dataloader(dataset, datadir, train_bs, test_bs, dataidxs=None, backdoor=
         train_ds = dl_obj(datadir+'./train/', dataidxs=dataidxs, transform=transform_train, backdoor=backdoor)
         test_ds = dl_obj(datadir+'./val/', transform=transform_test, backdoor=backdoor)
 
-        train_dl = data.DataLoader(dataset=train_ds, batch_size=train_bs, drop_last=True, shuffle=True)
+        train_dl = data.DataLoader(dataset=train_ds, batch_size=train_bs, drop_last=False, shuffle=True)
         test_dl = data.DataLoader(dataset=test_ds, batch_size=test_bs, shuffle=False)
-
+    '''
 
     return train_dl, test_dl, train_ds, test_ds

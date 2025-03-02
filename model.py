@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import math
 import torchvision.models as models
-from resnetcifar import ResNet18_cifar10, ResNet50_cifar10, ResNet50_MNIST
+from resnetcifar import ResNet18_cifar10, ResNet50_cifar10, ResNet50_MNIST, ResNet18_MNIST, VGG16_cifar10, VGG19_cifar10, VGG16_mnist, VGG19_mnist, DenseNet_cifar10, DenseNet_mnist
 
 #import pytorch_lightning as pl
 
@@ -537,7 +537,7 @@ class ModelFedCon(nn.Module):
 
     def __init__(self, base_model, out_dim, n_classes, net_configs=None):
         super(ModelFedCon, self).__init__()
-
+        self.base_model = base_model
         if base_model == "resnet50-cifar10" or base_model == "resnet50-cifar100" or base_model == "resnet50-smallkernel" or base_model == "resnet50":
             basemodel = ResNet50_cifar10()
             self.features = nn.Sequential(*list(basemodel.children())[:-1])
@@ -552,14 +552,54 @@ class ModelFedCon(nn.Module):
         elif base_model == 'simple-cnn':
             self.features = SimpleCNN_header(input_dim=(16 * 5 * 5), hidden_dims=[120, 84], output_dim=n_classes)
             num_ftrs = 84
-        elif base_model == 'simple-cnn-mnist':
+        elif base_model == 'simple-cnn-MNIST':
             self.features = SimpleCNNMNIST_header(input_dim=(16 * 4 * 4), hidden_dims=[120, 84], output_dim=n_classes)
             num_ftrs = 84
         elif base_model == "resnet50-MNIST":
             basemodel = ResNet50_MNIST()
             self.features = nn.Sequential(*list(basemodel.children())[:-1])
             num_ftrs = basemodel.fc.in_features
+        elif base_model == "resnet18-MNIST":
+            basemodel = ResNet18_MNIST()
+            self.features = nn.Sequential(*list(basemodel.children())[:-1])
+            num_ftrs = basemodel.fc.in_features
+        elif base_model == "vgg16":
+            basemodel = VGG16_cifar10()
+            self.features = basemodel.features
+            num_ftrs = basemodel.num_ftrs
+        elif base_model == "vgg19":
+            basemodel = VGG19_cifar10()           
+            self.features = basemodel.features
+            num_ftrs = basemodel.num_ftrs
+        elif base_model == "vgg16-MNIST":
+            basemodel = VGG16_mnist()           
+            self.features = basemodel.features
+            num_ftrs = basemodel.num_ftrs
+        elif base_model == "vgg19-MNIST":
+            basemodel = VGG19_mnist()           
+            self.features = basemodel.features
+            num_ftrs = basemodel.num_ftrs
+        elif base_model == "densenet":
+            basemodel = DenseNet_cifar10()
+            self.features = nn.Sequential(
+                basemodel.features,
+                basemodel.avgpool,
+                nn.Flatten(),
+                basemodel.projection
+            )
+            num_ftrs = basemodel.num_ftrs
 
+        elif base_model == "densenet-MNIST":
+            basemodel = DenseNet_mnist()
+            self.features = nn.Sequential(
+                basemodel.features,
+                basemodel.avgpool,
+                nn.Flatten(),
+                basemodel.projection
+            )
+            num_ftrs = basemodel.num_ftrs
+
+            
         #summary(self.features.to('cuda:0'), (3,32,32))
         #print("features:", self.features)
         # projection MLP
@@ -578,10 +618,14 @@ class ModelFedCon(nn.Module):
             raise ("Invalid model name. Check the config file and pass one of: resnet18 or resnet50")
 
     def forward(self, x):
+        
         h = self.features(x)
         #print("h before:", h)
         #print("h size:", h.size())
-        h = h.squeeze()
+        if self.base_model in ['vgg16', 'vgg19', 'vgg16-MNIST', 'vgg19-MNIST']:
+            h = torch.flatten(h, 1)  # 展平特征图，确保维度匹配
+        if self.base_model not in ['densenet', 'densenet-MNIST']:
+            h = h.squeeze()
         #print("h after:", h)
         x = self.l1(h)
         x = F.relu(x)

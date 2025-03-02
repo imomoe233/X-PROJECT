@@ -1,0 +1,247 @@
+10-30 08:24 INFO     Data statistics: {0: {0: 144, 1: 113, 3: 49, 4: 15, 5: 68, 6: 2, 7: 2, 8: 3, 9: 453}, 1: {0: 2290, 1: 2018, 2: 1394, 3: 4246, 4: 151, 5: 231, 6: 135, 7: 122, 8: 1, 9: 610}, 2: {0: 2152, 1: 4, 2: 278, 3: 359, 4: 397, 5: 4141, 6: 5555, 7: 8, 8: 4665, 9: 2371}, 3: {0: 664, 1: 2268, 2: 3015, 3: 507, 4: 2157, 5: 280, 6: 224, 7: 5152, 8: 1155, 9: 1192}, 4: {0: 673, 1: 2339, 2: 1271, 3: 970, 4: 3122, 5: 701, 6: 2, 7: 981, 8: 27, 9: 1323}}
+10-30 08:24 INFO     in comm round:0
+10-30 08:24 INFO     Training network 0
+10-30 08:24 INFO     Epoch: 0 Loss: 10.511164
+10-30 08:24 INFO     Training network 1
+10-30 08:24 INFO     Epoch: 0 Loss: 2.335125
+10-30 08:24 INFO     Training network 2
+10-30 08:24 INFO     Epoch: 0 Loss: 1.505246
+10-30 08:24 INFO     Training network 3
+10-30 08:24 INFO     Epoch: 0 Loss: 2.560879
+10-30 08:24 INFO     Training network 4
+10-30 08:24 INFO     Epoch: 0 Loss: 4.010638
+10-30 08:24 INFO     global n_training: 234
+10-30 08:24 INFO     global n_test: 313
+10-30 08:24 INFO     >> Global Model Test accuracy: 0.703400
+10-30 08:24 INFO     >> Global Model Test backdoor accuracy: 0.035100
+10-30 08:24 INFO     in comm round:1
+10-30 08:24 INFO     Training network 0
+10-30 08:24 INFO     Epoch: 0 Loss: 1.355291
+10-30 08:24 INFO     Training network 1
+10-30 08:24 INFO     Epoch: 0 Loss: 0.245071
+10-30 08:24 INFO     Training network 2
+10-30 08:25 INFO     Epoch: 0 Loss: 0.285556
+10-30 08:25 INFO     Training network 3
+10-30 08:25 INFO     Epoch: 0 Loss: 0.345321
+10-30 08:25 INFO     Training network 4
+10-30 08:25 INFO     Epoch: 0 Loss: 0.331294
+10-30 08:25 INFO     global n_training: 234
+10-30 08:25 INFO     global n_test: 313
+10-30 08:25 INFO     >> Global Model Test accuracy: 0.893500
+10-30 08:25 INFO     >> Global Model Test backdoor accuracy: 0.085800
+10-30 08:25 INFO     in comm round:2
+10-30 08:25 INFO     Training network 0
+10-30 08:25 INFO     Epoch: 0 Loss: 0.298884
+10-30 08:25 INFO     Training network 1
+10-30 08:25 INFO     Epoch: 0 Loss: 0.114018
+10-30 08:25 INFO     Training network 2
+10-30 08:25 INFO     Epoch: 0 Loss: 0.137023
+10-30 08:25 INFO     Training network 3
+10-30 08:25 INFO     Epoch: 0 Loss: 0.146832
+10-30 08:25 INFO     Training network 4
+10-30 08:25 INFO     Epoch: 0 Loss: 0.122124
+10-30 08:25 INFO     global n_training: 234
+10-30 08:25 INFO     global n_test: 313
+10-30 08:25 INFO     >> Global Model Test accuracy: 0.943700
+10-30 08:25 INFO     >> Global Model Test backdoor accuracy: 0.098600
+10-30 08:25 INFO     in comm round:3
+10-30 08:25 INFO     Training network 0
+10-30 08:25 INFO     Epoch: 0 Loss: 0.185931
+10-30 08:25 INFO     Training network 1
+10-30 08:25 INFO     Epoch: 0 Loss: 0.074168
+10-30 08:25 INFO     Training network 2
+10-30 08:26 INFO     Epoch: 0 Loss: 0.086346
+10-30 08:26 INFO     Training network 3
+10-30 08:26 INFO     Epoch: 0 Loss: 0.083043
+10-30 08:26 INFO     Training network 4
+10-30 08:26 INFO     Epoch: 0 Loss: 0.076056
+10-30 08:26 INFO     global n_training: 234
+10-30 08:26 INFO     global n_test: 313
+10-30 08:26 INFO     >> Global Model Test accuracy: 0.961100
+10-30 08:26 INFO     >> Global Model Test backdoor accuracy: 0.099300
+10-30 08:26 INFO     in comm round:4
+10-30 08:26 INFO     Training network 0
+10-30 08:26 INFO     Epoch: 0 Loss: 0.166636
+10-30 08:26 INFO     Training network 1
+10-30 08:26 INFO     Epoch: 0 Loss: 0.058832
+10-30 08:26 INFO     Training network 2
+10-30 08:26 INFO     Epoch: 0 Loss: 0.070346
+10-30 08:26 INFO     Training network 3
+10-30 08:26 INFO     Epoch: 0 Loss: 0.062356
+10-30 08:26 INFO     Training network 4
+10-30 08:26 INFO     Epoch: 0 Loss: 0.054135
+10-30 08:26 INFO     global n_training: 234
+10-30 08:26 INFO     global n_test: 313
+10-30 08:26 INFO     >> Global Model Test accuracy: 0.972100
+10-30 08:26 INFO     >> Global Model Test backdoor accuracy: 0.098700
+10-30 08:26 INFO     in comm round:5
+10-30 08:26 INFO     Training network 0
+10-30 08:26 INFO     Epoch: 0 Loss: 0.138677
+10-30 08:26 INFO     Training network 1
+10-30 08:27 INFO     Epoch: 0 Loss: 0.049737
+10-30 08:27 INFO     Training network 2
+10-30 08:27 INFO     Epoch: 0 Loss: 0.058971
+10-30 08:27 INFO     Training network 3
+10-30 08:27 INFO     Epoch: 0 Loss: 0.049105
+10-30 08:27 INFO     Training network 4
+10-30 08:27 INFO     Epoch: 0 Loss: 0.044165
+10-30 08:27 INFO     global n_training: 234
+10-30 08:27 INFO     global n_test: 313
+10-30 08:27 INFO     >> Global Model Test accuracy: 0.978700
+10-30 08:27 INFO     >> Global Model Test backdoor accuracy: 0.097200
+10-30 08:27 INFO     in comm round:6
+10-30 08:27 INFO     Training network 0
+10-30 08:27 INFO     Epoch: 0 Loss: 0.103048
+10-30 08:27 INFO     Training network 1
+10-30 08:27 INFO     Epoch: 0 Loss: 0.040121
+10-30 08:27 INFO     Training network 2
+10-30 08:27 INFO     Epoch: 0 Loss: 0.047935
+10-30 08:27 INFO     Training network 3
+10-30 08:27 INFO     Epoch: 0 Loss: 0.039942
+10-30 08:27 INFO     Training network 4
+10-30 08:27 INFO     Epoch: 0 Loss: 0.036929
+10-30 08:27 INFO     global n_training: 234
+10-30 08:27 INFO     global n_test: 313
+10-30 08:27 INFO     >> Global Model Test accuracy: 0.982200
+10-30 08:27 INFO     >> Global Model Test backdoor accuracy: 0.096600
+10-30 08:27 INFO     in comm round:7
+10-30 08:27 INFO     Training network 0
+10-30 08:27 INFO     Epoch: 0 Loss: 0.130374
+10-30 08:27 INFO     Training network 1
+10-30 08:28 INFO     Epoch: 0 Loss: 0.031472
+10-30 08:28 INFO     Training network 2
+10-30 08:28 INFO     Epoch: 0 Loss: 0.045055
+10-30 08:28 INFO     Training network 3
+10-30 08:28 INFO     Epoch: 0 Loss: 0.033713
+10-30 08:28 INFO     Training network 4
+10-30 08:28 INFO     Epoch: 0 Loss: 0.033981
+10-30 08:28 INFO     global n_training: 234
+10-30 08:28 INFO     global n_test: 313
+10-30 08:28 INFO     >> Global Model Test accuracy: 0.983500
+10-30 08:28 INFO     >> Global Model Test backdoor accuracy: 0.097200
+10-30 08:28 INFO     in comm round:8
+10-30 08:28 INFO     Training network 0
+10-30 08:28 INFO     Epoch: 0 Loss: 0.103625
+10-30 08:28 INFO     Training network 1
+10-30 08:28 INFO     Epoch: 0 Loss: 0.028388
+10-30 08:28 INFO     Training network 2
+10-30 08:28 INFO     Epoch: 0 Loss: 0.039972
+10-30 08:28 INFO     Training network 3
+10-30 08:28 INFO     Epoch: 0 Loss: 0.029026
+10-30 08:28 INFO     Training network 4
+10-30 08:28 INFO     Epoch: 0 Loss: 0.028120
+10-30 08:28 INFO     global n_training: 234
+10-30 08:28 INFO     global n_test: 313
+10-30 08:29 INFO     >> Global Model Test accuracy: 0.985200
+10-30 08:29 INFO     >> Global Model Test backdoor accuracy: 0.096500
+10-30 08:29 INFO     in comm round:9
+10-30 08:29 INFO     Training network 0
+10-30 08:29 INFO     Epoch: 0 Loss: 0.094610
+10-30 08:29 INFO     Training network 1
+10-30 08:29 INFO     Epoch: 0 Loss: 0.026730
+10-30 08:29 INFO     Training network 2
+10-30 08:29 INFO     Epoch: 0 Loss: 0.037428
+10-30 08:29 INFO     Training network 3
+10-30 08:29 INFO     Epoch: 0 Loss: 0.025816
+10-30 08:29 INFO     Training network 4
+10-30 08:29 INFO     Epoch: 0 Loss: 0.025387
+10-30 08:29 INFO     global n_training: 234
+10-30 08:29 INFO     global n_test: 313
+10-30 08:29 INFO     >> Global Model Test accuracy: 0.985900
+10-30 08:29 INFO     >> Global Model Test backdoor accuracy: 0.097500
+10-30 08:29 INFO     in comm round:10
+10-30 08:29 INFO     Training network 0
+10-30 08:29 INFO     Epoch: 0 Loss: 0.089635
+10-30 08:29 INFO     Training network 1
+10-30 08:29 INFO     Epoch: 0 Loss: 0.025280
+10-30 08:29 INFO     Training network 2
+10-30 08:29 INFO     Epoch: 0 Loss: 0.032779
+10-30 08:29 INFO     Training network 3
+10-30 08:29 INFO     Epoch: 0 Loss: 0.024172
+10-30 08:29 INFO     Training network 4
+10-30 08:30 INFO     Epoch: 0 Loss: 0.025592
+10-30 08:30 INFO     global n_training: 234
+10-30 08:30 INFO     global n_test: 313
+10-30 08:30 INFO     >> Global Model Test accuracy: 0.986000
+10-30 08:30 INFO     >> Global Model Test backdoor accuracy: 0.097400
+10-30 08:30 INFO     in comm round:11
+10-30 08:30 INFO     Training network 0
+10-30 08:30 INFO     Epoch: 0 Loss: 0.094674
+10-30 08:30 INFO     Training network 1
+10-30 08:30 INFO     Epoch: 0 Loss: 0.018341
+10-30 08:30 INFO     Training network 2
+10-30 08:30 INFO     Epoch: 0 Loss: 0.032958
+10-30 08:30 INFO     Training network 3
+10-30 08:30 INFO     Epoch: 0 Loss: 0.020910
+10-30 08:30 INFO     Training network 4
+10-30 08:30 INFO     Epoch: 0 Loss: 0.023070
+10-30 08:30 INFO     global n_training: 234
+10-30 08:30 INFO     global n_test: 313
+10-30 08:30 INFO     >> Global Model Test accuracy: 0.986600
+10-30 08:30 INFO     >> Global Model Test backdoor accuracy: 0.097300
+10-30 08:30 INFO     in comm round:12
+10-30 08:30 INFO     Training network 0
+10-30 08:30 INFO     Epoch: 0 Loss: 0.086084
+10-30 08:30 INFO     Training network 1
+10-30 08:30 INFO     Epoch: 0 Loss: 0.017971
+10-30 08:30 INFO     Training network 2
+10-30 08:30 INFO     Epoch: 0 Loss: 0.028695
+10-30 08:30 INFO     Training network 3
+10-30 08:31 INFO     Epoch: 0 Loss: 0.020149
+10-30 08:31 INFO     Training network 4
+10-30 08:31 INFO     Epoch: 0 Loss: 0.019995
+10-30 08:31 INFO     global n_training: 234
+10-30 08:31 INFO     global n_test: 313
+10-30 08:31 INFO     >> Global Model Test accuracy: 0.987300
+10-30 08:31 INFO     >> Global Model Test backdoor accuracy: 0.096800
+10-30 08:31 INFO     in comm round:13
+10-30 08:31 INFO     Training network 0
+10-30 08:31 INFO     Epoch: 0 Loss: 0.069685
+10-30 08:31 INFO     Training network 1
+10-30 08:31 INFO     Epoch: 0 Loss: 0.018534
+10-30 08:31 INFO     Training network 2
+10-30 08:31 INFO     Epoch: 0 Loss: 0.027542
+10-30 08:31 INFO     Training network 3
+10-30 08:31 INFO     Epoch: 0 Loss: 0.018314
+10-30 08:31 INFO     Training network 4
+10-30 08:31 INFO     Epoch: 0 Loss: 0.021666
+10-30 08:31 INFO     global n_training: 234
+10-30 08:31 INFO     global n_test: 313
+10-30 08:31 INFO     >> Global Model Test accuracy: 0.987500
+10-30 08:31 INFO     >> Global Model Test backdoor accuracy: 0.097000
+10-30 08:31 INFO     in comm round:14
+10-30 08:31 INFO     Training network 0
+10-30 08:31 INFO     Epoch: 0 Loss: 0.066043
+10-30 08:31 INFO     Training network 1
+10-30 08:31 INFO     Epoch: 0 Loss: 0.015279
+10-30 08:31 INFO     Training network 2
+10-30 08:31 INFO     Epoch: 0 Loss: 0.026565
+10-30 08:31 INFO     Training network 3
+10-30 08:32 INFO     Epoch: 0 Loss: 0.017303
+10-30 08:32 INFO     Training network 4
+10-30 08:32 INFO     Epoch: 0 Loss: 0.015825
+10-30 08:32 INFO     global n_training: 234
+10-30 08:32 INFO     global n_test: 313
+10-30 08:32 INFO     >> Global Model Test accuracy: 0.988300
+10-30 08:32 INFO     >> Global Model Test backdoor accuracy: 0.097100
+10-30 08:32 INFO     in comm round:15
+10-30 08:32 INFO     Training network 0
+10-30 08:32 INFO     Epoch: 0 Loss: 0.067895
+10-30 08:32 INFO     Training network 1
+10-30 08:32 INFO     Epoch: 0 Loss: 0.015983
+10-30 08:32 INFO     Training network 2
+10-30 08:32 INFO     Epoch: 0 Loss: 0.021170
+10-30 08:32 INFO     Training network 3
+10-30 08:32 INFO     Epoch: 0 Loss: 0.015733
+10-30 08:32 INFO     Training network 4
+10-30 08:32 INFO     Epoch: 0 Loss: 0.016432
+10-30 08:32 INFO     global n_training: 234
+10-30 08:32 INFO     global n_test: 313
+10-30 08:32 INFO     >> Global Model Test accuracy: 0.987900
+10-30 08:32 INFO     >> Global Model Test backdoor accuracy: 0.097300
+10-30 08:32 INFO     in comm round:16
+10-30 08:32 INFO     Training network 0
+10-30 08:32 INFO     Epoch: 0 Loss: 0.070377
+10-30 08:32 INFO     Training network 1
+10-30 08:32 INFO     Epoch: 0 Loss: 0.013956
+10-30 08:32 INFO     Training network 2
